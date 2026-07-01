@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "OkEcP+Z0DIc=",
+  "success": true,
+  "projectFilePath": "C:\\code\\xinneng\\tmp_mysql_query\\tmp_mysql_query.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\ss102\\.nuget\\packages\\mysqlconnector\\2.2.5\\mysqlconnector.2.2.5.nupkg.sha512"
+  ],
+  "logs": []
+}

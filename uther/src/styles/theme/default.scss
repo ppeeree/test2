@@ -1,0 +1,103 @@
+//系统管理主题
+.theme-default {
+  overflow: hidden;
+
+  .el-table {
+    color: #fff;
+  }
+
+  .el-form-item__label {
+    color: #fff;
+  }
+
+  .el-tree-node__content {
+    color: white;
+  }
+
+  .el-button--text {
+    span {
+      border-bottom: 1px solid #409eff;
+    }
+
+    &:hover {
+      color: #afcaff;
+
+      span {
+        border-bottom: 1px solid #afcaff;
+      }
+
+      /*  .el-icon-edit {
+        background: url('/img/changeImg1.png') center no-repeat;
+        background-size: contain;
+      }
+
+      .el-icon-view {
+        background: url('/img/lookImg1.png') center no-repeat;
+        background-size: contain;
+      } */
+    }
+  }
+
+  // 时间范围背景色
+  .el-date-table td.in-range div,
+  .el-date-table td.in-range div:hover,
+  .el-date-table.is-week-mode .el-date-table__row.current div,
+  .el-date-table.is-week-mode .el-date-table__row:hover div {
+    background-color: #76bbff;
+  }
+
+  .el-picker-panel__icon-btn {
+    color: white;
+  }
+
+  .el-date-range-picker__editor {
+    .el-input__inner {
+      background: rgba(71, 86, 128, 0.5);
+      border-color: rgba(71, 86, 128, 0.5);
+      color: white;
+    }
+  }
+
+  .el-picker-panel__sidebar {
+    background-color: rgba(4, 17, 33, 0.5);
+
+    .el-picker-panel__shortcut {
+      color: white;
+    }
+  }
+
+  // 树形结构
+  .el-tree {
+    background: none;
+    color: #fff;
+
+    .el-tree__empty-text {
+      color: #fff;
+    }
+
+    .el-tree-node__content:hover {
+      background: #315ebd;
+    }
+
+    .el-tree-node.is-current>.el-tree-node__content {
+      color: #fff;
+      background: transparent;
+    }
+
+    .is-current {
+      background: none;
+    }
+  }
+
+  .el-tree--highlight-current .el-tree-node.is-current>.el-tree-node__content {
+    background: #315ebd;
+  }
+
+  .el-tree-node:focus>.el-tree-node__content {
+    background: transparent;
+  }
+
+  .el-pagination .el-select .el-input .el-input__inner {
+    color: #fff !important;
+  }
+}

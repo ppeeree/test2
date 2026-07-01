@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.1</TargetFramework>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Content Remove="C:\Users\DELL\.nuget\packages\ach.achlog.serilog\1.0.4\contentFiles\any\netstandard2.1\logger.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="ACH.ACHLog.SeriLog" Version="1.0.4" />
+		<PackageReference Include="ACH.MeasData.DB" Version="1.0.7" />
+		<PackageReference Include="ACH.MeasData.FSDB" Version="1.0.5" />
+		<PackageReference Include="DotNetZip" Version="1.16.0" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="9.0.7" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\ACH.DataEntity.DownLoad\ACH.DataEntity.DownLoad.csproj" />
+		<ProjectReference Include="..\ACH.Download.WavaDataSelect\ACH.Download.WaveDataSelect.csproj" />
+		<ProjectReference Include="..\ACH.Helper\ACH.Helper.csproj" />
+	</ItemGroup>
+
+</Project>

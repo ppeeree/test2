@@ -1,0 +1,293 @@
+body {
+    margin: 0;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 左侧统计信息 */
+.left_part {
+    width: 350px;
+    height: 100%;
+    border-right: 2px solid black;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    padding-right: 10px;
+}
+
+.btn_style {
+    padding: 0px !important;
+    height: 25px;
+    width: 30%;
+}
+
+/* 顶部筛选框 */
+.type_select {
+    height: 30px;
+    margin: 10px 0;
+}
+/* 左侧的圆环图表 */
+.left_ring {
+    width: 100%;
+    height: 320px;
+    /*border: 1px solid green;*/
+}
+/* 左侧的图表 */
+.left_table {
+    width: 100%;
+    height: calc(100% - 445px);
+    /* flex: 1;*/
+    /*border: 1px solid red;*/
+    overflow-x: hidden;
+    /*margin-right: 10px;*/
+    overflow-y: auto;
+    font-size: 12px;
+    table-layout: fixed;
+    WORD-BREAK: break-all;
+    WORD-WRAP: break-word
+}
+
+table {
+    width: 100%;
+}
+
+td {
+    text-align: center;
+}
+
+
+/* 中间部分 */
+.center_part {
+    width: calc(100% - 370px);
+    height: 100%;
+    position: fixed;
+    left: 370px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 中间上方的机组列表 */
+.turbine_list {
+    height: 32%;
+    margin: 10px 10px 0px 10px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.content_title {
+    text-align: center;
+    margin: 0;
+}
+
+.turbine_item {
+    height: 35px;
+    width: 117px;
+    display: inline-block;
+    text-align: center;
+    line-height: 35px;
+    margin: 5px 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+/** 中间下方的波形图表 */
+.wave_chart {
+    height: 100%;
+    width: 100%;
+}
+
+.wave_content {
+    flex: 1;
+    margin: 10px;
+    border-top: 2px solid black;
+    padding-top: 10px;
+}
+
+/* pdf图片部分 */
+.file_content {
+    height: 100vh;
+    width: 100vw;
+    border: 2px solid red
+}
+
+
+/* 悬浮框 */
+.float_log {
+    /*cursor: move;*/
+    position: absolute;
+    /*top: 20%;
+    left: 20%;*/
+    z-index: 10;
+    display: none;
+    width: 500px;
+    height: 300px;
+    overflow: auto;
+    font-size: 14px;
+    border-radius: 5px;
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    padding: 10px;
+    white-space: pre-line;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+    /* text-align: center;*/
+    resize: both;
+}
+
+    .float_log .float_title {
+        position: relative;
+        height: 27px;
+        margin: 5px;
+        border-bottom: 1px solid black;
+        cursor: move;
+        top: -10px;
+    }
+
+      .float_log .float_title span {
+            position: relative;
+            display: inline-block;
+            height: 25px;
+            line-height: 25px;
+            cursor: pointer;
+            padding: 0 5px;
+            margin-right: 10px;
+            font-size: 14px;
+            top: -17px;
+            border: 1px solid black;
+            border-bottom: 0px;
+            border-radius: 4px 4px 0 0;
+        }
+
+        .float_log .float_title .float_title_btn {
+            position: absolute;
+            height: 19px;
+            top: 2px;
+            right: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+            .float_log .float_title .float_title_btn button {
+                height: 19px;
+                width: 19px;
+                margin-right: 7px;
+                padding: 0px;
+                cursor: pointer;
+                border: 0px;
+            }
+
+            .float_log .float_title .float_title_btn .draw_min {
+                background-image: url('../image/min.png');
+                background-size: cover;
+            }
+
+            .float_log .float_title .float_title_btn .draw_max {
+                background-image: url('../image/max.png');
+                background-size: cover;
+            }
+
+            .float_log .float_title .float_title_btn .draw_close {
+                background-image: url('../image/close.png');
+                background-size: cover;
+            }  
+
+.float_log {
+    position: absolute;
+    width: 700px;
+    height: 500px;
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+}
+
+#floatLog {
+    position: relative;
+    top: -66px;
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* 筛选数据下载的悬浮框 */
+.select_data {
+    height: 300px;
+    width: 300px;
+    position: absolute;
+    border: 1px solid red;
+    top: 30%;
+    left: 30%;
+    display: none;
+}
+
+
+.list_block {
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.list_row {
+    width: 100%;
+    height: 40px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    justify-items: center;
+    justify-content: space-around;
+    box-sizing: border-box;
+}
+
+    .list_row > span {
+        display: inline-block;
+        width: 33%;
+        text-align: center;
+    }
+
+.list_title {
+    width: 100%;
+    margin: 0;
+    font-weight: bolder;
+    margin-bottom: 5px;
+    color: #000;
+}
+
+.list_row .el-form-item {
+    margin-bottom: 0px;
+}
+
+.list_row .el-form-item__content {
+    margin-left: 0 !important;
+}
+
+.list_dau {
+    border-top: 1px solid #eee;
+    border-left: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+}
+
+.list_row_dau {
+    width: 50%;
+    float: left;
+    border-right: 1px solid #eee;
+}
+
+    .list_row_dau > span {
+        width: 50%;
+    }
+
+.el-form-item__error {
+    display: none;
+}

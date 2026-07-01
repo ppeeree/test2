@@ -1,0 +1,410 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link href="compJS/elementUI.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
+    <link href="css/download.css" rel="stylesheet">
+
+    <script src="js/moment.min.js"></script>
+    <script src="compJS/vue.js"></script>
+    <script src="compJS/elementUI.js"></script>
+    <script src="compJS/echarts.min.js"></script>
+    <script src="js/chartOption.js"></script>
+    <link rel="icon" href="img/logo.png" type="image/x-icon">
+    <title></title>
+</head>
+
+<body>
+    <div id="app">
+        <header class="header">
+            <p class="logo"><img src="img/logo.png" />{{this.webTitleName}}</p>
+            <el-menu default-active="3" class="el-menu-demo" mode="horizontal" background-color="#fff" text-color="#000"
+                     active-text-color="#192ad1">
+                <el-menu-item index="1"><a href="index.html">数据下载</a></el-menu-item>
+                <el-menu-item index="3"><a href="dau.html">系统自检</a></el-menu-item>
+            </el-menu>
+            <!--<p style="font-size: 11px; display: flex; flex-direction: row; align-items: center; color: #606266; margin-left: auto;">版权所有 © 2022-2026 众芯汉创（北京）科技有限公司 {{this.webVersion}}</p>
+    -->
+        </header>
+        <el-main>
+            <el-row :gutter="8" style="width:100%; height:100%;margin:0;padding:10px 5px">
+                <el-col :span="8" style="height:100%">
+                    <div class="card_block" style="height:100%">
+                        <div class="card_block_title">
+                            <span v-if="windparkList.length==1">
+                                {{windparkList[0].stationName}}
+                            </span>
+                            <el-select v-else v-model="selectedWindparkID" placeholder="请选择">
+                                <el-option v-for="item in windparkList" :key="item.stationID" :label="item.stationName"
+                                    :value="item.stationID">
+                                </el-option>
+                            </el-select>
+                        </div>
+                        <div class="card_block_content">
+                            <p>
+                                <el-badge v-for="item in allTurbineDAUList" :key="item.deviceType"
+                                    :value="item.abnormalNum"
+                                    :class="['badge',{'activebadge':selectedDAUType==item.deviceType}]">
+                                    <el-button :title="item.abnormalNum+'台机组状态异常'"
+                                        @click="changeSelectedDAUType(item.deviceType)" size="small">
+                                        {{item.deviceTypeName}}采集单元</el-button>
+                                </el-badge>
+                            </p>
+                            <el-table ref="singleTable" :data="turbineList" height="95%" style="width: 100%" border
+                                row-key="deviceID" :highlight-current-row="true"
+                                :header-cell-style="{backgroundColor:'#F2F6FC',color:'#909399',textAlign: 'center'}"
+                                class="tableLimit" size="mini" @current-change="getTurbineDAUList">
+                                <el-table-column prop="deviceName" label="机组名称"></el-table-column>
+                                <el-table-column prop="ip" width="150" label="IP地址"></el-table-column>
+                                <el-table-column prop="deviceStatus" label="状态" :filters="turbineStatusFilters"
+                                    :filter-method="filterStatus">
+                                    <template slot-scope="scope">
+                                        <span
+                                            :style="{color:scope.row.deviceStatus=='正常'?'#606266':'#F56C6C'}">{{scope.row.deviceStatus}}</span>
+                                    </template>
+                                </el-table-column>
+                                <el-table-column prop="acqTime" sortable label="更新时间" width="240"></el-table-column>
+                            </el-table>
+                        </div>
+                    </div>
+                </el-col>
+                <el-col :span="16" style="height:100%">
+                    <div class="card_block" style="height:49%;margin-bottom:8px">
+                        <div class="card_block_title">{{currentDeviceName}}机组通道状态
+                            <el-button title="查看表格勾选项的偏置电压趋势" type="primary" size="mini" @click="getChart"
+                                style="float:right;margin-right:20px;margin-top:5px;">查看趋势</el-button>
+                        </div>
+                        <div class="card_block_content">
+                            <el-table ref="multipleTable" :data="dauList" height="100%" style="width: 100%" border
+                                :highlight-current-row="true" row-key="measlocID"
+                                :header-cell-style="{backgroundColor:'#F2F6FC',color:'#909399',textAlign: 'center'}"
+                                @selection-change="handleSelectionChange" class="tableLimit">
+                                <el-table-column type="selection" width="55" :selectable="checkSelectable">
+                                </el-table-column>
+                                <el-table-column prop="channelNumber" label="通道号">
+                                    <template slot-scope="scope">
+                                        <span>{{ scope.row.channelNumber === -1 ? '--' :
+                                            scope.row.channelNumber}}</span>
+                                    </template>
+                                </el-table-column>
+                                <el-table-column prop="measlocName" label="测量位置"></el-table-column>
+                                <el-table-column prop="channelStatus" label="通道状态" :filters="dauStatusFilters"
+                                    :filter-method="filterDauStatus">
+                                    <template slot-scope="scope">
+                                        <span
+                                            :style="{color:scope.row.channelStatus == '正常'?'#606266':'#F56C6C'}">{{scope.row.channelStatus}}</span>
+                                    </template>
+                                </el-table-column>
+                                <el-table-column prop="voltage" label="偏置电压（V）"></el-table-column>
+                                <el-table-column prop="acqTime" sortable label="更新时间"></el-table-column>
+                            </el-table>
+                        </div>
+                    </div>
+                    <div class="card_block" style="height:50%">
+                        <div class="card_block_title">偏置电压趋势
+                            <p style="float:right;margin-right:15px;font-size:12px;font-weight:normal">
+                                时间：
+                                <el-date-picker v-model="timeValue" style="width:240px" type="daterange" size="mini"
+                                    align="right" unlink-panels range-separator="-" start-placeholder="开始日期"
+                                    end-placeholder="结束日期" :picker-options="pickerOptions" @change="getChart">
+                                </el-date-picker>
+                            </p>
+                        </div>
+                        <div class="card_block_content">
+                            <div id="myChart" style="width:100%;height:100%"></div>
+                        </div>
+                    </div>
+                </el-col>
+            </el-row>
+        </el-main>
+    </div>
+</body>
+
+</html>
+
+<script>
+    new Vue({
+        el: '#app',
+        data() {
+            const low = (rule, value, callback) => {
+                if (value <= 0) {
+                    callback(new Error('波形数量必须大于0'))
+                } else {
+                    callback()
+                }
+            }
+            return {
+                selectedWindparkID: '', // 当前页面显示的风场ID
+                selectedDAUType: '',// 左侧展示相关数据的采集器类型
+
+                // 左侧模块数据
+                windparkList: [], //风场列表
+                allTurbineDAUList: [], //全部机组采集状态列表
+                turbineList: [], // 采集类型对应的机组DAU状态列表（左侧）
+                turbineStatusFilters: [],
+
+                showConfigMenu: false, // 展示系统配置按钮变量
+
+                // 右上模块数据
+                dauList: [],
+                currentDeviceName: '',// 标题机组名称
+                selectDAUtableRow: [],
+                dauStatusFilters: [],
+
+                webTitleName: "", // 软件名称
+                webVersion: "", // 软件版本
+
+                timeValue: [],
+                pickerOptions: {
+                    shortcuts: [{
+                        text: '最近一周',
+                        onClick(picker) {
+                            const end = new Date();
+                            const start = new Date();
+                            start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
+                            picker.$emit('pick', [start, end]);
+                        }
+                    }, {
+                        text: '最近一个月',
+                        onClick(picker) {
+                            const end = new Date();
+                            const start = new Date();
+                            start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
+                            picker.$emit('pick', [start, end]);
+                        }
+                    }, {
+                        text: '最近三个月',
+                        onClick(picker) {
+                            const end = new Date();
+                            const start = new Date();
+                            start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
+                            picker.$emit('pick', [start, end]);
+                        }
+                    }]
+                },
+                // 趋势图实例
+                myChart: null,
+            }
+        },
+        computed: {
+        },
+        watch: {
+            selectedWindparkID: {
+                handler() {
+                    this.initWindparkPage()
+                },
+            }
+        },
+        created() {
+            this.getWebClientInfo()
+            this.getTurbineList()
+
+            // 给时间筛选赋初始值
+            const start = moment().subtract(7, 'day').startOf('day').format('YYYY-MM-DD')
+            const end = moment().endOf('day').format('YYYY-MM-DD')
+            this.timeValue = [start, end]
+
+            // 注册全局键盘事件
+            window.addEventListener('keydown', this.onKey);
+
+            this.showConfigMenu = sessionStorage.getItem('showConfigMenu') == "false"? false : true;
+        },
+        beforeDestroy() {
+            window.removeEventListener('keydown', this.onKey);
+        },
+        mounted() {
+            /*this.webTitleName = sessionStorage.getItem('webTitleName')
+            this.webVersion = sessionStorage.getItem('webVersion')
+            this.windparkList = JSON.parse(sessionStorage.getItem('deviceList'))
+            this.selectedWindparkID = this.windparkList[0].stationID     */      
+        },
+        methods: {
+            onKey(e) {
+                // 必须同时按下 Ctrl + Shift + I
+                if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'i') {                    
+                    this.showConfigMenu = !this.showConfigMenu;    
+                    sessionStorage.setItem('showConfigMenu', this.showConfigMenu);
+                }
+            },
+            getWebClientInfo() {
+                var url = `/NetApi/DownloadTask/GetCMSWebClientInfo`
+                fetch(url)
+                    .then((response) => response.json())
+                    .then((data) => {
+                        // console.log('软件信息', data.data)
+                        const { webTitleName, webVersion } = data.data
+                        this.webTitleName = webTitleName
+                        this.webVersion = webVersion
+                        document.title = this.webTitleName
+
+                        sessionStorage.setItem('webVersion', webVersion);
+                        sessionStorage.setItem('webTitleName', webTitleName);
+                    })
+                    .catch((error) => console.error('Unable to get items.', error))
+            },
+
+            getTurbineList() {
+                fetch("/NetApi/DownloadTask/GetDevTree")
+                    .then((response) => response.json())
+                    .then((data) => {
+                        this.windparkList = data.data
+                        sessionStorage.setItem('deviceList', JSON.stringify(data.data));
+
+                        this.selectedWindparkID = this.windparkList[0].stationID     
+                    })
+                    .catch((error) => console.error("Unable to get items.", error));
+            },
+
+            initWindparkPage() {
+                // 清空所有相关数据
+                this.currentDeviceName = ''
+                this.allTurbineDAUList = []
+                this.turbineList = []
+                this.dauList = []
+                if (this.myChart) {
+                    this.myChart.dispose()
+                    this.myChart = null
+                }
+                this.turbineStatusFilters = []
+                this.dauStatusFilters = []
+                // 请求接口
+                this.getTurbineTableList()
+            },
+
+            // 切换采集类型，左侧列表数据变更
+            changeSelectedDAUType(val) {
+                if (this.selectedDAUType == val) { return }
+                this.selectedDAUType = val
+                this.turbineList = this.allTurbineDAUList.find(i => i.deviceType == val).deviceStatusList
+                // 过滤下拉
+                let statusList = new Set(Array.from(this.turbineList, item => item.deviceStatus))
+                this.turbineStatusFilters = Array.from([...statusList], item => ({ value: item, text: item }))
+                // 清除过滤
+                this.$refs.singleTable.clearFilter();
+
+                this.$nextTick(() => {
+                    this.$refs.singleTable.setCurrentRow(this.turbineList[0]);
+                })
+            },
+
+
+            // 测点状态表格勾选change - 通道号为-1时，默认不选中
+            handleSelectionChange(val) {
+                // this.selectDAUtableRow = val;
+
+                const valid = val.filter(r => r.channelNumber !== -1);
+                if (valid.length !== val.length) {
+                    this.$nextTick(() => {
+                        this.$refs.multipleTable.clearSelection();
+                        valid.forEach(r => this.$refs.multipleTable.toggleRowSelection(r, true));
+                    });
+                }
+                this.selectDAUtableRow = valid;
+            },
+
+            // 机组所有采集数据
+            getTurbineTableList() {
+                var param = {
+                    stationID: this.selectedWindparkID,
+                }
+                const queryString = new URLSearchParams(param).toString()
+                var url = `/NetApi/HADUStatus/GetHADUStatusList?${queryString}`
+                fetch(url)
+                    .then((response) => response.json())
+                    .then((data) => {
+                        if (data.data.length) {
+                            this.allTurbineDAUList = data.data
+                            this.selectedDAUType = data.data[0].deviceType
+                            this.turbineList = data.data[0].deviceStatusList
+                            let statusList = new Set(Array.from(this.turbineList, item => item.deviceStatus))
+                            this.turbineStatusFilters = Array.from([...statusList], item => ({ value: item, text: item }))
+                            this.$nextTick(() => {
+                                this.$refs.singleTable.setCurrentRow(this.turbineList[0]);
+                            })
+                        }
+
+                    })
+                    .catch((error) => console.error('Unable to get items.', error))
+            },
+
+            // 获取单个机组通道状态列表
+            getTurbineDAUList(row) {
+                if (!row) return
+                this.currentDeviceName = row.deviceName
+                this.selectDAUtableRow = []
+                this.$refs.multipleTable.clearSelection()
+                var param = {
+                    deviceID: row.deviceID,
+                    deviceType: this.selectedDAUType
+                }
+                const queryString = new URLSearchParams(param).toString()
+                var url = `/NetApi/HADUStatus/GetChannelStatusList?${queryString}`
+                fetch(url)
+                    .then((response) => response.json())
+                    .then((data) => {
+                        this.dauList = data.data
+                        let statusList = new Set(Array.from(this.dauList, item => item.channelStatus))
+                        this.dauStatusFilters = Array.from([...statusList], item => ({ value: item, text: item }))
+                        this.$nextTick(() => {
+                            let unNormalList = this.dauList.filter(i => i.channelStatus !== '正常' && i.channelStatus !== '未知')
+                            if (unNormalList.length) {
+                                unNormalList.forEach(row => {
+                                    this.$refs.multipleTable.toggleRowSelection(row);
+                                });
+                                this.selectDAUtableRow = unNormalList
+                                this.getChart()
+                            } else {
+                                this.$refs.multipleTable.toggleRowSelection(this.dauList[0]);
+                                this.selectDAUtableRow = [this.dauList[0]]
+                                this.getChart()
+                            }
+
+                        })
+                    })
+                    .catch((error) => console.error('Unable to get items.', error))
+            },
+
+            // 获取趋势图数据
+            getChart() {
+                var param = {
+                    measIDs: this.selectDAUtableRow.map(i => i.measlocID).join(','),
+                    startTime: moment(this.timeValue[0]).format('YYYY-MM-DD'),
+                    endTime: moment(this.timeValue[1]).format('YYYY-MM-DD')
+                }
+                const queryString = new URLSearchParams(param).toString()
+                var url = `/NetApi/HADUStatus/GetDCTrend?${queryString}`
+                fetch(url)
+                    .then((response) => response.json())
+                    .then((data) => {
+                        let { lowerLine, upperLine, dcDatas } = data.data
+                        if (this.myChart) {
+                            this.myChart.clear()
+                            this.myChart.setOption({
+                                ...getChartOption(dcDatas, [lowerLine, upperLine]),
+                            })
+                        } else {
+                            this.myChart = echarts.init(document.getElementById('myChart'))
+                            this.myChart.setOption({
+                                ...getChartOption(dcDatas, [lowerLine, upperLine]),
+                            })
+                        }
+                    })
+            },
+
+            // 机组状态表格状态列筛选
+            filterStatus(value, row) {
+                return row.deviceStatus === value;
+            },
+            // 通道状态表格状态列筛选
+            filterDauStatus(value, row) {
+                return row.channelStatus === value;
+            },
+            checkSelectable(row) {
+                return row.channelNumber !== -1;
+            }
+
+        }
+    })
+</script>

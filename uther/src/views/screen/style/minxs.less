@@ -1,0 +1,177 @@
+// .text {
+//   font-size: 14px;
+// }
+
+// ::v-deep .el-card__body {
+//     height: calc(100vh);
+// }
+
+.item {
+  margin-bottom: 18px;
+}
+
+// .clearfix:before,
+// .clearfix:after {
+//   display: table;
+//   content: '';
+// }
+.clearfix:after {
+  clear: both;
+}
+
+.box-card {
+  background: rgba(4, 17, 33, 0.5);
+  // width: 480px;
+  // margin-bottom: 29px;
+  border: 1px;
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  // height: 100%;
+}
+
+.flex {
+  display: flex;
+}
+
+.w-front {
+  color: white;
+  font-size: 0.8em;
+}
+
+.title-front {
+  font-size: 2.4em !important;
+}
+
+.lg-title-front {
+  font-size: 1em !important;
+}
+
+.icon-div {
+  display: flex;
+  flex-direction: row;
+  i {
+    margin-left: 10px;
+    font-size: 24px;
+    color: #fff;
+    cursor: pointer;
+  }
+}
+
+.change_type_btn {
+  position: absolute;
+  top: 5px;
+  z-index: 10;
+  right: 1%;
+  width: 50px;
+  height: 36px;
+  cursor: pointer;
+  color: white;
+  background: #0D3453;
+  .change_type_icon{
+    width: 27px;
+    top: 4px;
+    left: 11px;
+    position: absolute;
+  }
+  &::after{
+    content: '';
+    position: absolute;
+    right: 50px;
+    top: 0;
+    z-index: 10;
+    display: block;
+    border-top: 18px solid transparent;
+    border-bottom: 18px solid transparent;
+    border-left: 18px solid transparent;
+    border-right: 18px solid #0D3453;
+  }
+}
+
+
+.device-card {
+  position: absolute;
+  top: 11%;
+  z-index: 99;
+  right: 25%;
+}
+
+/* 设置大标题样式 */
+.top_title {
+  overflow: hidden;
+  line-height: 24px;
+  &::before {
+    // float: right;
+    float: left;
+    width: 10px;
+    height: 20px;
+    background: #1fffff;
+    content: '';
+    margin-right: 8px;
+    margin-top: 2px;
+  }
+  .titleChart {
+    color: #1fffff;
+    font-size: 18px;
+    height: 30px;
+    margin-right: 10px;
+    // float: right;
+    float: left;
+  }
+  .title_buttom {
+    height: 4px;
+    width: calc(100% - 160px);
+    background-image: url('/img/WindTurbine/line/title_line.png');
+    display: inline-block;
+    background-size: 100%, 100%;
+    background-repeat: no-repeat;
+    box-sizing: border-box;
+  }
+  .title_buttom_line {
+    height: 4px;
+    width: calc(100% - 100px);
+    background-image: url('/img/WindTurbine/line/title_line1.png');
+    background-size: 100%, 100%;
+    background-repeat: no-repeat;
+    box-sizing: border-box;
+    display: inline-block;
+  }
+}
+
+/* 设置小标题样式 */
+.title_class {
+  color: #1fffff;
+  font-size: 14px;
+  line-height: 22px;
+  margin-left: 15px;
+  overflow: hidden;
+  margin-top: 5px;
+  &::before {
+    float: left;
+    width: 5px;
+    height: 15px;
+    background: #1fffff;
+    content: '';
+    margin-right: 5px;
+    margin-top: 3px;
+  }
+  span {
+    display: block;
+    float: left;
+    margin-right: 10px;
+  }
+  .smell_line {
+    float: left;
+    height: 4px;
+    width: calc(100% - 90px);
+    background-image: url('/img/WindTurbine/line/title_line1.png');
+    background-size: 100%, 100%;
+    background-repeat: no-repeat;
+    box-sizing: border-box;
+    margin-top: 10px;
+  }
+  .img_cube {
+    height: 1vh;
+    width: 1vh;
+    margin-right: 1vh;
+  }
+}

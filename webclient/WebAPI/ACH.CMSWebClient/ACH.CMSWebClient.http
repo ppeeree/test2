@@ -1,0 +1,6 @@
+@ACH.CMSWebClient_HostAddress = http://localhost:5154
+
+GET {{ACH.CMSWebClient_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

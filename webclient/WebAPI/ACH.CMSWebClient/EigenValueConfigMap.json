@@ -1,0 +1,1632 @@
+[
+  {
+    "compType": "BVM",
+    "compList": [
+      {
+        "compType": "BL1MPTFa",
+        "compList": [
+          {
+            "name": "一阶固有频率",
+            "code": "1NF",
+            "isFirst": true
+          },
+          {
+            "name": "二阶固有频率",
+            "code": "2NF",
+            "isFirst": false
+          },
+          {
+            "name": "三阶固有频率",
+            "code": "3NF",
+            "isFirst": false
+          },
+          {
+            "name": "四阶固有频率",
+            "code": "4NF",
+            "isFirst": false
+          },
+          {
+            "name": "叶片有效能量",
+            "code": "TDR",
+            "isFirst": false
+          },
+          {
+            "name": "叶片冲击系数",
+            "code": "TDK",
+            "isFirst": false
+          },
+          {
+            "name": "叶片呼啸因子",
+            "code": "TDF",
+            "isFirst": false
+          },
+          {
+            "name": "桨距角偏差系数",
+            "code": "PB",
+            "isFirst": false
+          },
+          {
+            "name": "叶片谱相关系数12",
+            "code": "BSC12",
+            "isFirst": false
+          },
+          {
+            "name": "有效值",
+            "code": "RMS",
+            "isFirst": false
+          }
+        ]
+      },
+      {
+        "compType": "BL1MPTLa",
+        "compList": [
+          {
+            "name": "一阶固有频率",
+            "code": "1NF",
+            "isFirst": true
+          },
+          {
+            "name": "二阶固有频率",
+            "code": "2NF",
+            "isFirst": false
+          },
+          {
+            "name": "三阶固有频率",
+            "code": "3NF",
+            "isFirst": false
+          },
+          {
+            "name": "四阶固有频率",
+            "code": "4NF",
+            "isFirst": false
+          },
+          {
+            "name": "五阶固有频率",
+            "code": "5NF",
+            "isFirst": false
+          },
+          {
+            "name": "六阶固有频率",
+            "code": "6NF",
+            "isFirst": false
+          },
+          {
+            "name": "叶片谱相关系数12",
+            "code": "BSC12",
+            "isFirst": false
+          },
+          {
+            "name": "有效值",
+            "code": "RMS",
+            "isFirst": false
+          }
+        ]
+      },
+      {
+        "compType": "BL2MPTFa",
+        "compList": [
+          {
+            "name": "一阶固有频率",
+            "code": "1NF",
+            "isFirst": true
+          },
+          {
+            "name": "二阶固有频率",
+            "code": "2NF",
+            "isFirst": false
+          },
+          {
+            "name": "三阶固有频率",
+            "code": "3NF",
+            "isFirst": false
+          },
+          {
+            "name": "四阶固有频率",
+            "code": "4NF",
+            "isFirst": false
+          },
+          {
+            "name": "叶片有效能量",
+            "code": "TDR",
+            "isFirst": false
+          },
+          {
+            "name": "叶片冲击系数",
+            "code": "TDK",
+            "isFirst": false
+          },
+          {
+            "name": "叶片呼啸因子",
+            "code": "TDF",
+            "isFirst": false
+          },
+          {
+            "name": "叶片谱相关系数23",
+            "code": "BSC23",
+            "isFirst": false
+          },
+          {
+            "name": "有效值",
+            "code": "RMS",
+            "isFirst": false
+          }
+        ]
+      },
+      {
+        "compType": "BL2MPTLa",
+        "compList": [
+          {
+            "name": "一阶固有频率",
+            "code": "1NF",
+            "isFirst": true
+          },
+          {
+            "name": "二阶固有频率",
+            "code": "2NF",
+            "isFirst": false
+          },
+          {
+            "name": "三阶固有频率",
+            "code": "3NF",
+            "isFirst": false
+          },
+          {
+            "name": "四阶固有频率",
+            "code": "4NF",
+            "isFirst": false
+          },
+          {
+            "name": "五阶固有频率",
+            "code": "5NF",
+            "isFirst": false
+          },
+          {
+            "name": "六阶固有频率",
+            "code": "6NF",
+            "isFirst": false
+          },
+          {
+            "name": "叶片谱相关系数23",
+            "code": "BSC23",
+            "isFirst": false
+          },
+          {
+            "name": "有效值",
+            "code": "RMS",
+            "isFirst": false
+          }
+        ]
+      },
+      {
+        "compType": "BL3MPTFa",
+        "compList": [
+          {
+            "name": "一阶固有频率",
+            "code": "1NF",
+            "isFirst": true
+          },
+          {
+            "name": "二阶固有频率",
+            "code": "2NF",
+            "isFirst": false
+          },
+          {
+            "name": "三阶固有频率",
+            "code": "3NF",
+            "isFirst": false
+          },
+          {
+            "name": "四阶固有频率",
+            "code": "4NF",
+            "isFirst": false
+          },
+          {
+            "name": "叶片有效能量",
+            "code": "TDR",
+            "isFirst": false
+          },
+          {
+            "name": "叶片冲击系数",
+            "code": "TDK",
+            "isFirst": false
+          },
+          {
+            "name": "叶片呼啸因子",
+            "code": "TDF",
+            "isFirst": false
+          },
+          {
+            "name": "叶片谱相关系数31",
+            "code": "BSC31",
+            "isFirst": false
+          },
+          {
+            "name": "有效值",
+            "code": "RMS",
+            "isFirst": false
+          }
+        ]
+      },
+      {
+        "compType": "BL3MPTLa",
+        "compList": [
+          {
+            "name": "一阶固有频率",
+            "code": "1NF",
+            "isFirst": true
+          },
+          {
+            "name": "二阶固有频率",
+            "code": "2NF",
+            "isFirst": false
+          },
+          {
+            "name": "三阶固有频率",
+            "code": "3NF",
+            "isFirst": false
+          },
+          {
+            "name": "四阶固有频率",
+            "code": "4NF",
+            "isFirst": false
+          },
+          {
+            "name": "五阶固有频率",
+            "code": "5NF",
+            "isFirst": false
+          },
+          {
+            "name": "六阶固有频率",
+            "code": "6NF",
+            "isFirst": false
+          },
+          {
+            "name": "叶片谱相关系数31",
+            "code": "BSC31",
+            "isFirst": false
+          },
+          {
+            "name": "有效值",
+            "code": "RMS",
+            "isFirst": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "compType": "TVM",
+    "compList": [
+      {
+        "compType": "FL1Ri0ODS",
+        "compList": [
+          {
+            "name": "最大值",
+            "code": "MAX",
+            "isFirst": true
+          },
+          {
+            "name": "最小值",
+            "code": "MIN",
+            "isFirst": true
+          },
+          {
+            "name": "平均值",
+            "code": "AVG",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "FL1Ri0OT",
+        "compList": [
+          {
+            "name": "最大值",
+            "code": "MAX",
+            "isFirst": true
+          },
+          {
+            "name": "最小值",
+            "code": "MIN",
+            "isFirst": true
+          },
+          {
+            "name": "平均值",
+            "code": "AVG",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "FL1Ri3ODS",
+        "compList": [
+          {
+            "name": "最大值",
+            "code": "MAX",
+            "isFirst": true
+          },
+          {
+            "name": "最小值",
+            "code": "MIN",
+            "isFirst": true
+          },
+          {
+            "name": "平均值",
+            "code": "AVG",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "FL1Ri3OT",
+        "compList": [
+          {
+            "name": "最大值",
+            "code": "MAX",
+            "isFirst": true
+          },
+          {
+            "name": "最小值",
+            "code": "MIN",
+            "isFirst": true
+          },
+          {
+            "name": "平均值",
+            "code": "AVG",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "FL1Ri6ODS",
+        "compList": [
+          {
+            "name": "最大值",
+            "code": "MAX",
+            "isFirst": true
+          },
+          {
+            "name": "最小值",
+            "code": "MIN",
+            "isFirst": true
+          },
+          {
+            "name": "平均值",
+            "code": "AVG",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "FL1Ri6OT",
+        "compList": [
+          {
+            "name": "最大值",
+            "code": "MAX",
+            "isFirst": true
+          },
+          {
+            "name": "最小值",
+            "code": "MIN",
+            "isFirst": true
+          },
+          {
+            "name": "平均值",
+            "code": "AVG",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "FL1Ri9ODS",
+        "compList": [
+          {
+            "name": "最大值",
+            "code": "MAX",
+            "isFirst": true
+          },
+          {
+            "name": "最小值",
+            "code": "MIN",
+            "isFirst": true
+          },
+          {
+            "name": "平均值",
+            "code": "AVG",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "FL1Ri9OT",
+        "compList": [
+          {
+            "name": "最大值",
+            "code": "MAX",
+            "isFirst": true
+          },
+          {
+            "name": "最小值",
+            "code": "MIN",
+            "isFirst": true
+          },
+          {
+            "name": "平均值",
+            "code": "AVG",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWPL1S01Na",
+        "compList": [
+          {
+            "name": "拉索力",
+            "code": "CBF",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWPL1S01Ti",
+        "compList": [
+          {
+            "name": "拉索力",
+            "code": "CBF",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWPL1S02Na",
+        "compList": [
+          {
+            "name": "拉索力",
+            "code": "CBF",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWPL1S02Ti",
+        "compList": [
+          {
+            "name": "拉索力",
+            "code": "CBF",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWPL1S03Na",
+        "compList": [
+          {
+            "name": "拉索力",
+            "code": "CBF",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWPL1S04Na",
+        "compList": [
+          {
+            "name": "拉索力",
+            "code": "CBF",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWPL1S05Na",
+        "compList": [
+          {
+            "name": "拉索力",
+            "code": "CBF",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWPL1S06Na",
+        "compList": [
+          {
+            "name": "拉索力",
+            "code": "CBF",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWPL1S06Ti",
+        "compList": [
+          {
+            "name": "拉索力",
+            "code": "CBF",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWPL1S07Na",
+        "compList": [
+          {
+            "name": "拉索力",
+            "code": "CBF",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWPL1S07Ti",
+        "compList": [
+          {
+            "name": "拉索力",
+            "code": "CBF",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWPL1S08Na",
+        "compList": [
+          {
+            "name": "拉索力",
+            "code": "CBF",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWPL1S09Na",
+        "compList": [
+          {
+            "name": "拉索力",
+            "code": "CBF",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWPL1S10Na",
+        "compList": [
+          {
+            "name": "拉索力",
+            "code": "CBF",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWPL1S11Na",
+        "compList": [
+          {
+            "name": "拉索力",
+            "code": "CBF",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWPL1S11Ti",
+        "compList": [
+          {
+            "name": "拉索力",
+            "code": "CBF",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWPL1S12Na",
+        "compList": [
+          {
+            "name": "拉索力",
+            "code": "CBF",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWPL1S12Ti",
+        "compList": [
+          {
+            "name": "拉索力",
+            "code": "CBF",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWPL1S13Na",
+        "compList": [
+          {
+            "name": "拉索力",
+            "code": "CBF",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWPL1S14Na",
+        "compList": [
+          {
+            "name": "拉索力",
+            "code": "CBF",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWPL1S15Na",
+        "compList": [
+          {
+            "name": "拉索力",
+            "code": "CBF",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWPL1S16Na",
+        "compList": [
+          {
+            "name": "拉索力",
+            "code": "CBF",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWPL1S16Ti",
+        "compList": [
+          {
+            "name": "拉索力",
+            "code": "CBF",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWPL1S17Na",
+        "compList": [
+          {
+            "name": "拉索力",
+            "code": "CBF",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWPL1S17Ti",
+        "compList": [
+          {
+            "name": "拉索力",
+            "code": "CBF",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWPL1S18Na",
+        "compList": [
+          {
+            "name": "拉索力",
+            "code": "CBF",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWPL1S19Na",
+        "compList": [
+          {
+            "name": "拉索力",
+            "code": "CBF",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWPL1S20Na",
+        "compList": [
+          {
+            "name": "拉索力",
+            "code": "CBF",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWPL1S21Na",
+        "compList": [
+          {
+            "name": "拉索力",
+            "code": "CBF",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWPL1S22Na",
+        "compList": [
+          {
+            "name": "拉索力",
+            "code": "CBF",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWPL1S23Na",
+        "compList": [
+          {
+            "name": "拉索力",
+            "code": "CBF",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWPL1S24Na",
+        "compList": [
+          {
+            "name": "拉索力",
+            "code": "CBF",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWPL1S24Ti",
+        "compList": [
+          {
+            "name": "拉索力",
+            "code": "CBF",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWPL1S25Na",
+        "compList": [
+          {
+            "name": "拉索力",
+            "code": "CBF",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWPL1S26Na",
+        "compList": [
+          {
+            "name": "拉索力",
+            "code": "CBF",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWPL1S27Na",
+        "compList": [
+          {
+            "name": "拉索力",
+            "code": "CBF",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWPL1S28Na",
+        "compList": [
+          {
+            "name": "拉索力",
+            "code": "CBF",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWPL1S29Na",
+        "compList": [
+          {
+            "name": "拉索力",
+            "code": "CBF",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWPL1S30Na",
+        "compList": [
+          {
+            "name": "拉索力",
+            "code": "CBF",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWFL1BOL008",
+        "compList": [
+          {
+            "name": "轴力",
+            "code": "BAF",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWFL1BOL020",
+        "compList": [
+          {
+            "name": "轴力",
+            "code": "BAF",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWFL1BOL032",
+        "compList": [
+          {
+            "name": "轴力",
+            "code": "BAF",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWFL1BOL044",
+        "compList": [
+          {
+            "name": "轴力",
+            "code": "BAF",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWFL1BOL058",
+        "compList": [
+          {
+            "name": "轴力",
+            "code": "BAF",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWFL1BOL070",
+        "compList": [
+          {
+            "name": "轴力",
+            "code": "BAF",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWFL1BOL082",
+        "compList": [
+          {
+            "name": "轴力",
+            "code": "BAF",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWFL1BOL094",
+        "compList": [
+          {
+            "name": "轴力",
+            "code": "BAF",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWFL2BOL008",
+        "compList": [
+          {
+            "name": "轴力",
+            "code": "BAF",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWFL2BOL021",
+        "compList": [
+          {
+            "name": "轴力",
+            "code": "BAF",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWFL2BOL035",
+        "compList": [
+          {
+            "name": "轴力",
+            "code": "BAF",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWFL2BOL048",
+        "compList": [
+          {
+            "name": "轴力",
+            "code": "BAF",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWFL2BOL062",
+        "compList": [
+          {
+            "name": "轴力",
+            "code": "BAF",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWFL2BOL075",
+        "compList": [
+          {
+            "name": "轴力",
+            "code": "BAF",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWFL2BOL089",
+        "compList": [
+          {
+            "name": "轴力",
+            "code": "BAF",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWFL2BOL102",
+        "compList": [
+          {
+            "name": "轴力",
+            "code": "BAF",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWFL3BOL008",
+        "compList": [
+          {
+            "name": "轴力",
+            "code": "BAF",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWFL3BOL022",
+        "compList": [
+          {
+            "name": "轴力",
+            "code": "BAF",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWFL3BOL036",
+        "compList": [
+          {
+            "name": "轴力",
+            "code": "BAF",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWFL3BOL050",
+        "compList": [
+          {
+            "name": "轴力",
+            "code": "BAF",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWFL3BOL064",
+        "compList": [
+          {
+            "name": "轴力",
+            "code": "BAF",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWFL3BOL078",
+        "compList": [
+          {
+            "name": "轴力",
+            "code": "BAF",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWFL3BOL092",
+        "compList": [
+          {
+            "name": "轴力",
+            "code": "BAF",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWFL3BOL106",
+        "compList": [
+          {
+            "name": "轴力",
+            "code": "BAF",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWFL3BOL020",
+        "compList": [
+          {
+            "name": "轴力",
+            "code": "BAF",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWFL3BOL032",
+        "compList": [
+          {
+            "name": "轴力",
+            "code": "BAF",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWFL3BOL044",
+        "compList": [
+          {
+            "name": "轴力",
+            "code": "BAF",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWFL3BOL058",
+        "compList": [
+          {
+            "name": "轴力",
+            "code": "BAF",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWFL3BOL070",
+        "compList": [
+          {
+            "name": "轴力",
+            "code": "BAF",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWFL3BOL082",
+        "compList": [
+          {
+            "name": "轴力",
+            "code": "BAF",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWFL3BOL094",
+        "compList": [
+          {
+            "name": "轴力",
+            "code": "BAF",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWFDNTiA",
+        "compList": [
+          {
+            "name": "X倾角",
+            "code": "XI",
+            "isFirst": true
+          },
+          {
+            "name": "沉降角度",
+            "code": "SAE",
+            "isFirst": true
+          },
+          {
+            "name": "倾斜率",
+            "code": "TRE",
+            "isFirst": true
+          },
+          {
+            "name": "沉降方位角",
+            "code": "SAH",
+            "isFirst": true
+          },
+          {
+            "name": "合成角度",
+            "code": "Actrual",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWFDNNaA",
+        "compList": [
+          {
+            "name": "Y倾角",
+            "code": "YI",
+            "isFirst": true
+          }
+        ]
+      },
+      //{
+      //  "compType": "TOWFDNT",
+      //  "compList": [
+      //    {
+      //      "name": "温度",
+      //      "code": "AvgT",
+      //      "isFirst": true
+      //    }
+      //  ]
+      //} ,
+      {
+        "compType": "TOWTOPTiA",
+        "compList": [
+          {
+            "name": "最大值",
+            "code": "MAX",
+            "isFirst": true
+          },
+          {
+            "name": "最小值",
+            "code": "MIN",
+            "isFirst": true
+          },
+          {
+            "name": "平均值",
+            "code": "AVG",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWTOPTi",
+        "compList": [
+          {
+            "name": "水平加速度",
+            "code": "LA_Horizontal",
+            "isFirst": true
+          },
+          {
+            "name": "合成角度",
+            "code": "Actrual",
+            "isFirst": true
+          },
+          {
+            "name": "0.1-10有效值",
+            "code": "0_10-RMS",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWTOPNaA",
+        "compList": [
+          {
+            "name": "最大值",
+            "code": "MAX",
+            "isFirst": true
+          },
+          {
+            "name": "最小值",
+            "code": "MIN",
+            "isFirst": true
+          },
+          {
+            "name": "平均值",
+            "code": "AVG",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWTOPNa",
+        "compList": [
+          {
+            "name": "轴向加速度",
+            "code": "AA_Axisl",
+            "isFirst": true
+          },
+          {
+            "name": "0.1-10有效值",
+            "code": "0_10-RMS",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWTOPRiA",
+        "compList": [
+          {
+            "name": "最大值",
+            "code": "MAX",
+            "isFirst": true
+          },
+          {
+            "name": "最小值",
+            "code": "MIN",
+            "isFirst": true
+          },
+          {
+            "name": "平均值",
+            "code": "AVG",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWTOPRi",
+        "compList": [
+          {
+            "name": "垂直加速度",
+            "code": "VA_Vertical",
+            "isFirst": true
+          },
+          {
+            "name": "0.1-10有效值",
+            "code": "0_10-RMS",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWTOPPi",
+        "compList": [
+          {
+            "name": "基础Pi",
+            "code": "Pitch",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "TOWTOPRo",
+        "compList": [
+          {
+            "name": "基础Ro",
+            "code": "Roll",
+            "isFirst": true
+          }
+        ]
+      }
+      //{
+      //  "compType": "TOWTOPT",
+      //  "compList": [
+      //    {
+      //      "name": "温度",
+      //      "code": "AvgT",
+      //      "isFirst": true
+      //    }
+      //  ]
+      //}
+    ]
+  },
+  {
+    "compType": "CVM",
+    "compList": [
+      {
+        "compType": "MSTMB1",
+        "compList": [
+          {
+            "name": "0.1-10有效值",
+            "code": "0_10-RMS",
+            "isFirst": true
+          },
+          {
+            "name": "10-1000速度有效值",
+            "code": "10_1K-VRMS",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "MSTMB2",
+        "compList": [
+          {
+            "name": "0.1-10有效值",
+            "code": "0_10-RMS",
+            "isFirst": true
+          },
+          {
+            "name": "10-1000速度有效值",
+            "code": "10_1K-VRMS",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "GBXINS",
+        "compList": [
+          {
+            "name": "0.1-10有效值",
+            "code": "0_10-RMS",
+            "isFirst": true
+          },
+          {
+            "name": "10-1000速度有效值",
+            "code": "10_1K-VRMS",
+            "isFirst": true
+          },
+          {
+            "name": "10-2000有效值",
+            "code": "10_2K-RMS",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "GBXIST",
+        "compList": [
+          {
+            "name": "0.1-10有效值",
+            "code": "0_10-RMS",
+            "isFirst": true
+          },
+          {
+            "name": "10-1000速度有效值",
+            "code": "10_1K-VRMS",
+            "isFirst": true
+          },
+          {
+            "name": "10-2000有效值",
+            "code": "10_2K-RMS",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "GBX1PS",
+        "compList": [
+          {
+            "name": "0.1-10有效值",
+            "code": "0_10-RMS",
+            "isFirst": true
+          },
+          {
+            "name": "10-1000速度有效值",
+            "code": "10_1K-VRMS",
+            "isFirst": true
+          },
+          {
+            "name": "10-2000有效值",
+            "code": "10_2K-RMS",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "GBXLSS",
+        "compList": [
+          {
+            "name": "0.1-10有效值",
+            "code": "0_10-RMS",
+            "isFirst": true
+          },
+          {
+            "name": "10-1000速度有效值",
+            "code": "10_1K-VRMS",
+            "isFirst": true
+          },
+          {
+            "name": "10-2000有效值",
+            "code": "10_2K-RMS",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "GBX2PS",
+        "compList": [
+          {
+            "name": "10-1000速度有效值",
+            "code": "10_1K-VRMS",
+            "isFirst": true
+          },
+          {
+            "name": "10-2000有效值",
+            "code": "10_2K-RMS",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "GBX3PS",
+        "compList": [
+          {
+            "name": "10-1000速度有效值",
+            "code": "10_1K-VRMS",
+            "isFirst": true
+          },
+          {
+            "name": "10-2000有效值",
+            "code": "10_2K-RMS",
+            "isFirst": true
+          },
+          {
+            "name": "0-50速度有效值",
+            "code": "0_50-VRMS",
+            "isFirst": true
+          },
+          {
+            "name": "50-300速度有效值",
+            "code": "50_300-VRMS",
+            "isFirst": true
+          },
+          {
+            "name": "300-1000速度有效值",
+            "code": "300_1000-VRMS",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "GBXHSS",
+        "compList": [
+          {
+            "name": "10-1000速度有效值",
+            "code": "10_1K-VRMS",
+            "isFirst": true
+          },
+          {
+            "name": "10-2000有效值",
+            "code": "10_2K-RMS",
+            "isFirst": true
+          },
+          {
+            "name": "0-50速度有效值",
+            "code": "0_50-VRMS",
+            "isFirst": true
+          },
+          {
+            "name": "50-300速度有效值",
+            "code": "50_300-VRMS",
+            "isFirst": true
+          },
+          {
+            "name": "300-1000速度有效值",
+            "code": "300_1000-VRMS",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "GBXHSSAi",
+        "compList": [
+          {
+            "name": "10-1000速度有效值",
+            "code": "10_1K-VRMS",
+            "isFirst": true
+          },
+          {
+            "name": "10-2000有效值",
+            "code": "10_2K-RMS",
+            "isFirst": true
+          },
+          {
+            "name": "0-50速度有效值",
+            "code": "0_50-VRMS",
+            "isFirst": true
+          },
+          {
+            "name": "50-300速度有效值",
+            "code": "50_300-VRMS",
+            "isFirst": true
+          },
+          {
+            "name": "300-1000速度有效值",
+            "code": "300_1000-VRMS",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "GENDEE",
+        "compList": [
+          {
+            "name": "10-5000有效值",
+            "code": "10_5K-RMS",
+            "isFirst": true
+          },
+          {
+            "name": "10-1000速度有效值",
+            "code": "10_1K-VRMS",
+            "isFirst": true
+          },
+          {
+            "name": "10-35有效值",
+            "code": "10_35-RMS",
+            "isFirst": true
+          },
+          {
+            "name": "10-300有效值",
+            "code": "10_300-RMS",
+            "isFirst": true
+          },
+          {
+            "name": "300-1000有效值",
+            "code": "300_1000-RMS",
+            "isFirst": true
+          }
+        ]
+      },
+      {
+        "compType": "GENNDE",
+        "compList": [
+          {
+            "name": "10-5000有效值",
+            "code": "10_5K-RMS",
+            "isFirst": true
+          },
+          {
+            "name": "10-1000速度有效值",
+            "code": "10_1K-VRMS",
+            "isFirst": true
+          },
+          {
+            "name": "10-35有效值",
+            "code": "10_35-RMS",
+            "isFirst": true
+          },
+          {
+            "name": "10-300有效值",
+            "code": "10_300-RMS",
+            "isFirst": true
+          },
+          {
+            "name": "300-1000有效值",
+            "code": "300_1000-RMS",
+            "isFirst": true
+          }
+        ]
+      }
+    ]
+  }
+]

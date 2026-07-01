@@ -1,0 +1,48 @@
+[
+  {
+    "ModeId": "203001",// 模型编号 发电机外圈
+    "ModeParaId": "Gen_Bpfo_1",// 模型参数id  Gen_Bpfo_x 参数序号
+    "FrequencyDoublingNumber": 50,// 倍频个数
+    "FrequencyDoublingErrorPoint": 8,// 倍频误差点数
+    "BandAvgThreshold": 6,// 频带均值阈值
+    "FrequencyDoublingRangePoint": 60,// 倍频范围点数
+    "FrequencyDoublingSiftNumber": 8,// 倍频筛选个数
+    "EnvSpecFreqSpecErrorPoint": 1,// 包络谱基频与频谱基频误差点数
+    "ContinuousFrequencyDoubling": 4,// 倍频筛选后，连续倍频个数
+  },
+  {
+    "ModeId": "203002",// 模型编号 发电机保持架
+    "ModeParaId": "Gen_Ftf_1",// 模型参数id  Gen_Ftf_1参数序号
+    "FrequencyDoublingNumber": 20,// 倍频个数
+    "FrequencyDoublingErrorPoint": 3,// 倍频误差点数
+    "BandAvgThreshold": 6,// 频带均值阈值
+    "FrequencyDoublingRangePoint": 60,// 倍频范围点数
+    "FrequencyDoublingSiftNumber": 8,// 倍频筛选个数
+    "EnvSpecFreqSpecErrorPoint": 1,// 包络谱基频与频谱基频误差点数
+    "ContinuousFrequencyDoubling": 4,// 倍频筛选后，连续倍频个数
+  },
+  {
+    "ModeId": "203003",// 模型编号 发电机内圈
+    "ModeParaId": "Gen_Bpfi_1",// // 模型参数id  Gen_Bpfo_x 参数序号
+    "FrequencyDoublingNumber": 35,// 倍频个数
+    "FrequencyDoublingErrorPoint": 8,// 倍频误差点数
+    "BandAvgThreshold": 4,// 频带均值阈值
+    "FrequencyDoublingRangePoint": 60,// 倍频范围点数
+    "FrequencyDoublingSiftNumber": 7,// 倍频筛选个数
+    "EnvSpecFreqSpecErrorPoint": 1,// 包络谱基频与频谱基频误差点数
+    "SideFreDoublingFreRatioCoeff": 0.4,// 边频幅值相对于倍频幅值设定的占比系数
+    "ContinuousFrequencyDoubling": 3,// 倍频筛选后，连续倍频个数
+  },
+  {
+    "ModeId": "203004",// 模型编号 发电机滚动体
+    "ModeParaId": "Gen_Bsf_1",// // 模型参数id  Gen_Bpfo_x 参数序号
+    "FrequencyDoublingNumber": 20,// 倍频个数
+    "FrequencyDoublingErrorPoint": 8,// 倍频误差点数
+    "BandAvgThreshold": 4,// 频带均值阈值
+    "FrequencyDoublingRangePoint": 60,// 倍频范围点数
+    "FrequencyDoublingSiftNumber": 7,// 倍频筛选个数
+    "EnvSpecFreqSpecErrorPoint": 1,// 包络谱基频与频谱基频误差点数
+    "SideFreDoublingFreRatioCoeff": 0.4,// 边频幅值相对于倍频幅值设定的占比系数
+    "ContinuousFrequencyDoubling": 3,// 倍频筛选后，连续倍频个数
+  }
+]

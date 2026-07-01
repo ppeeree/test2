@@ -1,0 +1,207 @@
+﻿* {
+    box-sizing: border-box;
+}
+
+#app {
+    margin: 0;
+    height: 100%;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: #eee;
+}
+
+.el-main {
+    height: calc(100% - 65px);
+    width: 100%;
+    padding: 0;
+}
+.el-footer {
+    height:20px!important;
+    line-height:20px;
+    background:#fff;
+}
+
+.el-main .el-tabs {
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-top: 1px solid #ccc;
+}
+
+        .el-main .el-tabs .el-tabs__content {
+            width: 100%;
+            height: calc(100% - 40px);
+        }
+
+            .el-main .el-tabs .el-tabs__content .el-tab-pane {
+                width: 100%;
+                height: 100%;
+            }
+
+.left_download {
+    width: 100%;
+    padding: 5px;
+    height: 100%;
+}
+
+.right_download {
+    width: 100%;
+    padding: 5px;
+    overflow: auto;
+    height: 100%;
+}
+
+.download_task {
+    border: #ccc 1px solid;
+    margin: 5px;
+    height: 200px;
+}
+
+    .download_task .el-card__header {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .download_task .el-card__body {
+        width: 100%;
+        height: 160px;
+        overflow: auto;
+        font-size: 12px;
+        line-height: 20px;
+    }
+
+.header {
+    line-height: 28px;
+    padding: 0px 15px;
+    height: 65px;
+    overflow: hidden;
+    display: flex;
+    background:#fff;
+}
+
+    .header .logo {
+        display: flex;
+        margin-right: 100px;
+        flex-direction: row;
+        align-items: center;
+        font-size: 24px;
+        color: #606266;
+        font-weight: bold;
+    }
+
+        .header .logo img {
+            margin-right: 10px;
+        }
+
+    .header a {
+        display: inline-block;
+        text-align: center;
+        width: auto;
+        text-decoration: none !important;
+        color: #000;
+    }
+
+.el-menu-item a {
+    width: auto;
+    text-decoration: none !important;
+    color: #000;
+}
+
+
+    .el-table .el-table__cell{
+        padding: 3px 0 !important;
+    }
+
+    .el-pagination {
+        text-align: right;
+        padding-right: 45px;
+    }
+
+.el-table td.el-table__cell div {
+    text-align: center;
+    height: 24px;
+    font-size: 12px;
+    line-height: 24px;
+}
+.el-table__body tr.current-row > td.el-table__cell {
+    background-color: #ACDCFF;
+}
+.el-table--enable-row-hover .el-table__body tr:hover > td.el-table__cell {
+    background-color: #ACDCFF;
+}
+.table_btn {
+    padding: 0px;
+}
+
+.el-dialog__body {
+    max-height: 70vh;
+    overflow: auto;
+    padding: 0 20px;
+}
+
+.el-dialog {
+    margin-top: 10vh !important;
+}
+
+.handler_btn {
+    margin: 10px;
+}
+
+.card_block {
+    width: 100%;
+    overflow: hidden;
+    background: #fff;
+    border-radius:5px;
+}
+
+    .card_block .card_block_title {
+        font-size:15px;
+        font-weight:bolder;
+        height:40px;
+        line-height:40px;
+        padding:0 15px;
+        border-bottom:1px solid #eee;
+        position:relative;
+    }
+.card_block_title .el-select .el-input__inner {
+    font-weight: bolder;
+    height:30px;
+    line-height:30px;
+    border:none;
+    font-size:15px;
+    padding:0;
+    padding-left:15px;
+    width:auto;
+    color:#000;
+}
+.card_block_title .el-select .el-input__suffix {
+    left:-12px;
+    right:auto;
+}
+.card_block .card_block_title::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: 4px;
+    height: 25px;
+    border-radius: 0px 2px 2px 0px;
+    opacity: 1;
+    background: linear-gradient(171deg, #0081FF 0%, #22CCE2 101%);
+}
+
+.card_block_content {
+   width:100%;
+   height:calc(100% - 41px);
+   overflow:hidden;
+   padding:5px 10px;
+}
+.badge {
+    margin: 3px 10px;
+}
+.activebadge .el-button {
+    background: #0081FF;
+    color: #fff;
+}

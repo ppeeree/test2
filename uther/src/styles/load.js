@@ -1,0 +1,6 @@
+document.getElementsByTagName('body')[0].style.setProperty('--background', "url('/img/WindTurbine/background/bg.png')")
+document.getElementsByTagName('body')[0].style.setProperty('--blue', '#0A498A')
+document.getElementsByTagName('body')[0].style.setProperty('--fontColor', '#000')
+document.getElementsByTagName('body')[0].style.setProperty('--inputBg', 'linear-gradient(0deg, rgba(7, 5, 48, 0) 0%, rgba(7, 5, 48, 0.66) 100%)')
+document.getElementsByTagName('body')[0].style.setProperty('--treeNodeFontSize', '#fff')
+document.getElementsByTagName('body')[0].style.setProperty('--iconBarColor', '#fff')

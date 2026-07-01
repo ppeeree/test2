@@ -1,0 +1,27 @@
+{
+  "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJpc3N1c2VyIiwiYXVkIjoiYXVkaWVuY2UiLCJ0ZW5hbnRfaWQiOiIwMDAwMDAiLCJlbGV2YXRpb24iOiIxIiwidXNlcl9uYW1lIjoiYWRtaW4iLCJsYXRpdHVkZSI6IjEiLCJkZXB0X25hbWUiOiLljZPmmIfpo47nlLXlnLoiLCJ0b2tlbl90eXBlIjoiYWNjZXNzX3Rva2VuIiwicm9sZV9uYW1lIjoiYWRtaW5pc3RyYXRvciIsInBvc3RfaWQiOiIxMTIzNTk4ODE3NzM4Njc1MjAxIiwidXNlcl9pZCI6IjExMjM1OTg4MjE3Mzg2NzUyMDEiLCJyb2xlX2lkIjoiMTEyMzU5ODgxNjczODY3NTIwMSIsIm5pY2tfbmFtZSI6IueuoeeQhuWRmCIsImRldGFpbCI6eyJ0eXBlIjoid2ViIiwiZXh0IjoiMjIyMjIyMiJ9LCJkZXB0X2lkIjoiMTk0ODYxODgyODA3MTgxNzIxNyIsImFjY291bnQiOiJhZG1pbiIsImRlcHRDb2RlIjoiSkRHRjAwMiIsImxvbmdpdHVkZSI6IjEiLCJjbGllbnRfaWQiOiJzYWJlciIsImV4cCI6MTc2MDY3MTg2NywibmJmIjoxNzYwMDY3MDY3fQ.TmofSiiXAXQQIdIeL9RdXJZOPlNdEibFvcTkRwogxTmSITy15REQpAi5In52iyOnW7NyiaZ48v0vleP3j-3rOg",
+  "account": "admin",
+  "avatar": "https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png",
+  "deptCode": "ZGGH001",
+  "dept_id": "1948618828071817217",
+  "dept_name": "若羌100万千瓦风电场",
+  "detail": {
+    "ext": "2222222",
+    "type": "web"
+  },
+  "elevation": "1",
+  "expires_in": "604800",
+  "latitude": "1",
+  "license": "powered by bladex",
+  "longitude": "1",
+  "nick_name": "管理员",
+  "oauth_id": "",
+  "post_id": "1123598817738675201",
+  "refresh_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJpc3N1c2VyIiwiYXVkIjoiYXVkaWVuY2UiLCJ1c2VyX2lkIjoiMTEyMzU5ODgyMTczODY3NTIwMSIsInJvbGVfaWQiOiIxMTIzNTk4ODE2NzM4Njc1MjAxIiwidG9rZW5fdHlwZSI6InJlZnJlc2hfdG9rZW4iLCJkZXB0X2lkIjoiMTk0ODYxODgyODA3MTgxNzIxNyIsImNsaWVudF9pZCI6InNhYmVyIiwiZXhwIjoxNzYwNjcxODY3LCJuYmYiOjE3NjAwNjcwNjd9.at1k6Y2mAkZ5GoZ4HZRz49fX5fw7nIcLIZijQTZn8YDnYM1qKK1A7U04PJHnGJd9P_NPrgkhJIyzCnxi_1ryUg",
+  "role_id": "1123598816738675201",
+  "role_name": "administrator",
+  "tenant_id": "000000",
+  "token_type": "bearer",
+  "user_id": "1123598821738675201",
+  "user_name": "admin"
+}

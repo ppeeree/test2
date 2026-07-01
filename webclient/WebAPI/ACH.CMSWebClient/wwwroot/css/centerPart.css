@@ -1,0 +1,21 @@
+.el-col-12 {
+    width: 50%;
+    height: 100%;
+    overflow: auto;
+    padding: 0 0 0 10px;
+}
+.center_part .turbine_list h3 {
+    margin: 5px 10px;
+    color: #464646;
+    text-align: center;
+}
+.center_part .turbine_list span {
+    height: 35px;
+    line-height:35px;
+    display: inline-block;
+    width: 111px;
+    text-align: center;
+    margin: 5px;
+    border-radius: 3px;
+    cursor: pointer;
+}

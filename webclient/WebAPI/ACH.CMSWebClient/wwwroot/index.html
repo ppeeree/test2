@@ -1,0 +1,577 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link href="compJS/elementUI.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
+    <link href="css/download.css" rel="stylesheet">
+
+    <script src="js/mainLeft.js"></script>
+    <script src="js/moment.min.js"></script>
+    <script src="js/fileSaver.min.js"></script>
+    <script src="compJS/vue.js"></script>
+    <script src="compJS/elementUI.js"></script>
+    <link rel="icon" href="img/logo.png" type="image/x-icon">
+    <title></title>
+</head>
+
+<body>
+    <div id="app">
+        <header class="header">
+            <p class="logo"><img src="img/logo.png" />{{this.webTitleName}}</p>
+            <el-menu default-active="1" class="el-menu-demo" mode="horizontal" background-color="#fff" text-color="#000" active-text-color="#192ad1">
+                <el-menu-item index="1"><a href="index.html">数据下载</a></el-menu-item>
+                <el-menu-item index="3"><a href="dau.html">系统自检</a></el-menu-item>
+            </el-menu>
+
+        </header>
+        <el-main>
+            <el-tabs type="border-card" @tab-click="changeTab">
+                <el-tab-pane label="诊断数据下载">
+                    <!-- 诊断数据下载 -->
+                    <div class="left_download">
+                        <!-- 左侧：时间筛选 -->
+                        筛选：
+                        <el-date-picker v-model="dayZipTimeRange" type="daterange" :picker-options="timePickerOptions"
+                                        range-separator="~" start-placeholder="开始日期" end-placeholder="结束日期" align="right"
+                                        value-format="yyyy-MM-dd"
+                                        size="small"
+                                        @change="daySelectChange"></el-date-picker>
+
+                        <!-- 右侧：按钮组 -->
+                        <el-button type="primary" size="small" @click="DownloadDayZIP">
+                            <i class="el-icon-download" style="padding-right: 7px"></i>批量下载
+                        </el-button>
+                        <!--批量删除按钮隐藏-->
+                        <!--<el-button type="primary" @click="DeleteDayZIP">
+                        <i class="el-icon-delete" style="padding-right: 7px"></i>批量删除
+                    </el-button>-->
+                        <!-- 表格 -->
+                        <el-table ref="multipleTable" :data="dayTableList" height="95%" style="width: 100%;margin-top:8px;"
+                                  border :highlight-current-row="true"
+                                  row-key="fileName"
+                                  :header-cell-style="{backgroundColor:'#F2F6FC',color:'#909399',textAlign: 'center'}"
+                                  @selection-change="handleSelectionChange" class="tableLimit">
+                            <el-table-column type="selection" width="55"></el-table-column>
+                            <el-table-column type="index"
+                                             label="编号"
+                                             :index="indexMethod"
+                                             width="60">
+                            </el-table-column>
+                            <el-table-column prop="fileTime" label="数据包时间"></el-table-column>
+                            <el-table-column prop="fileName" label="文件名称"></el-table-column>
+                            <el-table-column prop="turbineNum" label="机组数量"></el-table-column>
+                            <el-table-column prop="fileMemory" label="文件大小（GB）"></el-table-column>
+                        </el-table>
+                    </div>
+                </el-tab-pane>
+                <el-tab-pane label="自定义下载">
+                    <!-- 手动下载 -->
+                    <div class="right_download">
+                        <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="120px">
+                            <el-form-item label="风场：" prop="windparkID" :required="true">
+                                <el-select v-model="ruleForm.windparkID" placeholder="请选择" @change="windparkSelectChange">
+                                    <el-option v-for="item in windparkList" :key="item.stationID" :label="item.stationName"
+                                               :value="item.stationID">
+                                    </el-option>
+                                </el-select>
+                            </el-form-item>
+
+                            <el-form-item label="机组：" prop="windturbineIDs" :required="true">
+                                <el-button-group>
+                                    <el-button size="small" @click="handleCheckedAll">全选</el-button>
+                                    <el-button size="small" @click="handleCheckedNone">全不选</el-button>
+                                    <el-button size="small" @click="handleCheckedReverse">反选</el-button>
+                                </el-button-group>
+                                <el-checkbox-group style="line-height: 24px;width:60%" v-model="ruleForm.windturbineIDs">
+                                    <el-checkbox v-for="item in turbineList" :label="item.deviceID" :key="item.deviceID">
+                                        {{ item.deviceName }}
+                                    </el-checkbox>
+                                </el-checkbox-group>
+                            </el-form-item>
+
+                            <el-form-item label="时间范围：" prop="itemTime" :required="true">
+                                <el-date-picker v-model="ruleForm.itemTime" type="datetimerange"
+                                                :picker-options="timePickerOptions" range-separator="至" start-placeholder="开始日期"
+                                                end-placeholder="结束日期" align="right" value-format="yyyy-MM-dd HH:mm:ss"
+                                                :default-time="['00:00:00', '23:59:59']">
+                                </el-date-picker>
+                            </el-form-item>
+
+                            <el-form-item label="部件：" prop="measType" :required="true">
+                                <el-checkbox-group v-model="ruleForm.measType">
+                                    <el-checkbox v-for="item in measTypeList" :label="item.key" :key="item.key">
+                                        {{ item.value }}
+                                    </el-checkbox>
+                                </el-checkbox-group>
+                            </el-form-item>
+                            <el-form-item label="波形组数：" prop="waveNum">
+                                <el-input-number controls-position="right" style="margin-right: 5px; width: 120px"
+                                                 v-model="ruleForm.waveNum" placeholder=""></el-input-number>
+                            </el-form-item>
+                        </el-form>
+
+                        <el-button style="margin-left:10px;" size="small" type="primary" @click.native="addTask('ruleForm')">
+                            数据打包
+                        </el-button>
+
+                        <el-card class="download_task">
+                            <div slot="header" class="clearfix">
+                                <span>自定义下载日志</span>
+                            </div>
+                            <div>
+                                <p v-for="item in logsList" :key="item">{{item}}</p>
+                            </div>
+                        </el-card>
+
+                        <div v-if="filePath.length" class="file_button">
+                            <el-button @click="downloadFile(filePath)">
+                                <el-image style="width: 40px; height: 40px"
+                                          src="/img/zip.png"
+                                          fit="fill"></el-image>
+                                <p style="float:right;margin-top:15px;margin-left:10px;">{{this.extractFileName(this.filePath)}}</p>
+                            </el-button>
+
+                        </div>
+
+                    </div>
+                </el-tab-pane>
+            </el-tabs>
+        </el-main>
+        <el-footer>
+            <p style="font-size: 11px;text-align:center; color: #606266; margin-left: auto;">版权所有 © 2022-2026 众芯汉创（北京）科技有限公司 {{this.webVersion}}</p>
+        </el-footer>
+        
+    </div>
+</body>
+
+</html>
+
+<script>
+    new Vue({
+        el: '#app',
+        data() {
+            const low = (rule, value, callback) => {
+                if (value <= 0) {
+                    callback(new Error('波形数量必须大于0'))
+                } else {
+                    callback()
+                }
+            }
+            return {
+                dayTableList: [],
+                dayZipTimeRange: [], // 诊断数据下载时间范围
+                selectTaskList: [], // 选中的压缩包
+                windparkList: [], //风场列表
+                allTurbineList: [], //全部机组列表
+                turbineList: [], // 该风场下的机组列表
+                measTypeList: [], // 部件类型
+                downloadLog: [], // 自定义下载日志
+                webTitleName: "", // 软件名称
+                webVersion: "", // 软件版本
+
+                showConfigMenu:false, // 展示系统配置按钮变量
+
+                rules: {
+                    windparkID: [{ required: true, message: '请选择风场', trigger: 'change' }],
+                    windturbineIDs: [{ required: true, message: '请选择机组', trigger: 'change' }],
+                    measType: [{ required: true, message: '请选择部件', trigger: 'change' }],
+                    dataType: [{ required: true, message: '请选择数据类型', trigger: 'change' }],
+                    itemTime: [{ required: true, message: '请选择时间范围', trigger: 'blur' }],
+                    waveNum: [{ required: true, message: '请输入波形数量', trigger: 'blur' }, { validator: low, trigger: 'blur' }],
+                },
+                ruleForm: {
+                    windparkID: '',
+                    windturbineIDs: [],
+                    startSpeed: '0',
+                    endSpeed: '2000',
+                    waveNum: 0,
+                    itemTime: [],
+                    measType: ["3", "4"]
+                },
+                interTimer: null,// 轮询定时器
+                logsList: [],
+                filePath: '',
+                timePickerOptions: {
+                    shortcuts: [{
+                        text: '最近一周',
+                        onClick(picker) {
+                            const end = new Date();
+                            const start = new Date();
+                            start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
+                            picker.$emit('pick', [start, end]);
+                        }
+                    }, {
+                        text: '最近一个月',
+                        onClick(picker) {
+                            const end = new Date();
+                            const start = new Date();
+                            start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
+                            picker.$emit('pick', [start, end]);
+                        }
+                    }, {
+                        text: '最近三个月',
+                        onClick(picker) {
+                            const end = new Date();
+                            const start = new Date();
+                            start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
+                            picker.$emit('pick', [start, end]);
+                        }
+                    }]
+                },
+            }
+        },
+        computed: {
+        },
+        watch: {
+            'ruleForm.windparkID': {
+                handler() {
+                    this.getMeasTypeList()
+                }
+            }
+        },
+        created() {
+            // 给时间筛选赋初始值
+            const start = moment().subtract(1, 'month').startOf('day').format('YYYY-MM-DD')
+            const end = moment().endOf('day').format('YYYY-MM-DD')
+            this.dayZipTimeRange = [start, end]
+            this.getTurbineList()
+            this.getWebClientInfo()
+
+            // 注册全局键盘事件
+            window.addEventListener('keydown', this.onKey); 
+            const menu = sessionStorage.getItem('showConfigMenu')
+            if (menu === null) {
+                sessionStorage.setItem('showConfigMenu', false) 
+            }
+            this.showConfigMenu = sessionStorage.getItem('showConfigMenu') == "false" ? false : true;
+        },
+        beforeDestroy() {
+            window.removeEventListener('keydown', this.onKey);
+        },
+        mounted() {
+            this.getDayTableList()
+           
+        },
+        methods: {
+            onKey(e) {
+                // 必须同时按下 Ctrl + Shift + I
+                if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'i') {
+                    this.showConfigMenu = !this.showConfigMenu;
+                    sessionStorage.setItem('showConfigMenu', this.showConfigMenu); 
+                }
+            },
+
+            // 接口：获取软件版本信息
+            getWebClientInfo() {
+                var url = `/NetApi/DownloadTask/GetCMSWebClientInfo`
+                fetch(url)
+                    .then((response) => response.json())
+                    .then((data) => {
+                        // console.log('软件信息', data.data)
+                        const { webTitleName, webVersion } = data.data
+                        this.webTitleName = webTitleName
+                        this.webVersion = webVersion
+                        document.title = this.webTitleName
+
+                        sessionStorage.setItem('webVersion', webVersion);
+                        sessionStorage.setItem('webTitleName',webTitleName);
+                    })
+                    .catch((error) => console.error('Unable to get items.', error))
+            },
+
+            // 诊断数据下载：表格编号
+            indexMethod(index) {
+                return index+1;
+            },
+            // 页面切换
+            changeTab(tab) {
+                if (tab.label == '诊断数据下载') {
+                    if (this.interTimer) {
+                        clearInterval(this.interTimer)
+                        this.interTimer = null
+                    }
+                } else {
+                    // 开始轮询获取打包日志
+                    this.getDownloadLogs()
+                }
+
+            },
+            // 诊断下载：表格选中change
+            handleSelectionChange(param) {
+                this.selectTaskList = param;
+            },
+
+            // 诊断下载：表格筛选change
+            daySelectChange(param) {
+                this.getDayTableList()
+            },
+
+            // 诊断下载接口：获取诊断数据下载表格
+            getDayTableList() {
+                var param = {
+                    timeString: this.dayZipTimeRange,
+                }
+                const queryString = new URLSearchParams(param).toString()
+                var url = `/NetApi/DownloadTask/GetZipPathList?${queryString}`
+                fetch(url)
+                    .then((response) => response.json())
+                    .then((data) => {
+                        this.dayTableList = data.data
+                        this.$nextTick(() => {
+                            this.$refs.multipleTable.toggleAllSelection(this.dayTableList);
+                            this.selectTaskList = this.dayTableList
+                        })
+                    })
+                    .catch((error) => console.error('Unable to get items.', error))
+            },
+
+            // 诊断数据下载：下载多个诊断数据压缩包
+            async DownloadDayZIP() {
+                if (this.selectTaskList.length === 0) {
+                    this.$message({ type: 'warning', message: "请在表格中选中文件！" });
+                    return;
+                }
+
+                const batch = 3; // 每批同时 3 个
+                for (let i = 0; i < this.selectTaskList.length; i += batch) {
+                    const slice = this.selectTaskList.slice(i, i + batch);
+                    slice.forEach(file => {
+                        const a = document.createElement('a');
+                        a.href = `/DownloadTask/DownloadZipByPath?path=${encodeURIComponent(file.filePath)}`;
+                        a.download = file.fileName;
+                        a.click();
+                    });
+                    if (i + batch < this.selectTaskList.length)
+                        await new Promise(r => setTimeout(r, 1000)); // 等 1 秒再下一批
+                }
+
+                // 下载时间范围内的数据采集结果
+                this.downloadCSVFile()
+            },
+
+            
+            // 诊断数据下载: 下载csv文件
+            downloadCSVFile() {
+                if (this.dayZipTimeRange.length == 0) {
+                    this.$message({ type: 'warning', message: "请选择时间范围！" })
+                } else {
+                    var param = {
+                        timeString: this.dayZipTimeRange,
+                    }
+                    const queryString = new URLSearchParams(param).toString()
+                    var url = `/NetApi/DownloadTask/DownloadCSVFile?${queryString}`
+
+                    fetch(url)
+                        .then((response) => response.json())
+                        .then((data) => {
+                            if (data.success) {
+                                if (data.data == "") {
+                                    this.$message({ type: 'warning', message: data.message });
+                                } else {
+                                    this.downloadFile(data.data)
+                                }
+                            } else {
+                               //  this.$message({ type: 'danger', message: data.message });
+                            }
+                        })
+                        .catch((error) => console.error('Unable to get items.', error))
+                }
+            },
+            // 诊断下载按钮：删除压缩包
+            DeleteDayZIP() {
+                if (this.selectTaskList.length == 0) {
+                    this.$message({ type: 'warning', message: "请在表格中选中文件！" })
+                    return;
+                }
+
+                this.$confirm('确定将选择压缩包删除?', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                })
+                    .then(() => {
+                        this.deleteTaskApi(this.selectTaskList)
+                    })
+            },
+
+            // 诊断下载接口：删除压缩包
+            deleteTaskApi(zipList) {
+                let request = new Request("/NetApi/DownloadTask/DeleteDayZipList", {
+                    method: 'post',
+                    headers: { 'Content-Type': 'application/json;charset=utf-8;' },
+                    body: JSON.stringify(zipList)
+                })
+
+                fetch(request)
+                    .then((response) => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then((data) => {
+                        if (data.success) {
+                            this.$message({ type: 'success', message: data.message })
+                            this.getDayTableList()
+                        } else {
+                            this.$message({ type: 'danger', message: data.message })
+                        }
+                    })
+                    .catch((error) => console.error('Unable to get items.', error))
+            },
+
+
+            // 自定义下载接口：获取机组列表
+            getTurbineList() {
+                fetch("/NetApi/DownloadTask/GetDevTree")
+                    .then((response) => response.json())
+                    .then((data) => {
+                        this.allTurbineList = data.data
+                        this.ruleForm.windparkID = data.data[0].stationID
+                        this.turbineList = data.data[0].deviceList
+                        this.windparkList = data.data
+                        sessionStorage.setItem('deviceList', JSON.stringify(data.data));
+                    })
+                    .catch((error) => console.error("Unable to get items.", error));
+            },
+
+            // 自定义下载接口：获取部件类型
+            getMeasTypeList() {
+                var param = {
+                    stationID: this.ruleForm.windparkID,
+                }
+                const queryString = new URLSearchParams(param).toString()
+                var url = `/NetApi/DownloadTask/GetMonitorType?${queryString}`
+                fetch(url)
+                    .then((response) => response.json())
+                    .then((data) => {
+                        this.measTypeList = data.data
+                        this.ruleForm.measType = data.data.map(i=>i.key)
+                    })
+                    .catch((error) => console.error('Unable to get items.', error))
+            },
+
+            // 自定义下载：选中风场改变
+            windparkSelectChange() {
+                var data = this.windparkList.filter(o => o.stationID == this.ruleForm.windparkID)
+                this.turbineList = data[0].deviceList
+            },
+            // 自定义下载：机组全选
+            handleCheckedAll() {
+                this.ruleForm.windturbineIDs = Array.from(this.turbineList, i => i.deviceID)
+            },
+            // 自定义下载：机组全不选
+            handleCheckedNone() {
+                this.ruleForm.windturbineIDs = []
+            },
+            // 自定义下载：机组反选
+            handleCheckedReverse() {
+                let arrSelected = this.ruleForm.windturbineIDs
+                let unselected = this.turbineList.filter(i => !arrSelected.includes(i.deviceID))
+                this.ruleForm.windturbineIDs = Array.from(unselected, i => i.deviceID)
+            },
+
+            // 自定义下载按钮：新增下载任务
+            addTask() {
+                if ((this.logsList.length != 0 && this.logsList.length != 0) || (this.logsList.length == 0 && this.logsList.length == 0)) {
+                    this.$refs['ruleForm'].validate(valid => {
+                        if (valid) {
+                            let param = {
+                                createdTime: moment().format("YYYY-MM-DD HH:mm:ss"),
+                                stationName: this.HandlerStationName(this.ruleForm.windparkID),
+                                windturbineIDs: this.ruleForm.windturbineIDs,
+                                startTime: this.ruleForm.itemTime[0],
+                                endTime: this.ruleForm.itemTime[1],
+                                waveNum: this.ruleForm.waveNum.toString(),
+                                measType: this.ruleForm.measType
+                            }
+                            this.addTaskApi(param)
+                        } else {
+                            this.$message({ type: 'warning', message: "参数未输入完整或不满足要求！" })
+                        }
+                    })
+                }
+                else {
+                    this.$message({ type: 'warning', message: "上次打包未完成，暂不打包！" })
+                }
+            },
+
+            // 根据风场ID获取风场名称
+            HandlerStationName(stationID) {
+                var data = this.allTurbineList.filter(o => o.stationID == stationID)
+                return data[0].stationName
+                /*var data = this.windparkList.filter(o => o.stationID == this.ruleForm.windparkID)
+                const matchedObjects = data[0].deviceList.filter(obj => searchValues.includes(obj.deviceID))
+                return matchedObjects.map(obj => obj.deviceName);*/
+            },
+
+            // 自定义下载接口：新增自定义下载
+            addTaskApi(param) {
+                let request = new Request("/NetApi/DownloadTask/AddTask", {
+                    method: 'post',
+                    headers: { 'Content-Type': 'application/json;charset=utf-8;' },
+                    body: JSON.stringify(param)
+                })
+
+                fetch(request)
+                    .then((response) => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json(); // 如果后端返回 JSON 数据，可以解析
+                    })
+                    .then((data) => {
+                        console.log('自定义下载后压缩包', data.data)
+                    })
+                    .catch((error) => {
+                        console.error("Unable to get items.", error);
+                    });
+            },
+
+            // 自定义下载接口：轮询调用，展示数据下载实时接口（自定义下载打包完成后需清除定时器）
+            getDownloadLogs() {
+                const url = '/NetApi/DownloadTask/GetDownloadLogs';
+                // 每 2 秒调用一次接口
+                this.interTimer = setInterval(() => {
+                    fetch(url)
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error(`HTTP error! status: ${response.status}`);
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            let { logs, path } = data.data
+                            this.logsList = logs
+                            this.filePath = path
+                        })
+                        .catch(error => {
+                            console.error('请求失败:', error);
+                        });
+                }, 5000);
+            },
+            // 使用正则表达式匹配文件名
+            extractFileName(filePath) {
+                const match = filePath.match(/[^\\/]+$/);
+                var name = match ? match[0] : filePath; // 如果匹配成功，返回文件名，否则返回路径
+                return name;
+            },
+
+            // 自定义下载：单个文件的A链接下载
+            async downloadFile(filePath) {
+                // 创建A链接
+                const a = document.createElement('a');
+                // 路径需 URL 编码
+                a.href = ` /DownloadTask/DownloadZipByPath?path=${encodeURIComponent(filePath)}`;
+                // 指定保存文件名
+                a.download = this.extractFileName(filePath);
+                a.style.display = 'none';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+            }
+        }
+    })
+</script>

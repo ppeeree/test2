@@ -1,0 +1,20 @@
+export const chartENZHList = {
+  empty: '空',
+  RCA: '转速',
+  PCA: '功率',
+  WCA: '风速',
+  DA: '特征值分布',
+  OA: '倾角分布图',
+  OrderEnvelopeSpectrum: '阶次包络谱',
+  OrderEnvelope: '阶次包络',
+  OrderSpectrum: '阶次谱',
+  Order: '阶次波形',
+  Envelope: '包络波形',
+  EnvelopeSpectrum: '包络谱',
+  Spd: '转速波形',
+  Waterfall: '瀑布图',
+  Cepstrum: '倒谱图',
+  FreqDomain: '频域',
+  TimeDomain: '时域',
+  BearingAnalysis: '轴承诊断'
+}

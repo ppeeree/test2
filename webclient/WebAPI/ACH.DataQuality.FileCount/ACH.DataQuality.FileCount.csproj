@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.1</TargetFramework>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Content Remove="C:\Users\DELL\.nuget\packages\ach.achlog.serilog\1.0.4\contentFiles\any\netstandard2.1\logger.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="ACH.ACHLog.SeriLog" Version="1.0.4" />
+	</ItemGroup>
+
+</Project>

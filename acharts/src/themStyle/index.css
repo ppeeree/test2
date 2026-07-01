@@ -1,0 +1,771 @@
+p {
+  margin: 0;
+}
+
+.advise_tooltip {
+  position: absolute;
+  top: 50px;
+  left: 300px;
+  width: 30%;
+  height: auto;
+  font-size: 14px;
+  text-align: left;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  color: #444;
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.advise_tooltip_dark {
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.advise_tooltip_closeicon {
+  position: absolute;
+  right: 3px;
+  top: 0px;
+  cursor: pointer;
+}
+
+.xy_tooltip {
+  position: absolute;
+  background-color: #f0f0f0;
+  font-size: 12px;
+  z-index: 10;
+  width: 80px;
+}
+
+.xy_tooltip:before {
+  content: '';
+  position: absolute;
+  left: -8px;
+  top: -8px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: rgba(156, 156, 156, 0.8);
+  pointer-events: none;
+  /*  border: 3px solid #ccc */
+}
+
+.xy_tooltip_left:before {
+  content: '';
+  position: absolute;
+  left: 82px;
+  top: -8px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: rgba(156, 156, 156, 0.8);
+  pointer-events: none;
+}
+
+/* 工具条白色主题样式 */
+.chart_toolbox {
+  width: auto;
+  padding: 0 15px;
+  height: 30px;
+  position: absolute;
+  text-align: center;
+  top: 5px;
+
+  li {
+    list-style: none;
+    text-align: center;
+    line-height: 0;
+    float: left;
+    margin: 3px 2px;
+    cursor: pointer;
+    background: transparent;
+    color: #444;
+
+    i {
+      margin: 0px 2px;
+      font-size: 16px;
+      line-height: 16px;
+    }
+  }
+
+  .icon {
+    color: #444;
+  }
+
+  .radioStyle {
+    background-color: transparent;
+  }
+
+  .activeRadio {
+    background-color: #bddeff !important;
+  }
+
+  .activeStack {
+    background-color: #bddeff !important;
+  }
+
+  .hideLi {
+    display: none;
+  }
+
+  .showLi {
+    display: block;
+  }
+
+  .biggap {
+    list-style: none;
+    text-align: center;
+    line-height: 0;
+    float: left;
+    margin: 3px;
+    cursor: pointer;
+    background: transparent;
+  }
+
+  .activedLi {
+    background: #86b5f1;
+  }
+
+  .gap {
+    float: left;
+    width: 1px;
+    height: 20px;
+    margin: 1px 5px;
+    background: #777575;
+  }
+
+  .selectLi {
+    position: relative;
+    list-style: none;
+    text-align: center;
+    line-height: 0;
+    float: left;
+    margin: 3px 2px;
+    cursor: pointer;
+    background: transparent;
+    border-radius: 5px;
+  }
+
+  .selectLi>.diagmodel {
+    position: absolute;
+    left: -50px;
+    top: 25px;
+    display: none;
+    width: 120px;
+    height: auto;
+    overflow: hidden;
+    background: #fff;
+    z-index: 2;
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  }
+
+  .selectLi .diagmodel p {
+    padding: 0 10px;
+    margin: 3px 0;
+    text-align: left;
+    width: 100%;
+    font-size: 14px;
+    height: 24px;
+    line-height: 24px;
+  }
+
+  .selectLi .diagmodel p:hover {
+    background-color: #eee;
+  }
+
+  .selectLi .diagmodel p i {
+    margin: 0 10px 0 5px;
+    font-size: 14px;
+  }
+
+  .selectLi>.diagContent {
+    position: absolute;
+    left: -100px;
+    top: 25px;
+    display: none;
+    width: 200px;
+    height: auto;
+    overflow: hidden;
+    border: none;
+    background: #fff;
+    z-index: 2;
+    line-height: 20px;
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  }
+
+  .selectLi .diagContent h3 {
+    font-size: 14px;
+    height: 24px;
+    line-height: 24px;
+    padding: 0 10px;
+    background-color: #d1eaff;
+    text-align: left;
+    font-weight: normal;
+  }
+
+  .selectLi .diagContent p {
+    text-align: center;
+    padding: 0 10px;
+    margin: 15px 0;
+    text-align: left;
+    width: 100%;
+    font-size: 14px;
+    height: auto;
+    line-height: 24px;
+  }
+
+  .selectLi .diagContent p input {
+    display: inline-block;
+    width: 60px;
+    padding: 3px 10px;
+  }
+
+  .selectLi .diagContent p span {
+    display: block;
+    color: red;
+  }
+
+  .selectLi .diagContent div {
+    text-align: center;
+    width: 100%;
+    height: auto;
+  }
+
+  .selectLi .diagContent button {
+    cursor: pointer;
+    margin: 5px;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    font-size: 12px;
+  }
+
+  .selectLi .diagContent .ybNumConfirm {
+    background-color: #409eff;
+    color: #fff;
+  }
+}
+
+/*  工具条黑色主题样式 */
+.chart_toolbox_dark {
+  .activedLi {
+    background: #3E4856 !important;
+  }
+
+  li {
+    background: transparent;
+    color: #fff;
+  }
+
+  .icon {
+    color: #fff;
+  }
+
+  .radioStyle {
+    background-color: transparent;
+  }
+
+  .activeRadio {
+    background-color: #3E4856 !important;
+  }
+
+  .activeStack {
+    background-color: #3E4856 !important;
+  }
+
+  .biggap {
+    list-style: none;
+    text-align: center;
+    line-height: 0;
+    float: left;
+    margin: 3px;
+    cursor: pointer;
+    background: transparent;
+  }
+
+  .gap {
+    float: left;
+    width: 1px;
+    height: 20px;
+    margin: 1px 5px;
+    background: #777575;
+  }
+
+  .selectLi {
+    background: transparent;
+  }
+
+  .selectLi>.diagmodel {
+    background: #2A3645;
+  }
+
+  .selectLi .diagmodel p:hover {
+    background-color: #3E4856;
+  }
+
+
+  .selectLi>.diagContent {
+    background: #2A3645;
+  }
+
+  .selectLi .diagContent h3 {
+    background-color: transparent;
+  }
+
+  .selectLi .diagContent p input {
+    background-color: #161D26;
+    color: #fff;
+    border: none;
+    box-shadow: none;
+  }
+
+  .selectLi .diagContent p span {
+    display: block;
+    color: red;
+  }
+
+  .selectLi .diagContent button {
+    cursor: pointer;
+    margin: 5px;
+    background-color: #061A31;
+    border: 1px solid #007BFF;
+    color: #fff;
+    padding: 5px 10px;
+    font-size: 12px;
+  }
+
+  .selectLi .diagContent .ybNumConfirm {
+    background-color: #409eff;
+    color: #fff;
+    border: none;
+  }
+}
+
+.chart_YBDataMark {
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  border-radius: 50%;
+  background-color: #fff;
+  position: absolute;
+  right: 50px;
+  top: 20px;
+  display: block;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+
+  i {
+    vertical-align: middle;
+    cursor: pointer;
+  }
+}
+
+.hideVisibel {
+  display: none !important;
+}
+
+/*备注输入框dom*/
+.echart_note_input_block {
+  display: none;
+  position: absolute;
+  border-radius: 5px;
+  height: 170px;
+  width: 200px;
+  text-align: center;
+  padding: 10px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 12px 0px;
+  font-size: 14px;
+  border: none;
+  background: #fff;
+
+  textarea {
+    width: 100%;
+    height: 75%;
+    font-size: 12px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+  }
+
+  p {
+    width: 100%;
+    text-align: center;
+    margin: 10px 0;
+    font-size: 14px;
+  }
+
+  .cancel {
+    margin: 0 8px;
+    text-align: center;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    background: #fff;
+    padding: 5px 10px;
+    font-size: 12px;
+  }
+
+  .confirm {
+    margin: 0 8px;
+    text-align: center;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    background: #409eff;
+    padding: 5px 10px;
+    font-size: 12px;
+  }
+}
+
+/* 深色主题 */
+.echart_note_input_block_dark {
+  background: #2A3645;
+  box-shadow: none;
+
+  textarea {
+    background-color: #161D26;
+    color: #fff;
+    border: 1px solid #8291A9;
+  }
+
+  .cancel {
+    color: #fff;
+    background: #061A31;
+    border: 1px solid #007BFF;
+
+  }
+
+  .confirm {
+    color: #fff;
+    border: none;
+    background: #007BFF;
+  }
+}
+
+/*坐标轴最大最小值输入框dom*/
+.echart_setvalue {
+  display: none;
+  position: absolute;
+  border: 1px solid #999;
+  border-radius: 5px;
+  height: 170px;
+  width: auto;
+  text-align: center;
+  padding: 0 10px;
+  overflow: auto;
+  background: #fff;
+
+  .setItem {
+    width: 140px;
+    float: left;
+  }
+
+  .hideLi {
+    display: none;
+  }
+
+  h3 {
+    width: 100%;
+    text-align: left;
+    margin: 0 0 10px 0;
+    font-size: 14px;
+    padding: 5px 10px;
+    border-bottom: 1px solid #eee;
+    font-weight: normal;
+  }
+
+  p {
+    width: 100%;
+    text-align: center;
+    margin: 10px 0;
+    font-size: 14px;
+
+    input {
+      width: 80px;
+      line-height: 18px;
+    }
+  }
+
+  .cancel {
+    margin: 0 8px;
+    text-align: center;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    background: #fff;
+    font-size: 14px;
+    padding: 5px 10px;
+  }
+
+  .confirm {
+    margin: 0 8px;
+    text-align: center;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    background: #409eff;
+    font-size: 14px;
+    padding: 5px 10px;
+  }
+
+  .footer {
+    width: 100%;
+    height: auto;
+    padding-bottom: 5px;
+  }
+}
+
+.echart_setvalue_dark {
+  border: none;
+  background: #2A3645;
+  color: #fff;
+
+  h3 {
+    border-bottom: 1px solid #eee;
+  }
+
+  p {
+    input {
+      color: #fff;
+      background-color: #161D26;
+    }
+  }
+
+  .cancel {
+    color: #fff;
+    background: #061A31;
+    border: 1px solid #007BFF;
+
+  }
+
+  .confirm {
+    color: #fff;
+    border: none;
+    background: #007BFF;
+  }
+}
+
+/*创建弹框，显示游标线的信息*/
+.chart_YBBlock {
+  width: auto;
+  background: #fff;
+  padding: 5px 10px;
+  height: auto;
+  position: absolute;
+  display: none;
+  font-size: 14px;
+  color: #666;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 12px 0px;
+
+  p {
+    line-height: 20px;
+    text-align: left;
+
+    span {
+      font-weight: bolder;
+    }
+  }
+}
+
+.chart_YBBlock_dark {
+  background-color: #2A3645;
+  box-shadow: none;
+}
+
+/* 创建游标信息展示窗口 */
+.chart_YBDataBlock {
+  width: 170px;
+  background: #fff;
+  padding: 15px 15px;
+  height: 85%;
+  overflow-y: auto;
+  position: absolute;
+  right: 0;
+  top: 30px;
+  display: block;
+  font-size: 12px;
+  color: #666;
+  border-radius: 10px;
+  z-index: 10;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 12px 0px;
+
+  .closeYBInfo {
+    position: absolute;
+    top: 3px;
+    right: 10px;
+    cursor: pointer;
+    overflow: hidden;
+  }
+
+  .collapse_block {
+    width: 100%;
+    text-align: left;
+  }
+
+  .collapse_title:hover {
+    background-color: #eee;
+  }
+
+  .collapse_title {
+    cursor: pointer;
+    font-size: 14px;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .collapse_title span {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 5px;
+  }
+
+  .collapse_YB_title:hover {
+    background-color: #eee;
+  }
+
+  .collapse_YB_title {
+    cursor: pointer;
+    padding-left: 5px;
+  }
+
+  .dataline {
+    width: 100%;
+    line-height: 18px;
+
+    span {
+      display: inline-block;
+      width: 50px;
+      margin: 0 5px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+}
+
+.chart_YBDataBlock_dark {
+  background: #2A3645;
+  color: #fff;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 12px 0px;
+
+  .collapse_title:hover {
+    background-color: #3E4856;
+  }
+
+  .collapse_YB_title:hover {
+    background-color: #3E4856;
+  }
+}
+
+/* 右键弹出的菜单 */
+.echart_context_menu_block {
+  width: 150px;
+  background: #fff;
+  padding: 0;
+  height: auto;
+  position: absolute;
+  display: none;
+  font-size: 14px;
+  color: #666;
+  border-radius: 5px;
+
+  li {
+    list-style: none;
+    float: left;
+    text-align: left;
+    padding: 5px 15px;
+    width: 100%;
+    cursor: pointer;
+    background-color: #faf8f8;
+  }
+
+  li:hover {
+    background-color: #ccc;
+  }
+}
+
+.echart_context_menu_block_dark {
+  background: #2A3645;
+  color: #fff;
+
+  li {
+    background-color: transparent;
+  }
+
+  li:hover {
+    background-color: #3E4856;
+  }
+}
+
+.echart_Ybline_add {
+  width: 150px;
+  height: auto;
+  padding: 10px 5px;
+  position: absolute;
+  left: calc(50% - 75px);
+  top: 15%;
+  font-size: 12px;
+  background-color: #fff;
+  color: #000;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 12px 0px;
+
+  input {
+    width: 30px;
+  }
+
+  .cancel {
+    margin: 0 8px;
+    text-align: center;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    background: #fff;
+    padding: 2px 3px;
+    font-size: 12px;
+  }
+
+  .confirm {
+    margin: 0 8px;
+    text-align: center;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    background: #409eff;
+    padding: 2px 3px;
+    font-size: 12px;
+  }
+}
+
+.echart_Ybline_add_dark {
+  background-color: #2A3645;
+  color: #fff;
+
+  input {
+    color: #fff;
+    background-color: #161D26;
+  }
+
+  .cancel {
+    color: #fff;
+    background: #061A31;
+    border: 1px solid #007BFF;
+  }
+
+  .confirm {
+    color: #fff;
+    border: none;
+    background: #007BFF;
+  }
+}
+
+/* .collapse_YB_title_icon {
+  margin-right: 10px;
+  display: inline-block;
+  color: #ddd;
+}
+
+.collapse_YB_title_icon_down {
+  transform: rotate(90deg);
+} */

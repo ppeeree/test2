@@ -1,0 +1,238 @@
+::v-deep .el-form-item__label {
+    width: 100px !important;
+}
+
+::v-deep .el-form-item__content {
+    margin-left: 100px !important;
+}
+
+::v-deep .avue-form__group .el-col {
+    width: 20%;
+}
+
+::v-deep .avue-form__menu--center .el-button {
+    position: relative;
+    top: -5px;
+    left: 5%;
+}
+
+//下方页码样式
+::v-deep .el-pagination__sizes {
+    color: white;
+}
+
+::v-deep .el-pagination .el-select .el-input .el-input__inner {
+    border: 1px white solid;
+    background: transparent;
+}
+
+::v-deep .el-pagination__editor.el-input .el-input__inner {
+    border: 1px white solid;
+    background: transparent;
+}
+
+.el-button--primary {
+    background: #0861aa;
+    border-color: #0861aa;
+    color: white;
+
+    &:hover {
+        background: #1c98ff;
+        border-color: #1c98ff;
+    }
+}
+
+// 左侧按钮样式
+::v-deep .avue-crud__left {
+    padding-left: 20px;
+
+    .el-button {
+        margin-right: 20px;
+    }
+
+    .el-button--info {
+        width: 80px;
+    }
+}
+
+//弹出框样式
+::v-deep .el-dialog {
+    padding-bottom: 15px;
+
+    .el-dialog__header {
+        .el-dialog__title {
+            font-size: 16px;
+        }
+    }
+
+    .el-dialog__body {
+        padding: 10px 20px;
+        color: white;
+        max-height: 620px;
+        overflow-y: auto;
+        overflow-x: hidden;
+
+        .el-form {
+            width: 93%;
+            padding: 21px 0 10px 27px;
+
+            .el-form-item {
+                display: inline-block;
+                margin-right: 40px;
+            }
+
+            .el-form-item__content {
+                line-height: 35px;
+            }
+
+            .el-input__inner {
+                height: 35px;
+            }
+        }
+    }
+
+    .el-dialog__footer {
+        height: 40px;
+        padding: 0px;
+
+        .dialog-footer {
+            position: relative;
+            bottom: 0px;
+            right: 40%;
+
+            .el-button {
+                width: 110px;
+                height: 36px;
+                padding: 0px;
+                line-height: 36px;
+
+                i {
+                    margin-right: 5px;
+                }
+            }
+        }
+    }
+}
+
+.last_check {
+    ::v-deep .el-cascader-panel li[aria-haspopup] .el-checkbox {
+        display: none;
+    }
+}
+
+//弹出框标题样式
+.seting_title {
+    width: 100%;
+    left: 0%;
+    margin-bottom: 20px;
+    font-size: 14px;
+    height: 30px;
+    line-height: 30px;
+    border-bottom: 1px solid rgba(72, 137, 217, 0.5);
+    position: relative;
+    padding-left: 10px;
+
+    img {
+        padding-right: 5px;
+    }
+}
+
+::v-deep .avue-crud--card .el-card+.el-card {
+    margin-top: -16px;
+
+}
+
+.basic-container {
+    padding: 0px;
+}
+
+.edit {
+    cursor: pointer;
+
+    .editBtn {
+        color: #4889d9;
+        display: inline-block;
+        height: 20px;
+        border-bottom: 1px solid;
+    }
+
+    .editImg {
+        display: inline-block;
+        height: 12px;
+        width: 13px;
+        position: relative;
+        top: 2px;
+        right: 5px;
+        background-image: url(/img/changeImg.png);
+    }
+
+    &:hover {
+        .editBtn {
+            color: #afcaff;
+        }
+
+        .editImg {
+            background-image: url('/img/changeImg1.png');
+        }
+    }
+}
+
+.edit_card {
+    .dialod_content {
+        padding: 0 18px;
+        color: white;
+
+        .no_edit {
+            line-height: 36px;
+            margin-top: 20px;
+            width: 48%;
+            display: inline-block;
+
+            .edit_title {
+                width: 100px;
+                display: inline-block;
+                text-align: right;
+            }
+
+            .edit_input {
+                height: 36px;
+                display: inline-block;
+                width: 260px;
+                border-radius: 4px;
+                background-color: rgba(71, 86, 128, 0.3);
+                padding-left: 15px;
+            }
+
+            .el-input {
+                height: 36px;
+                width: 260px;
+
+                .el-input__inner {
+                    height: 36px;
+                }
+            }
+        }
+    }
+
+    .el-dialog__footer {
+        height: 40px;
+        padding: 0px;
+
+        .dialog-footer {
+            position: relative;
+            bottom: 0px;
+            right: 40%;
+
+            .el-button {
+                width: 110px;
+                height: 36px;
+                padding: 0px;
+                line-height: 36px;
+
+                i {
+                    margin-right: 5px;
+                }
+            }
+        }
+    }
+}

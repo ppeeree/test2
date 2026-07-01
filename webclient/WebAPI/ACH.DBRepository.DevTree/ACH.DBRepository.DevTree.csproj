@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ACH.DevTree.DB" Version="1.0.24" />
+    <PackageReference Include="ACH.DevTree.Entity" Version="1.0.20" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ACH.DataEntity.DevTree\ACH.DataEntity.DevTree.csproj" />
+  </ItemGroup>
+
+</Project>

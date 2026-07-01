@@ -1,0 +1,111 @@
+@font-face {
+  font-family: "local"; /* Project id 814540 */
+  src: url('iconfont.woff2?t=1778465958596') format('woff2'),
+       url('iconfont.woff?t=1778465958596') format('woff'),
+       url('iconfont.ttf?t=1778465958596') format('truetype');
+}
+
+.local {
+  font-family: "local" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.local-fix:before {
+  content: "\e62e";
+}
+
+.local-acqData:before {
+  content: "\e622";
+}
+
+.local-healthy:before {
+  content: "\e626";
+}
+
+.local-air:before {
+  content: "\e624";
+}
+
+.local-oil:before {
+  content: "\e625";
+}
+
+.local-wind:before {
+  content: "\e623";
+}
+
+.local-YBG:before {
+  content: "\e61b";
+}
+
+.local-mark:before {
+  content: "\e676";
+}
+
+.local-location:before {
+  content: "\e640";
+}
+
+.local-link:before {
+  content: "\e620";
+}
+
+.local-TOWFDN:before {
+  content: "\e60d";
+}
+
+.local-TOW:before {
+  content: "\e60e";
+}
+
+.local-TOWTOP:before {
+  content: "\e60f";
+}
+
+.local-ROT:before {
+  content: "\e610";
+}
+
+.local-PB:before {
+  content: "\e611";
+}
+
+.local-turbine:before {
+  content: "\e613";
+}
+
+.local-MST:before {
+  content: "\e614";
+}
+
+.local-GBX:before {
+  content: "\e615";
+}
+
+.local-NAC:before {
+  content: "\e616";
+}
+
+.local-TOWFL:before {
+  content: "\e617";
+}
+
+.local-BOLT:before {
+  content: "\e618";
+}
+
+.local-BL:before {
+  content: "\e619";
+}
+
+.local-TOWPL:before {
+  content: "\e61a";
+}
+
+.local-GEN:before {
+  content: "\e60c";
+}
+

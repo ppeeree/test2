@@ -1,0 +1,69 @@
+// 全局变量
+@import './variables.scss';
+// ele样式覆盖
+@import './element-ui.scss';
+// 顶部右侧显示
+@import './top.scss';
+// 导航标签
+@import './tags.scss';
+// 工具类函数
+@import './mixin.scss';
+// 侧面导航栏
+@import './sidebar.scss';
+// 动画
+@import './animate/vue-transition.scss';
+//主题
+@import './theme/index.scss';
+//适配
+@import './media.scss';
+//通用配置
+@import './normalize.scss';
+
+a {
+  text-decoration: none;
+  color: #333;
+}
+
+* {
+  outline: none;
+}
+
+//退出登录样式
+.log_out {
+  margin-top: 30vh !important;
+  width: 17% !important;
+  height: 18% !important;
+  margin-left: 84vh !important;
+  background: rgba(4, 17, 33, 0.5) !important;
+  color: #fff !important;
+
+  .el-dialog__header {
+    background: transparent !important;
+
+    .el-dialog__headerbtn .el-dialog__close {
+      color: #fff !important;
+    }
+  }
+
+  .el-dialog__body {
+    padding: 15px !important;
+    background: transparent !important;
+    color: #fff !important;
+  }
+
+  .el-dialog__footer {
+    background: transparent !important;
+
+    .dialog-footer {
+      .el-button {
+        margin-right: 17px !important;
+        height: 30px !important;
+        padding-top: 0px !important;
+        padding-bottom: 0px !important;
+      }
+    }
+  }
+}
+
+//滚动条样式
+@include scrollBar;

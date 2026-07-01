@@ -1,0 +1,93 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+		<TargetFramework>net6.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Version>1.6.10.0</Version>
+		<Authors>新能源研发部</Authors>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Compile Remove="logs\**" />
+		<Compile Remove="wwwroot\新文件夹\**" />
+		<Content Remove="logs\**" />
+		<Content Remove="wwwroot\新文件夹\**" />
+		<EmbeddedResource Remove="logs\**" />
+		<EmbeddedResource Remove="wwwroot\新文件夹\**" />
+		<None Remove="logs\**" />
+		<None Remove="wwwroot\新文件夹\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Content Remove="logger.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Content Include="wwwroot\compJS\docxtemplater\.eslint-rules\package.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="logger.json">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Include="wwwroot\compJS\docxtemplater\.eslint-rules\index.js" />
+		<None Include="wwwroot\compJS\docxtemplater\.eslint-rules\sortable.js" />
+		<None Include="wwwroot\compJS\docxtemplater\.github\contributing.md" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="ACH.ChannelMapper" Version="1.0.2" />
+		<PackageReference Include="ACH.Diagnosis.BearingDiagnoseModel" Version="1.0.1" />
+		<PackageReference Include="ACH.DevTree.Entity" Version="1.0.20" />
+		<PackageReference Include="ACH.DevTree.DB" Version="1.0.25" />
+		<PackageReference Include="AutoMapper" Version="12.0.1" />
+		<PackageReference Include="DocumentFormat.OpenXml" Version="3.3.0" />
+		<PackageReference Include="StackExchange.Redis" Version="2.9.32" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+		<PackageReference Include="System.Drawing.Common" Version="9.0.7" />
+		<PackageReference Include="Yarp.ReverseProxy" Version="2.3.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\ACH.Bladex.DB\ACH.DBConn.Bladex.csproj" />
+		<ProjectReference Include="..\ACH.DataEntity.Bladex\ACH.DataEntity.Bladex.csproj" />
+		<ProjectReference Include="..\ACH.DataEntity.ReportData\ACH.DataEntity.ReportData.csproj" />
+		<ProjectReference Include="..\ACH.DataEntity.StatusTree\ACH.DataEntity.StatusTree.csproj" />
+		<ProjectReference Include="..\ACH.DataQuality.FileCount\ACH.DataQuality.FileCount.csproj" />
+		<ProjectReference Include="..\ACH.DBRepository.App\ACH.DBRepository.App.csproj" />
+		<ProjectReference Include="..\ACH.DBRepository.DBSelect\ACH.DBRepository.DBSelect.csproj" />
+		<ProjectReference Include="..\ACH.DBRepository.DevTree\ACH.DBRepository.DevTree.csproj" />
+		<ProjectReference Include="..\ACH.DBRepository.SD\ACH.DBRepository.SD.csproj" />
+		<ProjectReference Include="..\ACH.DBRepository.TheWeave\ACH.DBRepository.TheWeave.csproj" />
+		<ProjectReference Include="..\ACH.Download.DataDownload\ACH.Download.DataDownload.csproj" />
+		<ProjectReference Include="..\ACH.Helper\ACH.Helper.csproj" />
+
+	</ItemGroup>
+
+	<ItemGroup>
+		<Folder Include="Script\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Reference Include="ACH.BoltAxialForceDB">
+	    <HintPath>..\..\..\monitorserver\Src\ACH.BoltAxialForceDB\bin\Debug\netstandard2.1\ACH.BoltAxialForceDB.dll</HintPath>
+	  </Reference>
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Update="libfftw3-3.dll">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="Order.so">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="Properties\launchSettings.json">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+
+	<ProjectExtensions><VisualStudio><UserProperties properties_4launchsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
+
+</Project>

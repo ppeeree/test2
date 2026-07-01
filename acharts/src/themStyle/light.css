@@ -1,0 +1,524 @@
+/* css样式写法 */
+p {
+  margin: 0;
+}
+
+.advise_tooltip {
+  position: absolute;
+  top: 50px;
+  left: 300px;
+  width: 30%;
+  height: auto;
+  font-size: 14px;
+  text-align: left;
+  padding: 5px 10px;
+  border: 1px solid #f4efef;
+  color: #fff;
+  border-radius: 5px;
+  background-color: #2A3645;
+}
+
+.xy_tooltip {
+  position: absolute;
+  background-color: #2A3645;
+  font-size: 12px;
+  z-index: 10;
+  width: 80px;
+}
+
+.xy_tooltip:before {
+  content: '';
+  position: absolute;
+  left: -8px;
+  top: -8px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #2A3645;
+  pointer-events: none;
+  /*  border: 3px solid #ccc */
+}
+
+.xy_tooltip_left:before {
+  content: '';
+  position: absolute;
+  left: 82px;
+  top: -8px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #2A3645;
+  pointer-events: none;
+  /* border:3px solid #ccc */
+}
+
+.advise_tooltip_closeicon {
+  position: absolute;
+  right: 3px;
+  top: 0px;
+  cursor: pointer;
+}
+
+.chart_toolbox {
+  width: auto;
+  padding: 0 15px;
+  height: 30px;
+  position: absolute;
+  text-align: center;
+  top: 5px;
+
+}
+
+.chart_toolbox_light>li>.icon {
+  color: #444;
+}
+
+.chart_toolbox_dark>li>.icon {
+  color: #fff;
+}
+
+.chart_toolbox>li {
+  list-style: none;
+  text-align: center;
+  line-height: 0;
+  float: left;
+  margin: 3px 2px;
+  cursor: pointer;
+  background: transparent;
+  color: #444;
+}
+
+.chart_toolbox .radioStyle {
+  background-color: transparent;
+}
+
+.chart_toolbox .activeRadio {
+  background-color: #bddeff !important;
+}
+
+.chart_toolbox .activeStack {
+  background-color: #bddeff !important;
+}
+
+.chart_toolbox .hideLi {
+  display: none;
+}
+
+.chart_toolbox .showLi {
+  display: block;
+}
+
+.chart_toolbox>li>i {
+  margin: 0px 2px;
+  font-size: 16px;
+  line-height: 16px;
+}
+
+.chart_toolbox .biggap {
+  list-style: none;
+  text-align: center;
+  line-height: 0;
+  float: left;
+  margin: 3px;
+  cursor: pointer;
+  background: transparent;
+}
+
+.chart_toolbox>.activedLi {
+  background: #86b5f1 !important;
+}
+
+.chart_toolbox_dark>.activedLi {
+  background: #0271ff !important;
+}
+
+.chart_toolbox>.gap {
+  float: left;
+  width: 1px;
+  height: 20px;
+  margin: 1px 5px;
+  background: #777575;
+}
+
+.chart_YBDataMark {
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  border-radius: 50%;
+  background-color: #fff;
+  position: absolute;
+  right: 30px;
+  top: 20px;
+  display: block;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1)
+}
+
+.chart_YBDataMark i {
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.hideVisibel {
+  display: none !important;
+}
+
+.selectLi {
+  position: relative;
+  list-style: none;
+  text-align: center;
+  line-height: 0;
+  float: left;
+  margin: 3px 2px;
+  cursor: pointer;
+  background: transparent;
+  border-radius: 5px;
+}
+
+.selectLi>.diagmodel {
+  position: absolute;
+  left: -50px;
+  top: 25px;
+  display: none;
+  width: 120px;
+  height: auto;
+  overflow: hidden;
+  background: #fff;
+  z-index: 2;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1)
+}
+
+.selectLi .diagmodel p {
+  padding: 0 10px;
+  margin: 3px 0;
+  text-align: left;
+  width: 100%;
+  font-size: 14px;
+  height: 24px;
+  line-height: 24px;
+}
+
+.selectLi .diagmodel p:hover {
+  background-color: #eee;
+}
+
+.selectLi .diagmodel p i {
+  margin: 0 10px 0 5px;
+  font-size: 14px;
+}
+
+.selectLi>.diagContent {
+  position: absolute;
+  left: -100px;
+  top: 25px;
+  display: none;
+  width: 200px;
+  height: auto;
+  overflow: hidden;
+  border: none;
+  background: #fff;
+  z-index: 2;
+  line-height: 20px;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1)
+}
+
+.selectLi .diagContent h3 {
+  font-size: 14px;
+  height: 24px;
+  line-height: 24px;
+  padding: 0 10px;
+  background-color: #D1EAFF;
+  text-align: left;
+  font-weight: normal;
+}
+
+.selectLi .diagContent p {
+  text-align: center;
+  padding: 0 10px;
+  margin: 15px 0;
+  text-align: left;
+  width: 100%;
+  font-size: 14px;
+  height: auto;
+  line-height: 24px;
+}
+
+.selectLi .diagContent p input {
+  display: inline-block;
+  width: 60px;
+  padding: 3px 10px;
+}
+
+.selectLi .diagContent p span {
+  display: block;
+  color: red
+}
+
+.selectLi .diagContent div {
+  text-align: center;
+  width: 100%;
+  height: auto;
+}
+
+.selectLi .diagContent button {
+  cursor: pointer;
+  margin: 5px;
+  background-color: #FFFFFF;
+  border: 1px solid #ccc;
+  padding: 5px 10px;
+  font-size: 12px;
+}
+
+.selectLi .diagContent .ybNumConfirm {
+  background-color: #409eff;
+  color: #fff
+}
+
+/*备注输入框dom*/
+.echart_note_input_block {
+  display: none;
+  position: absolute;
+  border-radius: 5px;
+  height: 170px;
+  width: 200px;
+  text-align: center;
+  padding: 10px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 12px 0px;
+  font-size: 14px;
+  border: none;
+  background: #fff;
+}
+
+.echart_note_input_block textarea {
+  width: 100%;
+  height: 75%;
+  font-size: 12px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+}
+
+.echart_note_input_block p {
+  width: 100%;
+  text-align: center;
+  margin: 10px 0;
+  font-size: 14px;
+}
+
+.echart_note_input_block .cancel {
+  margin: 0 8px;
+  text-align: center;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  background: #fff;
+  padding: 5px 10px;
+  font-size: 12px;
+}
+
+.echart_note_input_block .confirm {
+  margin: 0 8px;
+  text-align: center;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  background: #409eff;
+  padding: 5px 10px;
+  font-size: 12px;
+}
+
+/*坐标轴最大最小值输入框dom*/
+.echart_setvalue {
+  display: none;
+  position: absolute;
+  border: 1px solid #999;
+  border-radius: 5px;
+  height: 170px;
+  width: auto;
+  text-align: center;
+  padding: 0 10px;
+  overflow: auto;
+  background: #fff;
+}
+
+.echart_setvalue .setItem {
+  width: 140px;
+  float: left;
+}
+
+.echart_setvalue .hideLi {
+  display: none;
+}
+
+.echart_setvalue h3 {
+  width: 100%;
+  text-align: left;
+  margin: 0 0 10px 0;
+  font-size: 14px;
+  padding: 5px 10px;
+  border-bottom: 1px solid #eee;
+  font-weight: normal;
+}
+
+.echart_setvalue p {
+  width: 100%;
+  text-align: center;
+  margin: 10px 0;
+  font-size: 14px;
+}
+
+.echart_setvalue p input {
+  width: 80px;
+  line-height: 18px;
+}
+
+.echart_setvalue .cancel {
+  margin: 0 8px;
+  text-align: center;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  background: #fff;
+  font-size: 14px;
+  padding: 5px 10px;
+}
+
+.echart_setvalue .confirm {
+  margin: 0 8px;
+  text-align: center;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  background: #409eff;
+  font-size: 14px;
+  padding: 5px 10px;
+}
+
+.echart_setvalue .footer {
+  width: 100%;
+  height: auto;
+  padding-bottom: 5px;
+}
+
+/*创建弹框，显示游标线的信息*/
+.chart_YBBlock {
+  width: auto;
+  background: #fff;
+  padding: 5px 10px;
+  height: auto;
+  position: absolute;
+  display: none;
+  font-size: 14px;
+  color: #666;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 12px 0px;
+}
+
+.chart_YBBlock p {
+  line-height: 20px;
+  text-align: left;
+}
+
+.chart_YBBlock p span {
+  font-weight: bolder;
+}
+
+/* 创建游标信息展示窗口 */
+/* light主题 */
+.chart_YBDataBlock {
+  width: 170px;
+  background: #fff;
+  padding: 15px 15px;
+  height: 85%;
+  overflow-y: auto;
+  position: absolute;
+  right: 0;
+  top: 30px;
+  display: block;
+  font-size: 12px;
+  color: #666;
+  border-radius: 10px;
+  z-index: 10;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 12px 0px;
+}
+
+.chart_YBDataBlock .closeYBInfo {
+  position: absolute;
+  top: 3px;
+  right: 10px;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.chart_YBDataBlock .collapse_block {
+  width: 100%;
+  text-align: left;
+}
+
+.chart_YBDataBlock .collapse_title:hover {
+  background-color: #eee;
+}
+
+.chart_YBDataBlock .collapse_title {
+  cursor: pointer;
+  font-size: 14px;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.chart_YBDataBlock .collapse_title span {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+
+.chart_YBDataBlock .collapse_YB_title:hover {
+  background-color: #eee;
+}
+
+.chart_YBDataBlock .collapse_YB_title {
+  cursor: pointer;
+  padding-left: 5px;
+}
+
+.chart_YBDataBlock .dataline {
+  width: 100%;
+  line-height: 18px;
+}
+
+.chart_YBDataBlock .dataline span {
+  display: inline-block;
+  width: 50px;
+  margin: 0 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 右键弹出的菜单 */
+.echart_context_menu_block {
+  width: 150px;
+  background: #fff;
+  padding: 0;
+  height: auto;
+  position: absolute;
+  display: none;
+  font-size: 14px;
+  color: #666;
+  border-radius: 5px;
+}
+
+.echart_context_menu_block li {
+  list-style: none;
+  float: left;
+  text-align: left;
+  padding: 5px 15px;
+  width: 100%;
+  cursor: pointer;
+  background-color: #faf8f8;
+}
+
+.echart_context_menu_block li:hover {
+  background-color: #ccc;
+}

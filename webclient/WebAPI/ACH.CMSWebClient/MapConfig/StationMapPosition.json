@@ -1,0 +1,68 @@
+[
+  {
+    "StationID": "DTJT002",
+    "Longitude": 103.53,
+    "Latitude": 26.24,
+    "Elevation": 0
+  },
+  {
+    "StationID": "DTJT003",
+    "Longitude": 102.25,
+    "Latitude": 25.03,
+    "Elevation": 0
+  },
+  {
+    "StationID": "DTJT004",
+    "Longitude": 103.12,
+    "Latitude": 24.13,
+    "Elevation": 0
+  },
+  {
+    "StationID": "DTJT005",
+    "Longitude": 103.553,
+    "Latitude": 24.57,
+    "Elevation": 0
+  },
+  {
+    "StationID": "DTJT006",
+    "Longitude": 103.882,
+    "Latitude": 23.9,
+    "Elevation": 0
+  },
+  {
+    "StationID": "DTJT009",
+    "Longitude": 103.52,
+    "Latitude": 23.58,
+    "Elevation": 0
+  },
+  {
+    "StationID": "DTJT010",
+    "Longitude": 104.7,
+    "Latitude": 24,
+    "Elevation": 0
+  },
+  {
+    "StationID": "DTJT013",
+    "Longitude": 103.27,
+    "Latitude": 27.35,
+    "Elevation": 0
+  },
+  {
+    "StationID": "DTJT015",
+    "Longitude": 103.75,
+    "Latitude": 28,
+    "Elevation": 0
+  },
+  {
+    "StationID": "DTJT016",
+    "Longitude": 103.53,
+    "Latitude": 25.65,
+    "Elevation": 0
+  },
+  {
+    "StationID": "DTJT017",
+    "Longitude": 103.12,
+    "Latitude": 25.3,
+    "Elevation": 0
+  }
+]

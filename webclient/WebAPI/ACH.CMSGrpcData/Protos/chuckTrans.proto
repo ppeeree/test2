@@ -1,0 +1,102 @@
+﻿syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "io.grpc.examples.helloworld";
+option java_outer_classname = "HelloWorldProto";
+option objc_class_prefix = "HLW";
+
+package WindCMSAPI;
+
+// The greeting service definition.
+service CMSAPI {
+  // 1.login 
+  rpc chuckLogin(ChuckRequest) returns (stream BlockData){}
+
+  // 2.dev tree
+  rpc chuckDevTree(ChuckRequest) returns (stream BlockData){}
+
+  // 3.dev tree
+  rpc chuckWPDevTree(WPDevTreeRequest) returns (stream BlockData){}
+
+  // 4.ev dataList
+  rpc chuckEvEventTreeList(MeasEventRequest) returns (stream BlockData){}
+
+  // 5.waveForm dataList
+  rpc chuckWfEventTreeList(MeasEventRequest) returns (stream BlockData){}
+
+  // 6.waveform
+  rpc chuckWaveFormData(WaveFormRequest) returns (stream BlockData){}
+
+  // 7.rotWaveForm
+  rpc chuckRotWaveData(RotWaveRequest) returns (stream BlockData){}
+
+  // 8.work wave
+  rpc chuckWorkWaveData(WaveFormRequest) returns (stream BlockData){}
+  
+  // 9.WindCMSData
+  rpc chuckUploadCMSData(stream BlockData) returns (CMSDataSummary) {}
+
+  // 10.Report
+  rpc chuckUploadTurbineReport(stream BlockData) returns(ReportSummary){}
+}
+
+message ReportSummary{
+   int32 report_num = 1;
+   int32 elapsed_time = 2;
+}
+
+message CMSDataSummary{
+   int32 wave_event_count = 1;
+   int32 ev_event_count = 2;
+   int32 waveform_coumt = 3;
+   int32 rotwave_count = 4;
+   int32 workwave_count = 5;
+   int32 svmwave_count = 6;
+   int32 wkvalue_count = 7;
+   int32 evdata_count = 8;
+   int32 elapsed_time = 9;
+}
+
+message WaveFormRequest{
+  ChuckRequest baseRequest = 1;
+  string windTurbineId = 2;
+  string measLocId = 3;
+  string waveDefId = 4;
+  int32 waveFormType = 5;
+  int64 acqTime = 6;  
+}
+
+message RotWaveRequest{
+  ChuckRequest baseRequest = 1;
+  string windTurbineId = 2;
+  int64 acqTime = 3;
+}
+
+message MeasEventRequest{
+  ChuckRequest baseRequest = 1;
+  string windTurbineId = 2;
+  int64 beginTime = 3;
+  int64 endtime = 4;
+}
+
+message WPDevTreeRequest{
+  ChuckRequest baseRequest = 1;
+  string windParkId = 2;
+}
+
+// The request message containing the user's name.
+message ChuckRequest {
+  TransToken tokenMsg = 1;
+  int32 blocksize = 2;
+}
+
+message BlockData{
+  bytes chuckData = 1;
+}
+
+message TransToken{
+  string appkey = 1;
+  string userName = 2;
+  string password = 3;
+}
+

@@ -1,0 +1,506 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link href="compJS/elementUI.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
+    <link href="css/download.css" rel="stylesheet">
+
+    <script src="js/mainLeft.js"></script>
+    <script src="js/moment.min.js"></script>
+    <script src="compJS/vue.js"></script>
+    <script src="compJS/elementUI.js"></script>
+
+    <link rel="icon" href="img/logo.png" type="image/x-icon">
+    <title>风机混凝土塔筒在线状态监测系统-运维管理工具</title>
+</head>
+
+<body>
+    <div id="app" style="flex-direction:column">
+        <header class="header">
+            <p class="logo"><img src="img/logo.png" />风机混凝土塔筒在线状态监测系统</p>
+            <el-menu default-active="2-1" class="el-menu-demo" mode="horizontal" background-color="#fff" text-color="#000" active-text-color="#192ad1">
+                <el-menu-item index="1"><a href="index.html">数据下载</a></el-menu-item>
+                <el-submenu index="2">
+                    <template slot="title">
+                        系统配置
+                    </template>
+                    <el-menu-item index="2-1"> <a href="config.html">测点通道配置</a></el-menu-item>
+                </el-submenu>
+                <el-menu-item index="3"><a href="index.html">系统自检</a></el-menu-item>
+            </el-menu>
+        </header>
+        <el-main style="background:#fff">
+            <div style="padding-left:10px;margin:10px 0">
+                <el-button type="primary" size="small" @click="settingCard = !settingCard">
+                    <i class="el-icon-circle-plus-outline" style="padding-right: 7px"></i>新增配置
+                </el-button>
+                <el-button type="danger" size="small" @click="deleteData">
+                    <i class="el-icon-remove-outline" style="padding-right: 7px"></i>批量删除
+                </el-button>
+                <!--  <span style="margin-left:200px">风场机组筛选：</span>
+        <el-cascader
+          :options="searchOption"
+         :props="{ multiple: true}"
+          @change="selectedChange"
+          clearable></el-cascader>-->
+            </div>
+            <el-table ref="multipleTable" size="mini" :data="tableData" height="87%" style="width: calc(100% - 30px);margin-left:15px"
+                      :key="Math.random()" border :highlight-current-row="true"
+                      :header-cell-style="{backgroundColor:'#409EFF',color:'#FFF',textAlign: 'center'}"
+                      @selection-change="handleSelectionChange" class="tableLimit">
+                <el-table-column type="selection" width="55"></el-table-column>
+                <el-table-column prop="stationName" label="风场名称"></el-table-column>
+                <el-table-column prop="deviceName" label="机组名称"></el-table-column>
+                <el-table-column prop="measLocName" label="测量位置" :cell-class-name="'table-cell-wrap'">
+                </el-table-column>
+                <el-table-column prop="chno" label="通道地址"></el-table-column>
+                <el-table-column fixed="right" label="操作" width="240">
+                    <template slot-scope="scope">
+                        <el-button class="table_btn" @click="editData(scope.row)" type="text" size="small">
+                            <i class="el-icon-edit"></i> 修改
+                        </el-button>
+                        <el-button class="table_btn" @click="deleteData(scope.row)" type="text" size="small">
+                            <i class="el-icon-delete"></i> 删除
+                        </el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
+            <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange"
+                           :current-page="currentPage" :page-sizes="[10, 20, 50, 100]" :page-size="currentSize"
+                           layout="total, sizes, prev, pager, next, jumper" :total="totalNum">
+            </el-pagination>
+        </el-main>
+        <!--新增-->
+        <el-dialog title="新增测点映射配置" @before-close="beforeClose('ruleForm')" append-to-body :visible.sync="settingCard" width="1000px" custom-class="setting_card" destroy-on-close>
+            <el-form :model="ruleForm" ref="ruleForm" label-width="120px">
+                <p class="list_title">风场ID映射</p>
+                <div class="list_block">
+                    <div class="list_row"><span>风场名称</span><span>众芯ID</span><span>源ID</span></div>
+                    <div class="list_row">
+                        <span>
+                            <el-form-item prop="stationID" :rules="rules.stationID">
+                                <el-select size="small" v-model="ruleForm.stationID" @change="windparkSelectChange">
+                                    <el-option v-for="item in windparkList" :key="item.stationID" :label="item.stationName" :value="item.stationID">
+                                    </el-option>
+                                </el-select>
+                            </el-form-item>
+                        </span>
+                        <span>{{ruleForm.stationID}}</span>
+                        <span>
+                            <el-form-item prop="mapStationID" :rules="rules.mapStationID">
+                                <el-input size="small" style="width: 140px" v-model="ruleForm.mapStationID" @blur="changemapStationID"></el-input>
+                            </el-form-item>
+                        </span>
+                    </div>
+                </div>
+
+                <p class="list_title">机组ID映射</p>
+                <div class="list_block list_dau">
+                    <div class="list_row list_row_dau"><span>机组名称</span><span>众芯ID</span><span>源ID</span></div>
+                    <div class="list_row list_row_dau"><span>机组名称</span><span>众芯ID</span><span>源ID</span></div>
+                    <div class="list_row list_row_dau" v-for="(item,index) in turbineList" :key="item.deviceID">
+                        <span>{{item.deviceName}}</span>
+                        <span>{{item.deviceID}}</span>
+                        <span>
+                            <el-form-item :prop="`deviceID.${item.deviceID}`" :rules="rules.deviceID">
+                                <el-input size="small" style="width: 140px" v-model="ruleForm['deviceID'][item.deviceID]"></el-input>
+                            </el-form-item>
+                        </span>
+                    </div>
+                </div>
+
+                <p class="list_title">测点映射<b style="margin-left:20px;color:#ff0000;font-size:12px">(注意：混塔-振温一体采集器输出通道+100)</b></p>
+                <div class="list_block list_dau">
+                    <div class="list_row list_row_dau"><span>测量位置名称</span><span>通道地址</span></div>
+                    <div class="list_row list_row_dau"><span>测量位置名称</span><span>通道地址</span></div>
+                    <div class="list_row list_row_dau" v-for="item in locationOptions" :key="item.key">
+                        <span>{{item.value}}</span>
+                        <span>
+                            <el-form-item label="" :prop="`mapChno.${item.key}`" :rules="rules.chno">
+                                <el-input-number :min="1" :step="1" :precision="0" size="mini" v-model="ruleForm['mapChno'][item.key]" style=" width: 100px"></el-input-number>
+                            </el-form-item>
+                        </span>
+                    </div>
+                </div>
+            </el-form>
+            <span slot="footer" class="dialog-footer">
+                <el-button type="primary" @click.native="addConfig('ruleForm')">
+                    <i class="el-icon-circle-plus-outline" style="padding-right: 7px"></i>确 定
+                </el-button>
+                <el-button @click="settingCard = false">
+                    <i class="el-icon-circle-close" style="padding-right: 7px"></i>
+                    取 消
+                </el-button>
+            </span>
+        </el-dialog>
+
+        <!--修改-->
+        <el-dialog title="修改测点映射配置" @before-close="beforeClose('editRuleForm')" append-to-body :visible.sync="editCard" width="500px" custom-class="setting_card" destroy-on-close>
+            <el-form :model="editRuleForm" :rules="rules" ref="editRuleForm" label-width="120px">
+                <el-form-item label="风场：" prop="stationID">
+                    <el-input v-model="editRuleForm.stationName" type="text" disabled></el-input>
+                </el-form-item>
+
+                <el-form-item label="机组：" prop="deviceID">
+                    <el-input v-model="editRuleForm.deviceName" type="text" disabled></el-input>
+                </el-form-item>
+
+                <el-form-item label="测量位置：" prop="measLocName">
+                    <el-input v-model="editRuleForm.measLocName" type="text"></el-input>
+                </el-form-item>
+
+                <el-form-item label="通道地址：" prop="chno">
+                    <el-input-number controls-position="right" style="margin-right: 5px; width: 120px"
+                                     :min="1" :step="1" :precision="0" v-model="editRuleForm.chno" placeholder=""></el-input-number>
+                </el-form-item>
+            </el-form>
+            <span slot="footer" class="dialog-footer">
+                <el-button type="primary" @click.native="addConfig('editRuleForm')">
+                    <i class="el-icon-circle-plus-outline" style="padding-right: 7px"></i>确 定
+                </el-button>
+                <el-button @click="editCard = false">
+                    <i class="el-icon-circle-close" style="padding-right: 7px"></i>
+                    取 消
+                </el-button>
+            </span>
+        </el-dialog>
+    </div>
+</body>
+
+</html>
+
+<script>
+    new Vue({
+        el: '#app',
+        data() {
+            const low = (rule, value, callback) => {
+                if (value < 0) {
+                    callback(new Error('请输入正确的转速值'))
+                } else {
+                    callback()
+                }
+            }
+            const high = (rule, value, callback) => {
+                if (value < 0) {
+                    callback(new Error('请输入正确的转速值'))
+                } else if (Number(value) < Number(this.ruleForm.startSpeed)) {
+                    callback(new Error('不能小于下限'))
+                } else {
+                    callback()
+                }
+            }
+            return {
+                searchOption:[],
+                totalNum: 0, // 所有个数
+                tableData: [],
+                currentPage: 1, // 当前表格在第几页
+                currentSize: 30, // 当前也共有几条数据
+                settingCard: false, //新建弹框是否展示变量
+
+                selectTaskList: [], // 选中行
+
+                windparkList: [], //风场列表
+                allTurbineList: [], //全部机组列表
+                turbineList: [], // 该风场下的机组列表
+                locationOptions: [],
+
+                rules: {
+                    stationID: [{ required: true, message: '！', trigger: 'change' }],
+                    mapStationID: [{ required: true, message: '！', trigger: 'change' }],
+                    measLocName: [{ required: true, message: '请输入测量位置名称', trigger: 'change' }],
+                    chno: [{ required: true, message: '!', trigger: 'change' }],
+                    deviceID: [
+                        { required: true, message: '!', trigger: 'change' }
+                    ],
+                },
+                ruleForm: {
+                    stationID: '',
+                    mapStationID:'',
+                    deviceID: {},
+                    mapChno: {},
+                },
+                editCard:false,
+                editRuleForm: {
+                    stationName: '',
+                    deviceName: '',
+                    stationID: '',
+                    deviceID: '',
+                    measLocID: '',
+                    measLocName:'',
+                    chno: '',
+                }
+
+            }
+        },
+        watch: {
+          
+        },
+        computed: {
+        },
+        created() {
+            this.getDevTree()
+            this.getTableDatas()
+          
+        },
+        methods: {
+           /** selectedChange(val) {
+                console.log(val)
+            },*/
+            beforeClose(refName) {
+            //    this.$refs(refName).resetFields()
+            },
+            // 获取风场下测点列表接口
+            getMealDByStationId() {
+                const queryString = new URLSearchParams({ stationId: this.ruleForm.stationID }).toString()
+                var url = `/NetApi/NetApi/HADUChannelConfig/GetMeasIDByStationID?${queryString}`
+                fetch(url)
+                    .then((response) => response.json())
+                    .then((data) => {
+                        this.locationOptions = data.data
+                        data.data.forEach(i => {
+                            this.$set(this.ruleForm.mapChno,i.key,'1')
+                            })
+                    })
+            },
+            // 1、获取设备树
+            getDevTree() {
+                fetch("/NetApi/NetApi/DownloadTask/GetDevTree")
+                    .then((response) => response.json())
+                    .then((data) => {
+                        this.windparkList = data.data
+                        var firstStation = data.data[0]
+                        this.ruleForm.stationID = firstStation.stationID
+                        this.ruleForm.mapStationID = firstStation.stationID
+                        this.turbineList = firstStation.deviceList
+                        this.turbineList.forEach(item => {
+                            this.$set(this.ruleForm.deviceID, item.deviceID, item.deviceID)
+                        })
+                        this.getMealDByStationId()
+                        // searchOptions
+                       /* let options = []
+                        data.forEach(item => {
+                            let { stationID, stationName, deviceList } = item
+                            let unit = {
+                                label: stationName,
+                                value: stationID,
+                                children: []
+                            }
+                            if (deviceList && deviceList.length) {
+                                deviceList.forEach(i => {
+                                    unit.children.push({
+                                        label: i.deviceName,
+                                        value: i.deviceID
+                                    })
+                                })
+                            }
+                            options.push(unit)
+                        })
+                        this.searchOption = options */
+
+                    })
+                    .catch((error) => console.error("Unable to get items.", error));
+            },
+            // 修改风场源ID，机组源ID也进行改变
+            changemapStationID() {
+                if (this.ruleForm.stationID !== this.ruleForm.mapStationID) {
+                    Object.keys(this.ruleForm.deviceID).forEach(key => {
+                        this.ruleForm.deviceID[key] = key.replace(new RegExp(this.ruleForm.stationID, "g"), this.ruleForm.mapStationID)
+                        // this.$set(this.ruleForm.deviceID, key, key.replace(new RegExp(this.ruleForm.stationID, "g"), this.ruleForm.mapStationID))
+                    })
+                }
+            },
+
+
+            // 2.1、获取表格数据
+            getTableDatas() {
+                var param = {
+                    current: this.currentPage,
+                    size: this.currentSize,
+                }
+                const queryString = new URLSearchParams(param).toString()
+                var url = `/NetApi/HADUChannelConfig/GetHADUConfigList?${queryString}`
+
+                fetch(url)
+                    .then((response) => response.json())
+                    .then((data) => {
+                        this.tableData = data.data
+                        this.totalNum = data.totalCount
+                    })
+                    .catch((error) => console.error("Unable to get items.", error));
+            },
+
+            // 
+
+            // 3、表格：新增配置
+            addConfig(formName) {
+                this.$refs[formName].validate(valid => {
+                    if (valid) {
+                        let param = {}
+                        if (formName == 'editRuleForm') {
+                            param = this.editRuleForm
+                            this.editCard = false
+                        } else {
+                            let deviceIDList = Object.keys(this[formName].deviceID).map(item => {
+                                return `${item},${this[formName].deviceID[item]}`
+                            })
+                            let measLocList = Object.keys(this[formName].mapChno).map(item => {
+                                return `${item},${this[formName].mapChno[item]}`
+                            })
+                            param = {
+                                stationID: this[formName].stationID,
+                                mapStationID: this[formName].mapStationID,
+                                deviceIDList: deviceIDList,
+                                measLocList: measLocList,
+                            }
+                            this.settingCard = false
+                        }
+                        this.addConfigApi(param, formName == 'editRuleForm')
+                    }
+                })
+
+            },
+
+            // 3.1、新增、编辑
+            addConfigApi(param, isEdit) {
+                let url = isEdit ? '/NetApi/HADUChannelConfig/UpdateHADUConfig' :'/NetApi/HADUChannelConfig/AddHADUConfig'
+                let request = new Request(url, {
+                    method: 'post',
+                    headers: { 'Content-Type': 'application/json;charset=utf-8;' },
+                    body: JSON.stringify(param)
+                })
+
+                fetch(request)
+                    .then((response) => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json(); // 如果后端返回 JSON 数据，可以解析
+                    })
+                    .then((data) => {
+                        if (data.success) {
+                            this.$message.success('操作成功！')
+                        }
+                        this.getTableDatas(); // 在请求成功后调用 getTableDatas 方法
+                    })
+                    .catch((error) => {
+                        console.error("Unable to get items.", error);
+                    });
+            },
+
+
+            // 4.1、表格：删除
+            deleteData(row) {
+                this.$confirm('确定将选择数据删除?', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                })
+                    .then(() => {
+                        this.deleteTaskApi(row)
+                    })
+            },
+
+            // 4.2、删除数据接口
+            deleteTaskApi(data) {
+                let param = {}
+                if (data && data.measLocID) {
+                    param = {
+                        measIDs: data.measLocID
+                    }
+                } else {
+                    let measIDs = Array.from(this.selectTaskList, i => i.measLocID).join(',')
+                    console.log(measIDs)
+                    param = {
+                        measIDs
+                    }
+                }
+                const queryString = new URLSearchParams(param).toString()
+                fetch(`/NetApi/HADUChannelConfig/DeleteHADUConfig?${queryString}`)
+                    .then((response) => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json(); // 如果后端返回 JSON 数据，可以解析
+                    })
+                    .then((data) => {
+                        if (data.success) {
+                            this.$message({ type: 'success', message: '删除成功!', })
+                            this.getTableDatas()
+                        } else {
+                            this.$message({ type: 'danger', message: '删除失败！' })
+                        }
+                    })
+                    .catch((error) => console.error('Unable to get items.', error))
+            },
+
+
+            // 5.1、选中风场改变
+            windparkSelectChange(val) {
+                this.ruleForm.mapStationID = val
+                this.turbineList = this.windparkList.find(i => i.stationID == val).deviceList
+                this.$set(this.ruleForm, 'deviceID', {})
+                this.turbineList.forEach(item => {
+                    this.$set(this.ruleForm.deviceID, item.deviceID, item.deviceID)
+                })
+                this.getMealDByStationId()
+            },
+
+            // 5.2、多选框改变
+            handleSelectionChange(val) {
+                this.selectTaskList = val;
+            },
+
+            // 5.3、分页size改变
+            handleSizeChange(val) {
+                this.currentSize = val
+                this.getTableDatas()
+            },
+            // 5.4、分页改变
+            handleCurrentChange(val) {
+                this.currentPage = val
+                this.getTableDatas()
+            },
+
+
+            // 根据选择的机组id获取机组name列表
+            searchObjects(searchValues) {
+                this.ruleForm.deviceID = []
+                const matchedObjects = this.allTurbineList.filter(obj => searchValues.includes(obj.deviceID));
+                return matchedObjects.map(obj => obj.deviceName);
+            },
+
+            // 机组全选
+            handleCheckedAll() {
+                this.ruleForm.deviceID = Array.from(this.turbineList, i => i.id)
+            },
+            // 机组全不选
+            handleCheckedNone() {
+                this.ruleForm.deviceID = []
+            },
+            // 机组反选
+            handleCheckedReverse() {
+                let arrSelected = this.ruleForm.deviceID
+                let unselected = this.turbineList.filter(i => !arrSelected.includes(i.id))
+                this.ruleForm.deviceID = Array.from(unselected, i => i.id)
+            },
+
+            // 从大到小排序
+            sortUpObject(array, key) {
+                return array.sort(function (b, a) {
+                    let x = a[key]
+                    let y = b[key]
+                    return x < y ? -1 : x > y ? 1 : 0
+                })
+            },
+
+            // 点击编辑
+            editData(rowData) {
+                this.editCard = true
+                this.editRuleForm = rowData
+            }
+            
+        }
+    })
+</script>

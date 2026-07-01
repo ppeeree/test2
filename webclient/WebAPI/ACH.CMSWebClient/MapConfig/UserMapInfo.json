@@ -1,0 +1,16 @@
+[
+  {
+    "UserID": "1781162481921110018",
+    "Longitude": 101.4,
+    "Latitude": 25.2,
+    "Elevation": 1000000,
+    "JsonFile": "yunnan.json"
+  },
+  {
+    "UserID": "1123598821738675201",
+    "Longitude": 105.4,
+    "Latitude": 30,
+    "Elevation": 8000000,
+    "JsonFile": "china.json"
+  }
+]

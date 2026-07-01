@@ -1,0 +1,17 @@
+C:\code\xinneng\tmp_mysql_query\obj\Debug\net8.0\tmp_mysql_query.csproj.AssemblyReference.cache
+C:\code\xinneng\tmp_mysql_query\obj\Debug\net8.0\tmp_mysql_query.GeneratedMSBuildEditorConfig.editorconfig
+C:\code\xinneng\tmp_mysql_query\obj\Debug\net8.0\tmp_mysql_query.AssemblyInfoInputs.cache
+C:\code\xinneng\tmp_mysql_query\obj\Debug\net8.0\tmp_mysql_query.AssemblyInfo.cs
+C:\code\xinneng\tmp_mysql_query\obj\Debug\net8.0\tmp_mysql_query.csproj.CoreCompileInputs.cache
+C:\code\xinneng\tmp_mysql_query\bin\Debug\net8.0\tmp_mysql_query.exe
+C:\code\xinneng\tmp_mysql_query\bin\Debug\net8.0\tmp_mysql_query.deps.json
+C:\code\xinneng\tmp_mysql_query\bin\Debug\net8.0\tmp_mysql_query.runtimeconfig.json
+C:\code\xinneng\tmp_mysql_query\bin\Debug\net8.0\tmp_mysql_query.dll
+C:\code\xinneng\tmp_mysql_query\bin\Debug\net8.0\tmp_mysql_query.pdb
+C:\code\xinneng\tmp_mysql_query\bin\Debug\net8.0\MySqlConnector.dll
+C:\code\xinneng\tmp_mysql_query\obj\Debug\net8.0\tmp_mysq.C8BB0A7A.Up2Date
+C:\code\xinneng\tmp_mysql_query\obj\Debug\net8.0\tmp_mysql_query.dll
+C:\code\xinneng\tmp_mysql_query\obj\Debug\net8.0\refint\tmp_mysql_query.dll
+C:\code\xinneng\tmp_mysql_query\obj\Debug\net8.0\tmp_mysql_query.pdb
+C:\code\xinneng\tmp_mysql_query\obj\Debug\net8.0\tmp_mysql_query.genruntimeconfig.cache
+C:\code\xinneng\tmp_mysql_query\obj\Debug\net8.0\ref\tmp_mysql_query.dll

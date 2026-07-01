@@ -1,0 +1,177 @@
+{
+  "id": "814540",
+  "name": "www",
+  "font_family": "local",
+  "css_prefix_text": "local-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "47537163",
+      "name": "fix",
+      "font_class": "fix",
+      "unicode": "e62e",
+      "unicode_decimal": 58926
+    },
+    {
+      "icon_id": "3008307",
+      "name": "acqData",
+      "font_class": "acqData",
+      "unicode": "e622",
+      "unicode_decimal": 58914
+    },
+    {
+      "icon_id": "39436455",
+      "name": "healthy",
+      "font_class": "healthy",
+      "unicode": "e626",
+      "unicode_decimal": 58918
+    },
+    {
+      "icon_id": "39433824",
+      "name": "air",
+      "font_class": "air",
+      "unicode": "e624",
+      "unicode_decimal": 58916
+    },
+    {
+      "icon_id": "39433823",
+      "name": "oil",
+      "font_class": "oil",
+      "unicode": "e625",
+      "unicode_decimal": 58917
+    },
+    {
+      "icon_id": "39412440",
+      "name": "wind",
+      "font_class": "wind",
+      "unicode": "e623",
+      "unicode_decimal": 58915
+    },
+    {
+      "icon_id": "38957241",
+      "name": "YBG",
+      "font_class": "YBG",
+      "unicode": "e61b",
+      "unicode_decimal": 58907
+    },
+    {
+      "icon_id": "14679110",
+      "name": "mark",
+      "font_class": "mark",
+      "unicode": "e676",
+      "unicode_decimal": 58998
+    },
+    {
+      "icon_id": "1115083",
+      "name": "location",
+      "font_class": "location",
+      "unicode": "e640",
+      "unicode_decimal": 58944
+    },
+    {
+      "icon_id": "3427860",
+      "name": "link",
+      "font_class": "link",
+      "unicode": "e620",
+      "unicode_decimal": 58912
+    },
+    {
+      "icon_id": "38753046",
+      "name": "TOWFDN",
+      "font_class": "TOWFDN",
+      "unicode": "e60d",
+      "unicode_decimal": 58893
+    },
+    {
+      "icon_id": "38753047",
+      "name": "TOW",
+      "font_class": "TOW",
+      "unicode": "e60e",
+      "unicode_decimal": 58894
+    },
+    {
+      "icon_id": "38753049",
+      "name": "TOWTOP",
+      "font_class": "TOWTOP",
+      "unicode": "e60f",
+      "unicode_decimal": 58895
+    },
+    {
+      "icon_id": "38753052",
+      "name": "ROT",
+      "font_class": "ROT",
+      "unicode": "e610",
+      "unicode_decimal": 58896
+    },
+    {
+      "icon_id": "38753053",
+      "name": "PB",
+      "font_class": "PB",
+      "unicode": "e611",
+      "unicode_decimal": 58897
+    },
+    {
+      "icon_id": "38753056",
+      "name": "turbine",
+      "font_class": "turbine",
+      "unicode": "e613",
+      "unicode_decimal": 58899
+    },
+    {
+      "icon_id": "38753057",
+      "name": "MST",
+      "font_class": "MST",
+      "unicode": "e614",
+      "unicode_decimal": 58900
+    },
+    {
+      "icon_id": "38753059",
+      "name": "GBX",
+      "font_class": "GBX",
+      "unicode": "e615",
+      "unicode_decimal": 58901
+    },
+    {
+      "icon_id": "38796745",
+      "name": "NAC",
+      "font_class": "NAC",
+      "unicode": "e616",
+      "unicode_decimal": 58902
+    },
+    {
+      "icon_id": "38796746",
+      "name": "TOWFL",
+      "font_class": "TOWFL",
+      "unicode": "e617",
+      "unicode_decimal": 58903
+    },
+    {
+      "icon_id": "38796749",
+      "name": "BOLT",
+      "font_class": "BOLT",
+      "unicode": "e618",
+      "unicode_decimal": 58904
+    },
+    {
+      "icon_id": "38797640",
+      "name": "BL",
+      "font_class": "BL",
+      "unicode": "e619",
+      "unicode_decimal": 58905
+    },
+    {
+      "icon_id": "38797870",
+      "name": "TOWPL",
+      "font_class": "TOWPL",
+      "unicode": "e61a",
+      "unicode_decimal": 58906
+    },
+    {
+      "icon_id": "38753054",
+      "name": "GEN",
+      "font_class": "GEN",
+      "unicode": "e60c",
+      "unicode_decimal": 58892
+    }
+  ]
+}

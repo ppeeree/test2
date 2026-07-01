@@ -1,0 +1,14 @@
+﻿[Unit]
+Description=ACH.CMSWebClient.service
+
+[Service]
+Type=simple
+WorkingDirectory= /opt/ACH.CMSWebClient
+ExecStart= /opt/ACH.CMSWebClient/ACH.CMSWebClient
+Restart=always
+# Restart service after 60 seconds if the dotnet service crashes:
+RestartSec=60
+KillSignal=SIGINT
+
+[Install]
+WantedBy=multi-user.target
