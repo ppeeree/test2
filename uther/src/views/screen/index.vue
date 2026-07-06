@@ -208,10 +208,12 @@ export default {
   methods: {
     // 更新路由参数（核心）
     updateRoute(isControl, isMapShow, locationcode) {
+      const controlMode = typeof isControl === 'string' ? isControl === 'true' : isControl
+      const mapMode = typeof isMapShow === 'string' ? isMapShow === 'true' : isMapShow
       let queryParam = {
-        isControl: isControl,
-        isMapShow: isMapShow,
-        locationcode: isControl
+        isControl: controlMode,
+        isMapShow: mapMode,
+        locationcode: controlMode
           ? 'all'
           : locationcode || this.getWindFarmCode(this.WindFarm)
       }
@@ -439,7 +441,12 @@ export default {
       return windObj
     },
     changeControl() {
-      this.updateRoute(this.isControl, !this.isMapShow, this.$route.query.locationcode)
+      const nextMapShow = !this.isMapShow
+      if (nextMapShow) {
+        this.updateRoute(true, true, 'all')
+        return
+      }
+      this.updateRoute(this.isControl, false, this.$route.query.locationcode)
     },
     normalizeWindFarm(item) {
       if (!item) return null

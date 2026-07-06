@@ -238,7 +238,8 @@ const UtilData = {
 
     // this.initMapStatus(null)
     // 上层地图轮廓
-    this.AreaMap = await Cesium.GeoJsonDataSource.load(JSON.parse(jsonFile), {
+    const geoJson = typeof jsonFile === 'string' ? JSON.parse(jsonFile) : jsonFile
+    this.AreaMap = await Cesium.GeoJsonDataSource.load(geoJson, {
       clampToGround: true,               // 贴地形
       fill: Cesium.Color.fromCssColorString('#113d59').withAlpha(0), // 面填充
       stroke: Cesium.Color.fromCssColorString('#02e5ed'),   // 默认边线
@@ -360,10 +361,9 @@ const UtilData = {
   // 隐藏背景色和勾线和风场图标
   hideMapStatus() {
     if (this.markList.length) {
-      this.AreaMap.show = false
+      this.AreaMap ? this.AreaMap.show = false : null
       //this.AreaMapBorder.forEach(e => e.show = false)
-      this.AreaMapBorder.show = false
-      console.log(this.AreaMapBorder.show)
+      this.AreaMapBorder ? this.AreaMapBorder.show = false : null
       this.markList.forEach(e => e.show = false)
     }
   },

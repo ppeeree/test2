@@ -136,38 +136,49 @@ export default {
   mounted: function () {
     this.chart = echarts.init(this.$refs[this.chartId])
     this.handleSeriesData(this.seriesData)
-    this.chart.setOption(this.option)
+    this.chart.setOption(this.option, true)
     let dom = this.$refs[this.chartId]
     this.observer = new ResizeObserver(() => {
-      this.chart.resize()
+      this.chart && this.chart.resize()
     })
     this.observer.observe(dom)
   },
   beforeUnmount() {
-    if (this.chart) {
-      this.chart.dispose()
-    }
     if (this.observer) {
       this.observer.disconnect()
+      this.observer = null
+    }
+    if (this.chart) {
+      this.chart.dispose()
+      this.chart = null
     }
   },
   watch: {
     seriesData: {
       handler: function (val) {
         this.handleSeriesData(val)
-        this.chart.setOption(this.option)
+        this.chart && this.chart.setOption(this.option, true)
       },
       deep: true
     }
   },
   methods: {
     handleSeriesData(val) {
-      if (val.length === 0) return
+      if (!Array.isArray(val) || val.length === 0) {
+        this.option.series = []
+        this.option.legend.data = []
+        this.option.xAxis.data = []
+        return
+      }
       this.option.series = []
-      val.forEach((item, index) => {
+      val.forEach(item => {
+        if (!item) return
         this.option.series.push({
           name: item.statusName,
           type: 'line',
+          coordinateSystem: 'cartesian2d',
+          xAxisIndex: 0,
+          yAxisIndex: 0,
           showSymbol: false,
           symbolSize: 10,
           smooth: false,
@@ -180,10 +191,11 @@ export default {
             color: item.color,
             borderColor: item.color
           },
-          data: item.data
+          data: Array.isArray(item.data) ? item.data : []
         })
       })
-      this.option.legend.data = val.map(item => item.statusName)
+      this.option.legend.data = val.map(item => item?.statusName).filter(Boolean)
+      this.option.xAxis.data = this.xAxisData
     }
     /*    handleLegend(val) {
       this.option.legend.data = uniq(val)

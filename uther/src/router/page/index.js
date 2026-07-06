@@ -1,10 +1,10 @@
 import Layout from '@/page/index/'
+import Login from '@/page/login/index.vue'
 
 export default [{
   path: '/login',
   name: '登录页',
-  component: () =>
-    import(/* webpackChunkName: "view-user-login" */'@/page/login/index'),
+  component: Login,
   meta: {
     keepAlive: true,
     isTab: false,

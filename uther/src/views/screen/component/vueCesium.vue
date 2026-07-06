@@ -62,6 +62,7 @@
       <slot name="png" />
       <!-- 弹窗用 infobox -->
     </vc-viewer>
+    <div v-show="nativeViewerMode" ref="nativeViewerContainer" class="native-viewer"></div>
     <!--   v-if="popup.show" -->
     <div v-if="popup.show" class="my_popupContent" :style="popup.style">
       <unit-card :windparkInfo="hoverWindparkInfo" />
@@ -170,6 +171,8 @@ export default {
       shouldAnimate: true,
       animation: false,
       viewerReady: false,
+      nativeViewerMode: false,
+      nativeViewerTimer: null,
       timer: null,
       siteInfoDom: {},
       siteInfoPosition: {},
@@ -188,6 +191,11 @@ export default {
   },
   mounted() {
     this.clearPendingUnInit()
+    this.nativeViewerTimer = setTimeout(() => {
+      if (!this.viewerReady) {
+        this.startNativeViewer()
+      }
+    }, 800)
     // eslint-disable-next-line no-unused-vars
     this.$refs.vcViewer.createPromise.then(({ Cesium, viewer }) => {
       // 获取集控风场的经纬度创建风场广告牌
@@ -196,11 +204,14 @@ export default {
       this.$nextTick(() => {
         this.initMapView()
       })
+    }).catch(() => {
+      this.startNativeViewer()
     })
   },
   beforeUnmount() {
     // this.$refs.vcViewer.unload() // vue-cesium 1.x 提供的卸载
     this.clearPendingUnInit()
+    this.nativeViewerTimer && clearTimeout(this.nativeViewerTimer)
     window.__screenMapUnInitTimer = setTimeout(() => {
       this.$utils.map.unInit()
       window.__screenMapUnInitTimer = null
@@ -215,6 +226,8 @@ export default {
     },
     async onViewerReady({ Cesium, viewer }) {
       this.clearPendingUnInit()
+      this.nativeViewerTimer && clearTimeout(this.nativeViewerTimer)
+      if (this.viewerReady) return
       // 禁用相机惯性
       viewer.scene.screenSpaceCameraController.enableInertia = false
       // ==end==
@@ -223,6 +236,72 @@ export default {
       this.$nextTick(() => {
         this.initMapView()
       })
+    },
+    async startNativeViewer() {
+      if (this.viewerReady) return
+      this.nativeViewerMode = true
+      await this.$nextTick()
+      const Cesium = await this.loadCesium()
+      if (this.viewerReady || !this.$refs.nativeViewerContainer) return
+      if (Cesium.Ion) {
+        Cesium.Ion.defaultAccessToken =
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJiNDAwMTg3Yy1kNDQwLTQyNzktOWQ4OS0yNzIyMDYyNDcyYmMiLCJpZCI6Mzg5NTEsImlhdCI6MTYzMjY1MjAwOH0.eDhFxYQUUFfbubTrNB64sA_lerzTWkczrUMa-PLtbtM'
+      }
+      const viewer = new Cesium.Viewer(this.$refs.nativeViewerContainer, {
+        animation: false,
+        timeline: false,
+        baseLayerPicker: false,
+        geocoder: false,
+        homeButton: false,
+        sceneModePicker: false,
+        navigationHelpButton: false,
+        infoBox: false,
+        selectionIndicator: false,
+        fullscreenButton: false,
+        shouldAnimate: this.shouldAnimate,
+        orderIndependentTranslucency: false,
+        contextOptions: this.contextOptions
+      })
+      await this.onViewerReady({ Cesium, viewer })
+      this.installNativeViewerEvents(Cesium, viewer)
+    },
+    loadCesium() {
+      window.CESIUM_BASE_URL = window.CESIUM_BASE_URL || '/assets/Cesium/'
+      this.loadCss('/assets/Cesium/Widgets/widgets.css')
+      if (window.Cesium) return Promise.resolve(window.Cesium)
+      return new Promise((resolve, reject) => {
+        const existing = document.querySelector('script[data-screen-cesium]')
+        if (existing) {
+          existing.addEventListener('load', () => resolve(window.Cesium))
+          existing.addEventListener('error', reject)
+          return
+        }
+        const script = document.createElement('script')
+        script.src = '/assets/Cesium/Cesium.js'
+        script.dataset.screenCesium = 'true'
+        script.onload = () => resolve(window.Cesium)
+        script.onerror = reject
+        document.body.appendChild(script)
+      })
+    },
+    loadCss(href) {
+      if (document.querySelector(`link[href="${href}"]`)) return
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = href
+      document.head.appendChild(link)
+    },
+    installNativeViewerEvents(Cesium, viewer) {
+      if (!window.handler || !viewer || !viewer.scene) return
+      window.handler.setInputAction(
+        movement => this.onClick({ position: movement.position }),
+        Cesium.ScreenSpaceEventType.LEFT_CLICK
+      )
+      window.handler.setInputAction(
+        movement => this.onhover({ endPosition: movement.endPosition }),
+        Cesium.ScreenSpaceEventType.MOUSE_MOVE
+      )
+      viewer.camera.moveEnd.addEventListener(this.cameraMoveEnd)
     },
     async initMapView() {
       // console.log('initMapView')
@@ -234,9 +313,16 @@ export default {
           // 默认进来是集控云南地图
           getUserMapInfo({ userID: this.userInfo.user_id }).then(res => {
             if (res.data.data) {
-              if (this.$utils.map.markList?.length) {
+              if (
+                this.$utils.map.markList?.length &&
+                this.$utils.map.AreaMap &&
+                this.$utils.map.AreaMapBorder
+              ) {
                 this.$utils.map.resetMapStatus(res.data.data)
               } else {
+                if (this.$utils.map.markList?.length) {
+                  this.$utils.map.markList = []
+                }
                 this.$utils.map.initAniMat(res.data.data, () => {
                   this.initWindparkMarks()
                 })
@@ -411,6 +497,12 @@ export default {
 .viewer {
   height: 100vh;
   position: relative;
+}
+.native-viewer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
 }
 .measure {
   position: absolute;
