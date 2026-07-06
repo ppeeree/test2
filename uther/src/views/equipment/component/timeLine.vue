@@ -94,38 +94,38 @@ export default {
   margin-top: 10px;
   // top: -9px;
   position: relative;
-  ::v-deep .el-step__title {
+  :deep(.el-step__title){
     font-size: 14px;
     line-height: 22px;
     color: white;
   }
-  ::v-deep .el-step__title.is-success {
+  :deep(.el-step__title.is-success){
     color: #c0c4cc;
   }
-  ::v-deep .el-step__line {
+  :deep(.el-step__line){
     background-color: #11508b;
   }
-  ::v-deep .el-step__head.is-success {
+  :deep(.el-step__head.is-success){
     color: #11508b;
     border-color: #11508b;
     .el-step__icon {
       background: #11508b;
     }
   }
-  ::v-deep .el-step__head.is-error {
+  :deep(.el-step__head.is-error){
     color: #1f94ff;
     border-color: #1f94ff;
     .el-step__icon {
       background: #1f94ff;
     }
   }
-  ::v-deep .el-step__icon {
+  :deep(.el-step__icon){
     height: 16px;
     width: 16px;
     top: 4px;
     cursor: pointer;
   }
-  ::v-deep .el-step__icon-inner {
+  :deep(.el-step__icon-inner){
     display: none;
   }
 }

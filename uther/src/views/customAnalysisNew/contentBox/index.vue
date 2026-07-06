@@ -47,20 +47,18 @@
     </div>
     <Splitter key="splitH0" splitType="horizontal" id="splitH0" :limit="{}" style="flex: 0 0 4px" />
     <!-- 辅助视图 可配置保存-->
-    <template v-for="(item, index) in downLayout">
+    <template v-for="(item, index) in downLayout" :key="index + 1">
       <div
         class="rowbox"
         :style="{
           flex: `0 0 ${item.rowHeight + '%'}`
           // height: item.rowHeight + '%'
         }"
-        :key="index + 1"
         :id="'row' + (index + 1)"
       >
-        <template v-for="(ii, i) in item.charts">
+        <template v-for="(ii, i) in item.charts" :key="'row' + activeName + '-' + i">
           <emptyChart
             :type="activeName"
-            :key="'row' + activeName + '-' + i"
             :itemId="'row' + (index + 1) + '-' + i"
             :ref="'row' + (index + 1) + '-' + i"
             :rowId="'row' + (index + 1)"
@@ -736,12 +734,12 @@ export default {
     height: 100%;
     background: #fff;
   }
-  ::v-deep .el-tabs__content {
+  :deep(.el-tabs__content){
     width: 100%;
     height: calc(100% - 30px);
     padding: 0;
   }
-  ::v-deep .el-tabs__nav {
+  :deep(.el-tabs__nav){
     height: 30px;
   }
 }

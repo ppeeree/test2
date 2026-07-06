@@ -127,7 +127,7 @@ export default {
       }) */
     }
   },
-  destroyed() {
+  beforeUnmount() {
     clearInterval(this.timer)
     clearInterval(this.timerAxios)
     this.timer = null

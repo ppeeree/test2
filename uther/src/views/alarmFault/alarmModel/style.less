@@ -11,7 +11,7 @@
     position: relative;
 }
 
-::v-deep .el-tree {
+:deep(.el-tree){
     .el-tree-node__content {
         height: 33px;
         line-height: 33px;
@@ -19,7 +19,7 @@
     }
 }
 
-::v-deep .el-button--primary {
+:deep(.el-button--primary){
     background: #0861aa;
     border-color: #0861aa;
     color: white;
@@ -39,7 +39,7 @@
     }
 }
 
-::v-deep .el-button--default {
+:deep(.el-button--default){
     height: 28px;
     width: 92px;
     padding: 0px;
@@ -51,7 +51,7 @@
     }
 }
 
-::v-deep .el-dialog {
+:deep(.el-dialog){
     .el-dialog__header {
         .el-dialog__title {
             font-size: 16px;
@@ -63,7 +63,7 @@
     }
 }
 
-::v-deep .el-upload-list {
+:deep(.el-upload-list){
     width: 100%;
 
     .el-upload-list__item {
@@ -128,6 +128,6 @@
     }
 }
 
-::v-deep .el-table--enable-row-transition .el-table__body td.el-table__cell{
+:deep(.el-table--enable-row-transition .el-table__body td.el-table__cell){
     padding: 4px 0;
 }

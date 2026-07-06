@@ -7,16 +7,16 @@
 </template>
 
 <script>
-import color from "@/mixins/color";
+import color from "@/mixins/color"
 export default {
   name: "topColor",
   mixins: [color()],
   data() {
     return {
       chalk: ""
-    };
+    }
   }
-};
+}
 </script>
 
 <style>

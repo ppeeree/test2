@@ -28,26 +28,24 @@
           <div class="more_wind_card">
             <div
               class="wind_item"
-              v-for="item in userDeptTree"
-              :key="item"
+              v-for="item in windOptions"
+              :key="item.id || item.stationID || item.code"
               @mouseenter="mouseWind = item"
               @mouseleave="mouseWind = ''"
               @click="WindChange(item)"
               :style="{
                 background:
-                  item.name == selectWind.name || item.name == mouseWind.name
+                  getWindName(item) == getWindName(selectWind) || getWindName(item) == getWindName(mouseWind)
                     ? 'rgba(71, 86, 128, 0.5)'
                     : 'transparent'
               }"
             >
-              {{ item.name }}
+              {{ getWindName(item) }}
             </div>
           </div>
-          <i
-            slot="reference"
-            class="el-icon-arrow-down"
-            style="cursor: pointer; color: rgba(255, 255, 255, 0.5); font-size: 12px"
-          ></i>
+          <template #reference>
+            <span class="wind_dropdown_arrow"></span>
+          </template>
         </el-popover>
       </li>
 
@@ -81,11 +79,9 @@
               {{ item.windturbineName }}
             </span>
           </div>
-          <i
-            slot="reference"
-            class="el-icon-arrow-down"
-            style="cursor: pointer; color: rgba(255, 255, 255, 0.5); font-size: 12px"
-          ></i>
+          <template #reference>
+            <span class="wind_dropdown_arrow"></span>
+          </template>
         </el-popover>
       </li>
     </template>
@@ -107,26 +103,27 @@
           <div class="more_wind_card">
             <div
               class="wind_item"
-              v-for="item in userDeptTree"
-              :key="item"
+              v-for="item in windOptions"
+              :key="item.id || item.stationID || item.code"
               @mouseenter="mouseWind = item"
               @mouseleave="mouseWind = ''"
               @click="WindChange(item)"
               :style="{
                 background:
-                  item.name == selectWind.name || item.name == mouseWind.name
+                  getWindName(item) == getWindName(selectWind) || getWindName(item) == getWindName(mouseWind)
                     ? 'rgba(71, 86, 128, 0.5)'
                     : 'transparent'
               }"
             >
-              {{ item.name }}
+              {{ getWindName(item) }}
             </div>
           </div>
-          <i
-            slot="reference"
-            class="el-icon-arrow-down"
-            style="cursor: pointer; color: rgba(255, 255, 255, 0.5); font-size: 12px"
-          ></i>
+          <template #reference>
+            <i
+              class="el-icon-arrow-down"
+              style="cursor: pointer; color: rgba(255, 255, 255, 0.5); font-size: 12px"
+            ></i>
+          </template>
         </el-popover>
       </li>
 
@@ -165,11 +162,12 @@
               {{ item.windturbineName }}
             </span>
           </div>
-          <i
-            slot="reference"
-            class="el-icon-arrow-down"
-            style="cursor: pointer; color: rgba(255, 255, 255, 0.5); font-size: 12px"
-          ></i>
+          <template #reference>
+            <i
+              class="el-icon-arrow-down"
+              style="cursor: pointer; color: rgba(255, 255, 255, 0.5); font-size: 12px"
+            ></i>
+          </template>
         </el-popover>
       </li>
 
@@ -196,16 +194,17 @@
               {{ item.name }}
             </div>
           </div>
-          <i
-            slot="reference"
-            class="el-icon-arrow-down"
-            style="
-              cursor: pointer;
-              color: rgba(255, 255, 255, 1);
-              font-size: 12px;
-              font-weight: bold;
-            "
-          ></i>
+          <template #reference>
+            <i
+              class="el-icon-arrow-down"
+              style="
+                cursor: pointer;
+                color: rgba(255, 255, 255, 1);
+                font-size: 12px;
+                font-weight: bold;
+              "
+            ></i>
+          </template>
         </el-popover>
       </li>
     </template>
@@ -277,16 +276,28 @@ export default {
       immediate: true
     },
     '$route.query.locationcode'(newQuery) {
-      this.selectWind = this.userDeptTree.find(i => i.id == newQuery)
+      const windObj = this.findWindOption(newQuery)
+      if (windObj) {
+        this.selectWind = this.normalizeWindOption(windObj)
+      }
+    },
+    windOptions() {
+      const windObj = this.findWindOption(this.$route.query.locationcode)
+      if (windObj) {
+        this.selectWind = this.normalizeWindOption(windObj)
+      }
     }
   },
   computed: {
-    ...mapGetters(['userInfo', 'userDeptTree', 'permission'])
+    ...mapGetters(['userInfo', 'userDeptTree', 'permission']),
+    windOptions() {
+      return this.parent?.windparkList?.length ? this.parent.windparkList : this.userDeptTree
+    }
   },
   created() {
     let windFarmID = this.$route.query.locationcode
-    let windObj = this.userDeptTree.find(i => i.id == windFarmID)
-    this.selectWind = windObj ? windObj : this.userDeptTree[0]
+    let windObj = this.findWindOption(windFarmID)
+    this.selectWind = windObj ? this.normalizeWindOption(windObj) : this.normalizeWindOption(this.windOptions[0])
   },
   mounted() {
     if (this.isNoneWindPark) {
@@ -296,6 +307,32 @@ export default {
     }
   },
   methods: {
+    getWindName(item) {
+      return item?.name || item?.stationName || ''
+    },
+    normalizeWindOption(item) {
+      if (!item) return null
+      const windFarmCode =
+        item.stationID || item.stationId || item.stationCode || item.code || item.id
+      return {
+        ...item,
+        id: item.id || windFarmCode,
+        code: item.code || windFarmCode,
+        stationID: item.stationID || windFarmCode,
+        name: item.name || item.stationName
+      }
+    },
+    findWindOption(locationcode) {
+      if (!locationcode) return null
+      return this.windOptions.find(
+        item =>
+          item.id == locationcode ||
+          item.code == locationcode ||
+          item.stationID == locationcode ||
+          item.stationId == locationcode ||
+          item.stationCode == locationcode
+      )
+    },
     getPagecompByPlan(turbineId) {
       let list = []
       let allList = JSON.parse(getStore({ name: 'allPagecompList' }))
@@ -335,7 +372,12 @@ export default {
 
     initTurbineList(val) {
       // 新接口 val.code
-      windFieldStatusApi({ stationId: val.code }).then(res => {
+      const stationId = val?.stationID || val?.stationId || val?.stationCode || val?.code || val?.id
+      if (!stationId) {
+        this.turbineList = []
+        return
+      }
+      windFieldStatusApi({ stationId }).then(res => {
         if (res.data.code === 200) {
           this.turbineList = res.data.data
         }
@@ -343,16 +385,25 @@ export default {
     },
 
     async WindChange(val) {
-      let { childNode, ...others } = this.userDeptTree.find(i => i.id == val.id)
-      await this.initTurbineList(val) //childNode
-      this.selectWind = others
+      const selectedWind = this.normalizeWindOption(val)
+      const deptWind = this.userDeptTree.find(
+        i => i.id == selectedWind.id || i.code == selectedWind.code || i.stationID == selectedWind.stationID
+      )
+      const childNode = deptWind?.childNode || []
+      const { childNode: _childNode, ...others } = deptWind || selectedWind
+      await this.initTurbineList(selectedWind) //childNode
+      this.selectWind = this.normalizeWindOption(others)
       if (this.isNoneWindPark) {
-        this.$emit('ClickEntityWind', { ...others, ...childNode[0] })
+        this.$emit('ClickEntityWind', { ...this.selectWind, ...(childNode[0] || {}) })
       } else {
         this.parent.updateRoute(
-          this.$route.query.isControl,
-          this.$route.query.isMapShow,
-          this.selectWind.id
+          this.parent.isControl,
+          this.parent.isMapShow,
+          this.selectWind.stationID ||
+            this.selectWind.stationId ||
+            this.selectWind.stationCode ||
+            this.selectWind.code ||
+            this.selectWind.id
         )
       }
       this.$refs.closePopover.click()
@@ -394,7 +445,16 @@ export default {
     jumpWindpark() {
       this.$router.push({
         path: '/screen',
-        query: { isControl: false, isMapShow: false, locationcode: this.selectWind.id }
+        query: {
+          isControl: false,
+          isMapShow: false,
+          locationcode:
+            this.selectWind.stationID ||
+            this.selectWind.stationId ||
+            this.selectWind.stationCode ||
+            this.selectWind.code ||
+            this.selectWind.id
+        }
       })
     },
     jumpControlPage() {
@@ -471,6 +531,8 @@ export default {
 }
 
 .wind_farm_tag {
+  display: flex;
+  align-items: center;
   .wind_inform {
     position: relative;
     left: 3px;
@@ -479,6 +541,16 @@ export default {
     display: inline-block;
     width: 35px;
     height: 20px;
+  }
+  .wind_dropdown_arrow {
+    width: 0;
+    height: 0;
+    margin-left: 4px;
+    margin-right: 5px;
+    cursor: pointer;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid rgba(255, 255, 255, 0.65);
   }
 }
 

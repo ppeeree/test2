@@ -16,13 +16,14 @@
     <!-- 事件汇总 -->
     <div style="height: calc(50% - 53px)">
       <!-- 今日已发生事件 -->
-      <eventTracking :eventNum.sync="eventNum" />
+      <eventTracking :eventNum="eventNum" />
       <!-- 饼状图 -->
       <div
         class="charts_class"
         :style="{ opacity: peiData1.length && peiData2.length ? '1' : '0.3' }"
       >
         <pie-ring
+          ref="pieRingFirst"
           unique="first"
           :peiData="peiData1"
           :color="['#FFF287', '#F5B270', '#E85E51', '#DC1034']"
@@ -31,6 +32,7 @@
           @clickPartEvent="clickPartEvent"
         ></pie-ring>
         <pie-ring
+          ref="pieRingSecond"
           unique="second"
           :peiData="peiData2"
           height="122px"
@@ -56,7 +58,6 @@
         style="padding-left: 15px"
         :currentComp="currentComp"
         fatherComp="turbine"
-        v-on="$listeners"
         v-bind="$attrs"
       ></event-table>
     </div>
@@ -241,7 +242,8 @@ export default {
       })
     },
     handlePieStatus(hightLightData) {
-      this.$children.forEach(el => {
+      const pieComponents = [this.$refs.pieRingFirst, this.$refs.pieRingSecond].filter(Boolean)
+      pieComponents.forEach(el => {
         // eslint-disable-next-line no-useless-escape
         if (el?.chartId && /^[pie\-]/.test(el.chartId)) {
           if (
@@ -673,7 +675,7 @@ export default {
       }
     }
   },
-  beforeDestroy() {
+  beforeUnmount() {
     clearInterval(this.timer)
     this.timer = null
   }

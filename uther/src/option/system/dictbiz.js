@@ -88,7 +88,7 @@ export const optionParent = {
       hide: true
     }
   ]
-};
+}
 
 export const optionChild = {
   height: 'auto',
@@ -212,4 +212,4 @@ export const optionChild = {
       hide: true
     }
   ]
-};
+}

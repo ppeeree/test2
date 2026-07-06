@@ -25,12 +25,13 @@
 import { levelColorEnum } from '@/util/constant'
 import { healthStatusStatistic } from '@/api/screen/leftCardApi'
 import func from '@/util/func.js'
+import { defineAsyncComponent } from 'vue'
 
 export default {
   components: {
-    noData: () => import('@/components/noData/index.vue'),
-    Card: () => import('./card.vue'),
-    BarDetail: () => import('../base/bar-detail.vue')
+    noData: defineAsyncComponent(() => import('@/components/noData/index.vue')),
+    Card: defineAsyncComponent(() => import('./card.vue')),
+    BarDetail: defineAsyncComponent(() => import('../base/bar-detail.vue'))
   },
   inject: ['parent'],
   data() {

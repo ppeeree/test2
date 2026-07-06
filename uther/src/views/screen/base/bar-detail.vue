@@ -17,8 +17,7 @@ export default {
     },
     title: {
       type: String,
-      default: '',
-      required: true
+      default: ''
     },
     dataList: {
       type: Array,
@@ -28,8 +27,7 @@ export default {
       type: Object,
       default: () => {
         return {}
-      },
-      required: true
+      }
     }
   },
   data() {
@@ -126,16 +124,16 @@ export default {
   },
   computed: {},
   mounted: function () {
-    this.chart = echarts.init(this.$refs[this.chartId])
-    this.initChart()
-    window.addEventListener('resize', () => {
-      this.chart.resize()
+    this.$nextTick(() => {
+      const chartDom = this.$refs[this.chartId]
+      if (!chartDom) return
+      this.chart = echarts.init(chartDom)
+      this.initChart()
+      window.addEventListener('resize', this.handleResize)
     })
   },
-  destroyed() {
-    window.removeEventListener('resize', () => {
-      this.chart.resize()
-    })
+  beforeUnmount() {
+    window.removeEventListener('resize', this.handleResize)
     if (this.chart) {
       this.chart.dispose()
       this.chart = null
@@ -150,8 +148,13 @@ export default {
     }
   },
   methods: {
+    handleResize() {
+      if (this.chart) {
+        this.chart.resize()
+      }
+    },
     initChart() {
-      if (!this.dataList.length) return
+      if (!this.chart || !this.dataList.length) return
       this.option.xAxis.data = this.dataList.map(i => i.statusTime)
       // 1. 收集所有出现过的状态名
       const states = [...new Set(this.dataList.flatMap(d => d.data.map(([s]) => s)))]
@@ -162,6 +165,7 @@ export default {
         return {
           name: eventTypeEnum[i],
           type: 'bar',
+          coordinateSystem: 'cartesian2d',
           stack: 'all',
           barWidth: 20,
           color: levelColorEnum[i],

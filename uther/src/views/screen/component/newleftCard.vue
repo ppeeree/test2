@@ -1,12 +1,14 @@
 <template>
   <div class="content-left">
     <el-card class="box-card" :body-style="{ padding: '10px' }">
-      <div slot="header" class="title">
+      <template #header>
+        <div class="title">
         <div class="top_title">
           <span class="titleChart">风场概况</span>
           <span class="title_buttom_line"></span>
         </div>
-      </div>
+        </div>
+      </template>
       <div style="width: 450px" class="item-style">
         <part-1 ref="part1" :isControl="isControl" />
         <div class="top_title">
@@ -15,7 +17,7 @@
         </div>
         <iconChart
           :style="[{ left: '402px' }, handleIconBorder('groupCard')]"
-          @click.native="handleOpenChart('groupCard')"
+          @click="handleOpenChart('groupCard')"
         ></iconChart>
         <part-4 ref="part4" :isControl="isControl" style="position: relative; height: 31%" />
         <!-- 部件健康状态 -->
@@ -25,7 +27,7 @@
         </div>
         <iconChart
           :style="[{ left: '402px' }, handleIconBorder('stateCard')]"
-          @click.native="handleOpenChart('stateCard')"
+          @click="handleOpenChart('stateCard')"
         ></iconChart>
         <part-5 ref="part5" :isControl="isControl" />
       </div>
@@ -53,6 +55,7 @@ import { getFaultTrend, healthStatusTrend } from '@/api/screen/leftCardApi'
 import { faultTrendEnum } from '@/util/constant'
 import { levelColorEnum } from '@/util/constant'
 import { mapGetters } from 'vuex'
+import { defineAsyncComponent } from 'vue'
 import part1 from '../charts/newpart1.vue'
 import part4 from '../charts/part4.vue'
 import part5 from '../charts/newpart5.vue'
@@ -62,10 +65,10 @@ export default {
     part1, // () => import('../charts/newpart1.vue'),
     part4, // () => import('../charts/part4.vue'),
     part5, //() => import('../charts/newpart5.vue'),
-    lineCategory: () => import('../base/line-category.vue'),
-    iconChart: () => import('../charts/iconChart.vue'),
-    noData: () => import('@/components/noData/index.vue'),
-    lineChart: () => import('@/components/charts/baseChart.vue')
+    lineCategory: defineAsyncComponent(() => import('../base/line-category.vue')),
+    iconChart: defineAsyncComponent(() => import('../charts/iconChart.vue')),
+    noData: defineAsyncComponent(() => import('@/components/noData/index.vue')),
+    lineChart: defineAsyncComponent(() => import('@/components/charts/baseChart.vue'))
   },
   inject: ['parent'],
   data() {
@@ -315,10 +318,10 @@ export default {
   z-index: 10;
 }
 
-::v-deep .el-card__header {
+:deep(.el-card__header){
   border-bottom: none;
 }
-::v-deep .el-card__body {
+:deep(.el-card__body){
   height: calc(100% - 40px);
 }
 .item-style {

@@ -186,7 +186,7 @@ export default {
 .box-card {
   width: 480px;
 }
-::v-deep .el-slider__marks-text {
+:deep(.el-slider__marks-text){
   width: 36px;
 }
 </style>

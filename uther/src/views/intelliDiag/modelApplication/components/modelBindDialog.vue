@@ -1,7 +1,7 @@
 <template>
   <el-dialog
     title="机组绑定模型"
-    :visible.sync="dialogVisible"
+    v-model="dialogVisible"
     width="1000px"
     @close="handleClose"
     destroy-on-close
@@ -29,12 +29,14 @@
       </el-row>
     </el-form>
 
-    <div slot="footer" class="dialog-footer">
-      <el-button type="primary" size="small" style="margin-right: 10px" @click="handleSave"
-        >保存</el-button
-      >
-      <el-button size="small" @click="handleCancel">取消</el-button>
-    </div>
+    <template #footer>
+      <div class="dialog-footer">
+        <el-button type="primary" size="small" style="margin-right: 10px" @click="handleSave"
+          >保存</el-button
+        >
+        <el-button size="small" @click="handleCancel">取消</el-button>
+      </div>
+    </template>
   </el-dialog>
 </template>
 
@@ -162,7 +164,7 @@ export default {
 
 <style scoped>
 /* 局部样式 */
-::v-deep .el-select__tags {
+:deep(.el-select__tags){
   max-width: 95%; /* 防止标签过多撑破布局 */
 }
 </style>

@@ -5,7 +5,7 @@
     <div class="analysis_content">
       <el-collapse v-if="treeData.length" v-model="collapseExpanded">
         <el-collapse-item v-for="item in treeData" :key="item.label" :name="item.label">
-          <template slot="title">
+          <template #title>
             <div style="display: flex; flex-direction: row; align-items: center">
               <!--  <span v-if="handleFormateTitle(item)" class="formate_title">{{
                 handleFormateTitle(item)
@@ -31,7 +31,7 @@
             :name="name + '-' + index"
           /> -->
           <el-collapse-item v-for="(ii, i) in item.measList" :key="ii.label" :name="ii.label">
-            <template slot="title">
+            <template #title>
               <div style="display: flex; flex-direction: row; align-items: center">
                 <span>{{ ii.label }}</span>
               </div>
@@ -104,7 +104,7 @@ export default {
   },
   methods: {
     dealWithData(dataList) {
-      this.$set(this, 'formData', {})
+      this.formData = {}
       const newTreeData = dataList.reduce((acc, item) => {
         // 检查部件对象是否已存在
         let obj = acc.find(c => c.label === item.compName)
@@ -120,7 +120,7 @@ export default {
         }
         // 将item添加到对应的测点对象里面
         measLoc.children.push(item)
-        this.$set(this.formData, item.analyzerRecordId, item.description)
+        this.formData[item.analyzerRecordId] = item.description
         return acc
       }, [])
       return newTreeData
@@ -131,7 +131,7 @@ export default {
       this.collapseExpanded = []
       const { analyzerRecords } = data
       if (analyzerRecords.length == 0) {
-        this.$set(this, 'formData', {})
+        this.formData = {}
         return
       }
       this.treeData = this.dealWithData(analyzerRecords)
@@ -185,25 +185,25 @@ export default {
   }
   .device_state_select {
     --inputTextColor: '#C0C4CC';
-    ::v-deep .el-input__inner {
+    :deep(.el-input__inner){
       // background: black;
       border: 1px solid #bebebe;
       color: var(--inputTextColor) !important;
     }
-    ::v-deep .el-input__suffix-inner {
+    :deep(.el-input__suffix-inner){
       display: none;
     }
   }
 
   .avue_crud_st {
     width: 1330px;
-    ::v-deep .avue-crud__menu {
+    :deep(.avue-crud__menu){
       min-height: 11px;
     }
-    ::v-deep .el-table::before {
+    :deep(.el-table::before){
       background-color: transparent;
     }
-    ::v-deep .inputColor {
+    :deep(.inputColor){
       .el-input__inner {
         color: inherit;
       }
@@ -235,27 +235,27 @@ export default {
 
     .input_textarea {
       width: 100%;
-      ::v-deep .el-textarea__inner {
+      :deep(.el-textarea__inner){
         color: #000;
         background: #fff;
       }
     }
   }
 }
-::v-deep .el-collapse-item__header {
+:deep(.el-collapse-item__header){
   height: 40px;
   font-size: 14px;
   font-weight: bold;
   color: #000;
   background: transparent;
 }
-::v-deep .el-collapse-item__content {
+:deep(.el-collapse-item__content){
   background: transparent;
   .el-collapse-item__header {
     background: transparent;
   }
 }
-::v-deep .el-collapse-item__wrap {
+:deep(.el-collapse-item__wrap){
   background: transparent;
 }
 .formate_title {
@@ -263,7 +263,7 @@ export default {
   font-size: 14px;
   color: #000;
 }
-::v-deep .el-image__inner {
+:deep(.el-image__inner){
   max-width: 100%;
   height: auto;
   width: auto;

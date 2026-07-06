@@ -79,16 +79,16 @@
     update,
     getLazyMenuList,
     getMenu
-  } from "@/api/system/menu";
+  } from "@/api/system/menu"
   import {
     addApiScope,
     removeApiScope,
     updateApiScope,
     getListApiScope,
     getMenuApiScope
-  } from "@/api/system/scope";
-  import {mapGetters} from "vuex";
-  import iconList from "@/config/iconList";
+  } from "@/api/system/scope"
+  import {mapGetters} from "vuex"
+  import iconList from "@/config/iconList"
 
   export default {
     data() {
@@ -372,7 +372,7 @@
           ]
         },
         dataScope: []
-      };
+      }
     },
 
     computed: {
@@ -383,50 +383,50 @@
           viewBtn: this.vaildData(this.permission.menu_view, false),
           delBtn: this.vaildData(this.permission.menu_delete, false),
           editBtn: this.vaildData(this.permission.menu_edit, false)
-        };
+        }
       },
       ids() {
-        let ids = [];
+        let ids = []
         this.selectionList.forEach(ele => {
-          ids.push(ele.id);
-        });
-        return ids.join(",");
+          ids.push(ele.id)
+        })
+        return ids.join(",")
       },
       scopeIds() {
-        let ids = [];
+        let ids = []
         this.selectionListScope.forEach(ele => {
-          ids.push(ele.id);
-        });
-        return ids.join(",");
+          ids.push(ele.id)
+        })
+        return ids.join(",")
       }
     },
     methods: {
       // 菜单管理模块
       rowSave(row, done, loading) {
         add(row).then(() => {
-          this.onLoad(this.page);
+          this.onLoad(this.page)
           this.$message({
             type: "success",
             message: "操作成功!"
-          });
-          done();
+          })
+          done()
         }, error => {
-          window.console.log(error);
-          loading();
-        });
+          window.console.log(error)
+          loading()
+        })
       },
       rowUpdate(row, index, done, loading) {
         update(row).then(() => {
-          this.onLoad(this.page);
+          this.onLoad(this.page)
           this.$message({
             type: "success",
             message: "操作成功!"
-          });
-          done();
+          })
+          done()
         }, error => {
-          window.console.log(error);
-          loading();
-        });
+          window.console.log(error)
+          loading()
+        })
       },
       rowDel(row) {
         this.$confirm("确定将选择数据删除?", {
@@ -435,39 +435,39 @@
           type: "warning"
         })
           .then(() => {
-            return remove(row.id);
+            return remove(row.id)
           })
           .then(() => {
-            this.onLoad(this.page);
+            this.onLoad(this.page)
             this.$message({
               type: "success",
               message: "操作成功!"
-            });
-          });
+            })
+          })
       },
       searchReset() {
-        this.query = {};
-        this.parentId = 0;
-        this.onLoad(this.page);
+        this.query = {}
+        this.parentId = 0
+        this.onLoad(this.page)
       },
       searchChange(params, done) {
-        this.query = params;
-        this.parentId = '';
-        this.page.currentPage = 1;
-        this.onLoad(this.page, params);
-        done();
+        this.query = params
+        this.parentId = ''
+        this.page.currentPage = 1
+        this.onLoad(this.page, params)
+        done()
       },
       selectionChange(list) {
-        this.selectionList = list;
+        this.selectionList = list
       },
       selectionClear() {
-        this.selectionList = [];
-        this.$refs.crud.toggleSelection();
+        this.selectionList = []
+        this.$refs.crud.toggleSelection()
       },
       handleDelete() {
         if (this.selectionList.length === 0) {
-          this.$message.warning("请选择至少一条数据");
-          return;
+          this.$message.warning("请选择至少一条数据")
+          return
         }
         this.$confirm("确定将选择数据删除?", {
           confirmButtonText: "确定",
@@ -475,91 +475,91 @@
           type: "warning"
         })
           .then(() => {
-            return remove(this.ids);
+            return remove(this.ids)
           })
           .then(() => {
-            this.onLoad(this.page);
+            this.onLoad(this.page)
             this.$message({
               type: "success",
               message: "操作成功!"
-            });
-            this.$refs.crud.toggleSelection();
-          });
+            })
+            this.$refs.crud.toggleSelection()
+          })
       },
       beforeOpen(done, type) {
         if (["edit", "view"].includes(type)) {
           getMenu(this.form.id).then(res => {
-            this.form = res.data.data;
-          });
+            this.form = res.data.data
+          })
         }
-        done();
+        done()
       },
       currentChange(currentPage) {
-        this.page.currentPage = currentPage;
+        this.page.currentPage = currentPage
       },
       sizeChange(pageSize) {
-        this.page.pageSize = pageSize;
+        this.page.pageSize = pageSize
       },
       refreshChange() {
-        this.onLoad(this.page, this.query);
+        this.onLoad(this.page, this.query)
       },
       onLoad(page, params = {}) {
-        this.loading = true;
+        this.loading = true
         getLazyMenuList(this.parentId, Object.assign(params, this.query)).then(res => {
-          this.data = res.data.data;
-          this.loading = false;
-          this.selectionClear();
-        });
+          this.data = res.data.data
+          this.loading = false
+          this.selectionClear()
+        })
       },
       treeLoad(tree, treeNode, resolve) {
-        const parentId = tree.id;
+        const parentId = tree.id
         getLazyMenuList(parentId).then(res => {
-          resolve(res.data.data);
-        });
+          resolve(res.data.data)
+        })
       },
       // 数据权限模块
       handleDataScope(row) {
-        this.drawerVisible = true;
-        this.scopeMenuId = row.id;
-        this.scopeMenuName = row.name;
+        this.drawerVisible = true
+        this.scopeMenuId = row.id
+        this.scopeMenuName = row.name
         this.onLoadScope(this.pageScope)
       },
       handleDrawerClose(hide) {
-        hide();
+        hide()
       },
       rowSaveScope(row, done, loading) {
         row = {
           ...row,
           menuId: this.scopeMenuId,
-        };
+        }
         addApiScope(row).then(() => {
-          this.onLoadScope(this.pageScope);
+          this.onLoadScope(this.pageScope)
           this.$message({
             type: "success",
             message: "操作成功!"
-          });
-          done();
+          })
+          done()
         }, error => {
-          window.console.log(error);
-          loading();
-        });
+          window.console.log(error)
+          loading()
+        })
       },
       rowUpdateScope(row, index, done, loading) {
         row = {
           ...row,
           menuId: this.scopeMenuId,
-        };
+        }
         updateApiScope(row).then(() => {
-          this.onLoadScope(this.pageScope);
+          this.onLoadScope(this.pageScope)
           this.$message({
             type: "success",
             message: "操作成功!"
-          });
-          done();
+          })
+          done()
         }, error => {
-          window.console.log(error);
-          loading();
-        });
+          window.console.log(error)
+          loading()
+        })
       },
       rowDelScope(row) {
         this.$confirm("确定将选择数据删除?", {
@@ -568,20 +568,20 @@
           type: "warning"
         })
           .then(() => {
-            return removeApiScope(row.id);
+            return removeApiScope(row.id)
           })
           .then(() => {
-            this.onLoadScope(this.pageScope);
+            this.onLoadScope(this.pageScope)
             this.$message({
               type: "success",
               message: "操作成功!"
-            });
-          });
+            })
+          })
       },
       handleDeleteScope() {
         if (this.selectionListScope.length === 0) {
-          this.$message.warning("请选择至少一条数据");
-          return;
+          this.$message.warning("请选择至少一条数据")
+          return
         }
         this.$confirm("确定将选择数据删除?", {
           confirmButtonText: "确定",
@@ -589,55 +589,55 @@
           type: "warning"
         })
           .then(() => {
-            return removeApiScope(this.scopeIds);
+            return removeApiScope(this.scopeIds)
           })
           .then(() => {
-            this.onLoadScope(this.pageScope);
+            this.onLoadScope(this.pageScope)
             this.$message({
               type: "success",
               message: "操作成功!"
-            });
-            this.$refs.crudScope.toggleSelection();
-          });
+            })
+            this.$refs.crudScope.toggleSelection()
+          })
       },
       beforeOpenScope(done, type) {
         if (["edit", "view"].includes(type)) {
           getMenuApiScope(this.formScope.id).then(res => {
-            this.formScope = res.data.data;
-          });
+            this.formScope = res.data.data
+          })
         }
-        done();
+        done()
       },
       searchResetScope() {
-        this.onLoadScope(this.pageScope);
+        this.onLoadScope(this.pageScope)
       },
       searchChangeScope(params, done) {
-        this.onLoadScope(this.pageScope, params);
-        done();
+        this.onLoadScope(this.pageScope, params)
+        done()
       },
       selectionChangeScope(list) {
-        this.selectionListScope = list;
+        this.selectionListScope = list
       },
       currentChangeScope(currentPage) {
-        this.pageScope.currentPage = currentPage;
+        this.pageScope.currentPage = currentPage
       },
       sizeChangeScope(pageSize) {
-        this.pageScope.pageSize = pageSize;
+        this.pageScope.pageSize = pageSize
       },
       onLoadScope(page, params = {}) {
-        this.scopeLoading = true;
+        this.scopeLoading = true
         const values = {
           ...params,
           menuId: this.scopeMenuId,
         }
         getListApiScope(page.currentPage, page.pageSize, Object.assign(values, this.query)).then(res => {
-          const data = res.data.data;
-          this.pageScope.total = data.total;
-          this.dataScope = data.records;
-          this.selectionListScope = [];
-          this.scopeLoading = false;
-        });
+          const data = res.data.data
+          this.pageScope.total = data.total
+          this.dataScope = data.records
+          this.selectionListScope = []
+          this.scopeLoading = false
+        })
       },
     }
-  };
+  }
 </script>

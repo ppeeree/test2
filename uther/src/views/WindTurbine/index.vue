@@ -231,7 +231,7 @@ export default {
     //this.getAllPagecomp()
   },
   mounted() {},
-  beforeDestroy() {},
+  beforeUnmount() {},
   methods: {
     initPage() {
       let { turbineId, type } = this.$route.query
@@ -467,7 +467,7 @@ export default {
     .scada_content {
       font-size: 15px;
       margin-left: 12px;
-      ::v-deep .el-switch {
+      :deep(.el-switch){
         height: 15px;
         width: 25px;
         margin-bottom: 2px;
@@ -482,7 +482,7 @@ export default {
           top: 0px;
         }
       }
-      ::v-deep .el-switch.is-checked .el-switch__core::after {
+      :deep(.el-switch.is-checked .el-switch__core::after){
         margin-left: -13px;
       }
     }

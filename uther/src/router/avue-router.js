@@ -3,10 +3,28 @@ let RouterPlugin = function () {
   this.$store = null
 
 }
+const EmptyRouteComponent = {
+  name: 'EmptyRouteComponent',
+  render() {
+    return null
+  }
+}
+
+const loadViewComponent = component => {
+  return () => import(`../${component}.vue`).catch(error => {
+    console.error(`[avue-router] Failed to load route component: ../${component}.vue`, error)
+    return EmptyRouteComponent
+  })
+}
+
 RouterPlugin.install = function (vue, option = {}) {
   this.$router = option.router
   this.$store = option.store
-  this.$vue = new vue({ i18n: option.i18n })
+  const i18nGlobal = option.i18n && option.i18n.global
+  this.$vue = {
+    $t: (...args) => i18nGlobal ? i18nGlobal.t(...args) : args[0],
+    $te: (...args) => i18nGlobal ? i18nGlobal.te(...args) : false
+  }
 
   // 这个的作用是 为了检查出网页链接，因为本项目用到了 iframe
   function isURL(s) {
@@ -122,7 +140,7 @@ RouterPlugin.install = function (vue, option = {}) {
           component = 'views' + oMenu.path,
           name = oMenu[propsDefault.label],
           icon = oMenu[propsDefault.icon],
-          children = oMenu[propsDefault.children],
+          children = oMenu[propsDefault.children] || [],
           meta = oMenu[propsDefault.meta] || {}
         // meta中 keepalive 的处理
         meta = Object.assign(meta, (function () {
@@ -134,9 +152,15 @@ RouterPlugin.install = function (vue, option = {}) {
         })())
         //是否有子路由
         const isChild = children.length !== 0
+        const routeName = (first || isChild)
+          ? `${name || path}__layout_${String(path).replace(/[^\w-]/g, '_')}`
+          : name
         const oRouter = {
           path: path,
           component(resolve) {
+            if (first) return import('../page/index')
+            if (isChild && !first) return import('../page/index/layout')
+            return loadViewComponent(component)()
             // 判断是否为首路由
             if (first) {
               require(['../page/index'], resolve)
@@ -150,7 +174,7 @@ RouterPlugin.install = function (vue, option = {}) {
               require([`../${component}.vue`], resolve)
             }
           },
-          name: name,
+          name: routeName,
           icon: icon,
           meta: meta,
           redirect: (() => {
@@ -166,6 +190,7 @@ RouterPlugin.install = function (vue, option = {}) {
               if (!isURL(path)) oMenu[propsDefault.path] = `${path}/index`
               return [{
                 component(resolve) {
+                  return loadViewComponent(component)()
                   require([`../${component}.vue`], resolve)
                 },
                 icon: icon,
@@ -189,7 +214,7 @@ RouterPlugin.install = function (vue, option = {}) {
       // 这个first 卡的其实就是首路由
       // console.log(aRouter)
       if (first) {
-        this.safe.$router.addRoutes(aRouter)
+        aRouter.forEach(route => this.safe.$router.addRoute(route))
       } else {
         // 这里返回的是子组件
         return aRouter

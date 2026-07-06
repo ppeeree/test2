@@ -169,6 +169,7 @@ export default {
       removeLastPosition: true,
       shouldAnimate: true,
       animation: false,
+      viewerReady: false,
       timer: null,
       siteInfoDom: {},
       siteInfoPosition: {},
@@ -186,25 +187,42 @@ export default {
     }
   },
   mounted() {
+    this.clearPendingUnInit()
     // eslint-disable-next-line no-unused-vars
     this.$refs.vcViewer.createPromise.then(({ Cesium, viewer }) => {
       // 获取集控风场的经纬度创建风场广告牌
       //  this.$emit('fMethod')
-      this.initMapView()
+      if (this.viewerReady) return
+      this.$nextTick(() => {
+        this.initMapView()
+      })
     })
   },
-  destroyed() {
+  beforeUnmount() {
     // this.$refs.vcViewer.unload() // vue-cesium 1.x 提供的卸载
-    setTimeout(() => {
+    this.clearPendingUnInit()
+    window.__screenMapUnInitTimer = setTimeout(() => {
       this.$utils.map.unInit()
+      window.__screenMapUnInitTimer = null
     }, 1000)
   },
   methods: {
+    clearPendingUnInit() {
+      if (window.__screenMapUnInitTimer) {
+        clearTimeout(window.__screenMapUnInitTimer)
+        window.__screenMapUnInitTimer = null
+      }
+    },
     async onViewerReady({ Cesium, viewer }) {
+      this.clearPendingUnInit()
       // 禁用相机惯性
       viewer.scene.screenSpaceCameraController.enableInertia = false
       // ==end==
       this.$utils.map.initConfig(Cesium, viewer)
+      this.viewerReady = true
+      this.$nextTick(() => {
+        this.initMapView()
+      })
     },
     async initMapView() {
       // console.log('initMapView')
@@ -409,11 +427,11 @@ export default {
   border-color: #41404e;
   color: #9d9f9e;
 }
-::v-deep .el-switch.is-checked .el-switch__core {
+:deep(.el-switch.is-checked .el-switch__core){
   border-color: #41404e !important;
   background-color: #41404e !important;
 }
-::v-deep .vc-location-distance {
+:deep(.vc-location-distance){
   z-index: 11;
   right: 470px !important;
   button {

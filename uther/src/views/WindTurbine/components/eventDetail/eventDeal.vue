@@ -19,7 +19,6 @@
     <eventDealPart
       @switchCard="switchCard"
       v-else
-      v-on="$listeners"
       v-bind="$attrs"
     ></eventDealPart>
     <!-- </div> -->

@@ -25,15 +25,15 @@ export default {
           }
         ]
       }
-    };
+    }
   },
   methods: {
     handleBack() {
-      this.$router.$avueRouter.closeTag();
-      this.$router.back();
+      this.$router.$avueRouter.closeTag()
+      this.$router.back()
     }
   }
-};
+}
 </script>
 
 <style>

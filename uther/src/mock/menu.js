@@ -37,7 +37,7 @@ const top = [{
     parentId: 3
   }]
 export default ({mock}) => {
-  if (!mock) return;
+  if (!mock) return
   Mock.mock('/user/getTopMenu', 'get', () => {
     return {
       data: top

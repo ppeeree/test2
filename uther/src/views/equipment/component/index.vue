@@ -606,7 +606,7 @@ export default {
 <style lang="less" scoped>
 @import url('./commonStyle.less');
 
-::v-deep .avue-form__group .el-col {
+:deep(.avue-form__group .el-col){
   width: 25%;
 }
 

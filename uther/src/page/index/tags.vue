@@ -5,7 +5,7 @@
         <el-tabs
           v-model="active"
           type="card"
-          @contextmenu.native="handleContextmenu"
+          @contextmenu="handleContextmenu"
           :closable="tagLen !== 1"
           @tab-click="openTag"
           @edit="menuTag"
@@ -24,14 +24,16 @@
           {{ $t('tagsView.menu') }}
           <i class="el-icon-arrow-down el-icon--right"></i>
         </el-button>
-        <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item @click.native="closeOthersTags">{{
-            $t('tagsView.closeOthers')
-          }}</el-dropdown-item>
-          <el-dropdown-item @click.native="closeAllTags">{{
-            $t('tagsView.closeAll')
-          }}</el-dropdown-item>
-        </el-dropdown-menu>
+        <template #dropdown>
+          <el-dropdown-menu>
+            <el-dropdown-item @click="closeOthersTags">{{
+              $t('tagsView.closeOthers')
+            }}</el-dropdown-item>
+            <el-dropdown-item @click="closeAllTags">{{
+              $t('tagsView.closeAll')
+            }}</el-dropdown-item>
+          </el-dropdown-menu>
+        </template>
       </el-dropdown>
       <!-- <el-button type="primary" @click="test">测试</el-button> -->
     </div>
@@ -184,25 +186,25 @@ export default {
 </script>
 
 <style lang="less" scoped>
-::v-deep .el-tabs__item {
+:deep(.el-tabs__item){
   background: rgba(71, 86, 128, 0.5);
 }
-// ::v-deep .el-tabs__header .el-tabs__item.is-active {
+// :deep(.el-tabs__header .el-tabs__item.is-active){
 //   color: #fff;
 //   border-bottom: none;
 //   background: #0861AA;
 // }
-::v-deep .el-tabs__nav-prev,
-::v-deep .el-tabs__nav-next {
+:deep(.el-tabs__nav-prev),
+:deep(.el-tabs__nav-next){
   background: rgba(71, 86, 128, 0.5);
   font-size: 17px;
   width: 16px !important;
 }
-::v-deep .avue-tags__box .avue-tags__menu {
+:deep(.avue-tags__box .avue-tags__menu){
   margin-right: 8px;
   margin-left: 10px;
 }
-::v-deep .el-tabs {
+:deep(.el-tabs){
   height: 31px;
 }
 </style>

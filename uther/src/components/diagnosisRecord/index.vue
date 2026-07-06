@@ -415,7 +415,7 @@ export default {
 .avue-dialog {
   // --tagColor: #FF6666;
   overflow-y: hidden !important;
-  ::v-deep .el-dialog {
+  :deep(.el-dialog){
     //background: #303030;
     &::before {
       //  background-color: #303030;
@@ -474,38 +474,38 @@ export default {
         color: white;
       }
     }
-    ::v-deep .el-collapse-item__header {
+    :deep(.el-collapse-item__header){
       font-size: 15px;
       height: 30px;
       font-weight: bolder;
       background: #f6f6f6;
     }
-    ::v-deep .el-form-item {
+    :deep(.el-form-item){
       width: 100%;
       margin-bottom: 6px;
       margin-right: 0px;
     }
-    ::v-deep .el-form-item__content {
+    :deep(.el-form-item__content){
       width: 95%;
     }
-    ::v-deep .el-form-item__label {
+    :deep(.el-form-item__label){
       font-size: 12px;
     }
-    ::v-deep .el-textarea__inner {
+    :deep(.el-textarea__inner){
       background: #fff;
     }
-    ::v-deep .el-input__inner {
+    :deep(.el-input__inner){
       background: #fff;
     }
   }
 
   .fault_level {
-    ::v-deep .el-input__inner {
+    :deep(.el-input__inner){
       color: inherit;
       // color: var(--inputText);
     }
   }
-  ::v-deep .add_advice {
+  :deep(.add_advice){
     .el-tag,
     .el-tag.el-tag--info {
       background-color: var(--tagColor);
@@ -513,7 +513,7 @@ export default {
     }
   }
 }
-/* ::v-deep .el-textarea {
+/* :deep(.el-textarea){
   width: 82%;
 } */
 .icon-button {
@@ -537,11 +537,11 @@ export default {
     font-weight: bolder;
   }
 }
-::v-deep .el-dialog__footer {
+:deep(.el-dialog__footer){
   text-align: center;
   background: #f6f6f6;
 }
-::v-deep .el-collapse-item__wrap {
+:deep(.el-collapse-item__wrap){
   border-bottom: none;
   background: #f6f6f6;
 }

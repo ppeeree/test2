@@ -72,7 +72,7 @@ export default {
   justify-content: center;
   padding: 14px 0 0 0;
 }
-::v-deep .el-scrollbar__wrap {
+:deep(.el-scrollbar__wrap){
   background: transparent !important;
 }
 </style>

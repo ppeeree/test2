@@ -139,7 +139,7 @@ export default {
   height: 100%;
   width: 100%;
 }
-::v-deep .el-table__empty-block {
+:deep(.el-table__empty-block){
   display: none;
 }
 .dialog_content {
@@ -158,7 +158,7 @@ export default {
 .health {
   width: 20%;
 }
-::v-deep .el-table {
+:deep(.el-table){
   // width: 100%;
   box-sizing: border-box;
   &::before {
@@ -171,23 +171,23 @@ export default {
   height: 0px;
 }
 
-.report_table ::v-deep .el-table--fit {
+.report_table :deep(.el-table--fit){
   padding: 0px;
 }
-.report_table ::v-deep .el-table,
+.report_table :deep(.el-table),
 .el-table__expanded-cell {
   background-color: transparent;
 }
 
-.report_table ::v-deep .el-table tr {
+.report_table :deep(.el-table tr){
   background-color: transparent;
 }
-.report_table ::v-deep .el-table--enable-row-transition .el-table__body td,
+.report_table :deep(.el-table--enable-row-transition .el-table__body td),
 .el-table .cell {
   background-color: transparent;
   line-height: 18px;
 }
-::v-deep .el-table .row {
+:deep(.el-table .row){
   height: 12px;
 }
 
@@ -195,13 +195,13 @@ export default {
   .el-table {
     color: #fff;
     font-size: 0.7rem;
-    ::v-deep tr {
+    :deep(tr){
       &:hover > td {
         cursor: pointer;
         background-color: #2d5686;
       }
     }
-    ::v-deep .el-table__cell {
+    :deep(.el-table__cell){
       border-bottom: none !important;
     }
     .cell-flex {
@@ -216,12 +216,12 @@ export default {
   }
 }
 
-::v-deep .el-table__body {
+:deep(.el-table__body){
   -webkit-border-horizontal-spacing: 0px; // 水平间距
   -webkit-border-vertical-spacing: 0px; // 垂直间距 设置的是行间距
 }
 
-::v-deep .el-table {
+:deep(.el-table){
   .dobule-cell-table {
     background-color: rgba(255, 255, 255, 0.2) !important;
   }
@@ -229,7 +229,7 @@ export default {
     background-color: rgba(255, 255, 255, 0.1) !important;
   }
 }
-::v-deep .el-table,
+:deep(.el-table),
 .el-table__expanded-cell,
 .el-table th.el-table__cell {
   border: none;

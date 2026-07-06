@@ -27,21 +27,19 @@
       element-loading-spinner="el-icon-loading"
       element-loading-background="rgba(0, 0, 0, 0.4)"
     >
-      <template>
-        <turbineCardVue
-          v-for="item in cardData"
-          :key="item"
-          :data="item"
-          :style="{ width: boxWidth + 'px', height: boxHeight + 'px' }"
-          :boxWidth="boxWidth"
-          :turbineNum="turbineNum"
-        ></turbineCardVue>
+      <turbineCardVue
+        v-for="item in cardData"
+        :key="item.windturbineId || item.windturbineName"
+        :data="item"
+        :style="{ width: boxWidth + 'px', height: boxHeight + 'px' }"
+        :boxWidth="boxWidth"
+        :turbineNum="turbineNum"
+      ></turbineCardVue>
 
-        <NoData
-          v-show="!cardData.length"
-          style="background-color: rgba(13, 52, 83, 1); margin-top: 10px"
-        ></NoData>
-      </template>
+      <NoData
+        v-show="!cardData.length"
+        style="background-color: rgba(13, 52, 83, 1); margin-top: 10px"
+      ></NoData>
     </div>
   </div>
 </template>
@@ -114,7 +112,7 @@ export default {
   watch: {
     selectWind: {
       handler(val) {
-        if (val && val.id) {
+        if (this.getStationId(val)) {
           /*    if (this.timer) {
             this.clearTimer()
           } */
@@ -129,7 +127,7 @@ export default {
   },
   created() {},
   mounted() {},
-  beforeDestroy() {
+  beforeUnmount() {
     this.clearTimer()
   },
   methods: {
@@ -138,33 +136,55 @@ export default {
       this.timer = null
     },
 
+    getStationId(val) {
+      return val?.code || val?.stationID || val?.stationId || val?.stationCode || val?.id
+    },
+
     // 1.2、卡片+风场信息
     getTurbineData(val) {
       this.isCardLoading = true
       this.selectStatus = ''
-      // console.log(val)
+      const stationId = this.getStationId(val)
+      if (!stationId) {
+        this.isCardLoading = false
+        this.cardData = []
+        return
+      }
       // 获取中间卡片数据 新版本接口传val.code
-      windFieldStatusApi({ stationId: val.code }).then(res => {
-        if (res.data.code === 200) {
-          this.allCardData = res.data.data.map(item => ({
-            ...item,
-            healthStatusEntityVo: item.healthStatusEntityVo.filter(
-              child => child.entityId.trim() !== ''
-            )
-          }))
+      windFieldStatusApi({ stationId })
+        .then(res => {
+          if (this.isSuccessResponse(res)) {
+            const turbineList = Array.isArray(res.data?.data)
+              ? res.data.data
+              : this.getResponseList(res.data)
+            const normalizedList = turbineList.map(item => this.normalizeTurbineCard(item))
 
-          this.cardData = this.handlerTurbineStatusIndex(res.data.data)
+            this.allCardData = normalizedList
 
-          this.turbineNum = this.cardData.length
+            this.cardData = this.handlerTurbineStatusIndex(normalizedList)
 
-          this.handlerCardSize()
+            this.turbineNum = this.cardData.length
 
-          this.handlerTurbineStatus(this.cardData)
+            this.handlerTurbineStatus(this.cardData)
 
-          this.sortChange('windturbineName', 'Order')
+            this.$nextTick(() => {
+              this.handlerCardSize()
+              this.sortChange('windturbineName', 'Order')
+              this.isCardLoading = false
+            })
+          } else {
+            this.cardData = []
+            this.allCardData = []
+            this.turbineNum = 0
+            this.isCardLoading = false
+          }
+        })
+        .catch(() => {
+          this.cardData = []
+          this.allCardData = []
+          this.turbineNum = 0
           this.isCardLoading = false
-        }
-      })
+        })
 
       /*  // 获取风场信息
       getWindTurbineStatistics().then(res => {
@@ -196,10 +216,59 @@ export default {
       }) */
     },
     // 2、处理卡片尺寸
+    isSuccessResponse(res) {
+      const code = res?.data?.code ?? res?.data?.Code ?? res?.status
+      return code === 200
+    },
+    getResponseList(resData) {
+      const data = resData?.data ?? resData?.Data
+      if (Array.isArray(data)) return data
+      if (Array.isArray(data?.data)) return data.data
+      if (Array.isArray(data?.Data)) return data.Data
+      if (Array.isArray(data?.children)) return data.children
+      if (Array.isArray(data?.childNode)) return data.childNode
+      if (Array.isArray(data?.records)) return data.records
+      if (Array.isArray(data?.list)) return data.list
+      if (Array.isArray(resData?.records)) return resData.records
+      if (Array.isArray(resData?.list)) return resData.list
+      return []
+    },
+    normalizeTurbineCard(item) {
+      const healthStatusEntityVo =
+        item.healthStatusEntityVo ||
+        item.healthStatusEntityVO ||
+        item.healthStatusList ||
+        item.deviceStatusList ||
+        item.compStatusList ||
+        item.children ||
+        item.childNode ||
+        []
+
+      return {
+        ...item,
+        windturbineId: item.windturbineId || item.windTurbineId || item.entityId || item.id,
+        windturbineName:
+          item.windturbineName || item.windTurbineName || item.entityName || item.name,
+        windturbineStatus:
+          item.windturbineStatus ||
+          item.windTurbineStatus ||
+          item.entityStatus ||
+          item.status ||
+          item.statusCode ||
+          'nostate',
+        statusLastTime: item.statusLastTime || item.statusTime || item.updateTime || item.time,
+        windparkId:
+          item.windparkId || item.windParkId || item.stationID || item.stationId || item.stationCode,
+        healthStatusEntityVo: healthStatusEntityVo.filter(
+          child => `${child?.entityId ?? child?.id ?? child?.entityType ?? ''}`.trim() !== ''
+        )
+      }
+    },
     handlerCardSize() {
       if (!this.$refs['turbineDom']) return
       let width = this.$refs['turbineDom'] && this.$refs['turbineDom'].offsetWidth
       let height = this.$refs['turbineDom'] && this.$refs['turbineDom'].offsetHeight
+      if (!width || !height) return
       this.$refs['turbineDom'].style.overflow = 'hidden'
       let wnum, hnum
       if (this.turbineNum <= 24) {

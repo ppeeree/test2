@@ -152,7 +152,7 @@ export default {
     }
   },
   mounted() {},
-  destroyed() {
+  beforeUnmount() {
     this.isAnylizeCard = false
   },
   methods: {
@@ -353,7 +353,7 @@ export default {
       font-weight: bold;
       line-height: 20px;
     }
-    ::v-deep .el-collapse {
+    :deep(.el-collapse){
       border-color: transparent;
       .el-collapse-item__header {
         background-color: transparent;

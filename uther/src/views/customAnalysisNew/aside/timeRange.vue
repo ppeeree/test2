@@ -170,7 +170,7 @@ export default {
 <style lang="scss" scoped>
 .inline-input {
   width: 100px;
-  ::v-deep .el-input__inner {
+  :deep(.el-input__inner){
     padding: 0;
     text-align: center;
   }
@@ -179,12 +179,12 @@ input {
   height: 30px;
   line-height: 30px;
 }
-::v-deep .el-range-editor {
+:deep(.el-range-editor){
   width: 200px;
   height: 30px;
   line-height: 30px;
 }
-::v-deep .el-date-editor {
+:deep(.el-date-editor){
   .el-range-separator {
     color: #303133;
     padding: 0;

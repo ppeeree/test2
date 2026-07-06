@@ -10,7 +10,7 @@ import store from '@/store/'
 import router from '@/router/router'
 import { serialize } from '@/util/util'
 import { getToken } from '@/util/auth'
-import { Message } from 'element-ui'
+import { ElMessage } from 'element-plus'
 import website from '@/config/website'
 import { Base64 } from 'js-base64'
 import NProgress from 'nprogress'
@@ -80,7 +80,7 @@ axios.interceptors.response.use(res => {
   if (status === 401 || !getToken()) store.dispatch('FedLogOut').then(() => router.push({ path: '/login' }))
   // 如果请求为非200否者默认统一处理
   if (status !== 200 && status !== 401) {
-    Message({
+    ElMessage({
       message: message,
       type: 'error'
     })

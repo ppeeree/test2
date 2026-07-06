@@ -341,7 +341,7 @@ export default {
   font-weight: bold;
   letter-spacing: 6px;
 }
-::v-deep .el-input__inner,
+:deep(.el-input__inner),
 .el-input__inner:hover {
   color: #dcdfe6;
   border-radius: 0 4px 4px 0;
@@ -350,64 +350,64 @@ export default {
   box-shadow: 1px 1px 15px rgb(14, 91, 109, 1) inset;
   background: rgba(14, 91, 109, 1) !important;
 }
-::v-deep .el-input--small .el-input__inner {
+:deep(.el-input--small .el-input__inner){
   height: 47px;
   line-height: 47px;
   padding-left: 40px;
   font-size: 18px;
 }
-::v-deep .el-form-item {
+:deep(.el-form-item){
   margin-bottom: 20px;
 }
-::v-deep .el-button--small {
+:deep(.el-button--small){
   width: 100%;
   height: 45px;
 }
-::v-deep .el-button--primary {
+:deep(.el-button--primary){
   background-color: rgba(14, 91, 109, 1);
   border-color: rgba(14, 91, 109, 1);
   &:hover {
     background-color: rgba(14, 91, 109, 1);
   }
 }
-::v-deep .el-button--small {
+:deep(.el-button--small){
   color: #dcdfe6;
   font-size: 18px;
 }
 .username {
-  ::v-deep .el-input__prefix {
+  :deep(.el-input__prefix){
     padding: 3% 0;
   }
 }
 .password {
-  ::v-deep .el-input__prefix {
+  :deep(.el-input__prefix){
     padding: 3% 0;
   }
 }
 .loginKeys {
-  ::v-deep .el-input__prefix {
+  :deep(.el-input__prefix){
     padding: 5% 0;
   }
 }
-::v-deep .el-form-item__content {
+:deep(.el-form-item__content){
   line-height: 29px;
   padding: 0 10px;
   .el-image__inner {
     padding: 0 10px;
   }
 }
-::v-deep .el-checkbox__inner {
+:deep(.el-checkbox__inner){
   border-radius: 0px;
   background-color: rgba(14, 91, 109, 1);
   width: 20px;
   height: 20px;
   border: none;
 }
-::v-deep .el-checkbox__inner::after {
+:deep(.el-checkbox__inner::after){
   height: 14px;
   left: 8px;
 }
-::v-deep .el-checkbox__input.is-checked .el-checkbox__inner,
+:deep(.el-checkbox__input.is-checked .el-checkbox__inner),
 .el-checkbox__input.is-indeterminate .el-checkbox__inner {
   background-color: rgba(14, 91, 109, 1);
   border-color: rgba(14, 91, 109, 1);

@@ -203,6 +203,7 @@ export default {
         checkStrictly: true
       },
       // typeList: typeList,
+      isUnmounted: false,
       myChart: null,
       myChartInstance: null,
       chartSource: [],
@@ -304,11 +305,18 @@ export default {
   },
   created() {},
   mounted() {
+    this.isUnmounted = false
     this.chartType = this.chartInitType
-    this.$refs.colbox.style.width = this.initWidth
-    this.creatResizeOb()
+    this.$nextTick(() => {
+      if (this.isUnmounted) return
+      if (this.$refs.colbox) {
+        this.$refs.colbox.style.width = this.initWidth
+      }
+      this.creatResizeOb()
+    })
   },
   beforeUnmount() {
+    this.isUnmounted = true
     this.removeResizeOb()
     this.initChartInst()
   },
@@ -397,7 +405,9 @@ export default {
         }, 100)
       }
       this.resizeOb = new ResizeObserver(resizeHandler)
-      this.resizeOb.observe(this.$refs.chartBox)
+      if (this.$refs.chartBox) {
+        this.resizeOb.observe(this.$refs.chartBox)
+      }
     },
     removeChart() {
       this.$emit('removeChart', this.rowId, this.itemId)
@@ -411,6 +421,10 @@ export default {
     initChart() {
       this.loading = false
       this.initChartInst()
+      const chartBox = this.$refs.chartBox
+      if (this.isUnmounted || !chartBox || !chartBox.isConnected) {
+        return
+      }
       if (!this.chartSource.length) {
         this.noData = true
         return
@@ -418,7 +432,7 @@ export default {
         this.noData = false
       }
       if (!this.myChart) {
-        this.myChart = echarts.init(this.$refs.chartBox, null, {
+        this.myChart = echarts.init(chartBox, null, {
           renderer: 'canvas',
           useDirtyRect: true,
           useHandler: 'proxy' // 5.4.0+ 内置委托，减少事件监听器数量

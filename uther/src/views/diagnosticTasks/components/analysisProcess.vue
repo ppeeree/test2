@@ -2,7 +2,7 @@
   <div class="analysis_process">
     <h3>分析过程记录</h3>
     <div class="analysis_content">
-      <nested-collapse ref="nestedCollapse" :items.sync="processRecordData" />
+      <nested-collapse ref="nestedCollapse" v-model:items="processRecordData" />
     </div>
   </div>
 </template>
@@ -475,7 +475,7 @@ export default {
         }
       })
       this.handleDefaultChangeFaultLevel(stateslIst)
-      this.$set(this.tableData, 0, { id: stateslIst.join('') })
+      this.tableData[0] = { id: stateslIst.join('') }
     },
     handleDefaultChangeFaultLevel(elements) {
       const weights = {
@@ -515,20 +515,20 @@ export default {
     width: 100%;
     font-size: 14px;
   }
-  ::v-deep .el-form-item {
+  :deep(.el-form-item){
     margin-bottom: 0;
     .el-textarea {
       background: #fff;
     }
   }
-  ::v-deep .el-input__inner {
+  :deep(.el-input__inner){
     color: inherit;
   }
   .history_tree {
     width: 301px;
     padding: 7px;
     background: #323232;
-    ::v-deep .el-input {
+    :deep(.el-input){
       width: 100%;
       height: 28px;
       border-radius: 5px;
@@ -549,7 +549,7 @@ export default {
       width: 100%;
       justify-content: space-between;
     }
-    ::v-deep .el-tree {
+    :deep(.el-tree){
       .el-tree-node__expand-icon {
         font-size: 20px;
       }
@@ -588,25 +588,25 @@ export default {
     }
     .device_state_select {
       --inputTextColor: '#C0C4CC';
-      ::v-deep .el-input__inner {
+      :deep(.el-input__inner){
         // background: black;
         border: 1px solid #bebebe;
         color: var(--inputTextColor) !important;
       }
-      ::v-deep .el-input__suffix-inner {
+      :deep(.el-input__suffix-inner){
         display: none;
       }
     }
 
     .avue_crud_st {
       width: 1330px;
-      ::v-deep .avue-crud__menu {
+      :deep(.avue-crud__menu){
         min-height: 11px;
       }
-      ::v-deep .el-table::before {
+      :deep(.el-table::before){
         background-color: transparent;
       }
-      ::v-deep .inputColor {
+      :deep(.inputColor){
         .el-input__inner {
           color: inherit;
         }

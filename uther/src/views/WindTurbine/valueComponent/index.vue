@@ -6,11 +6,10 @@
         class="value_card_style"
         :style="{ top: item.cardTop + 'px', left: item.cardLeft + 'px' }"
         v-bind="$attrs"
-        v-on="$listeners"
         :cardInfo="item"
         :styleConfig="handlerCardStyle(item.evCardTitle)"
       >
-        <template slot="content">
+        <template #content>
           <PolarCanvas
             v-if="item.isShowCircle"
             :dataList="item.evList"

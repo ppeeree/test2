@@ -15,5 +15,5 @@
         window.console.log(a); // eslint-disable-line
       }
     }
-  };
+  }
 </script>

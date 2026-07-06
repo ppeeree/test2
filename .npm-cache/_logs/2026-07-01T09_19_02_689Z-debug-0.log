@@ -1,0 +1,121 @@
+0 verbose cli C:\nvm4w\nodejs\node.exe C:\nvm4w\nodejs\node_modules\npm\bin\npm-cli.js
+1 info using npm@8.19.4
+2 info using node@v16.20.2
+3 timing npm:load:whichnode Completed in 0ms
+4 timing config:load:defaults Completed in 4ms
+5 timing config:load:file:C:\Users\ss102\AppData\Local\nvm\v16.20.2\node_modules\npm\npmrc Completed in 1ms
+6 timing config:load:builtin Completed in 1ms
+7 timing config:load:cli Completed in 2ms
+8 timing config:load:env Completed in 0ms
+9 timing config:load:file:C:\code\ZD_3\uther\.npmrc Completed in 0ms
+10 timing config:load:project Completed in 2ms
+11 timing config:load:file:C:\Users\ss102\.npmrc Completed in 1ms
+12 timing config:load:user Completed in 1ms
+13 timing config:load:file:C:\Program Files\nodejs\node_global\etc\npmrc Completed in 0ms
+14 timing config:load:global Completed in 0ms
+15 timing config:load:validate Completed in 0ms
+16 timing config:load:credentials Completed in 1ms
+17 timing config:load:setEnvs Completed in 1ms
+18 timing config:load Completed in 12ms
+19 timing npm:load:configload Completed in 12ms
+20 timing npm:load:mkdirpcache Completed in 0ms
+21 timing npm:load:mkdirplogs Completed in 1ms
+22 verbose title npm install
+23 verbose argv "install" "--package-lock-only" "--ignore-scripts" "--cache" "C:\\code\\ZD_3\\.npm-cache"
+24 timing npm:load:setTitle Completed in 1ms
+25 timing config:load:flatten Completed in 2ms
+26 timing npm:load:display Completed in 4ms
+27 verbose logfile logs-max:10 dir:C:\code\ZD_3\.npm-cache\_logs
+28 verbose logfile C:\code\ZD_3\.npm-cache\_logs\2026-07-01T09_19_02_689Z-debug-0.log
+29 timing npm:load:logFile Completed in 5ms
+30 timing npm:load:timers Completed in 0ms
+31 timing npm:load:configScope Completed in 0ms
+32 timing npm:load Completed in 23ms
+33 timing arborist:ctor Completed in 0ms
+34 silly logfile done cleaning log files
+35 timing idealTree:init Completed in 1090ms
+36 timing idealTree:userRequests Completed in 1ms
+37 silly idealTree buildDeps
+38 silly fetch manifest element-plus@^2.8.8
+39 http fetch GET 200 https://registry.npmjs.org/element-plus 2034ms (cache miss)
+40 silly fetch manifest vue@^3.5.13
+41 http fetch GET 200 https://registry.npmjs.org/vue 228ms (cache revalidated)
+42 silly fetch manifest typescript@*
+43 http fetch GET 200 https://registry.npmjs.org/typescript 5486ms (cache miss)
+44 silly fetch manifest vue-router@^4.4.5
+45 http fetch GET 200 https://registry.npmjs.org/vue-router 659ms (cache miss)
+46 silly fetch manifest vuex@^4.1.0
+47 http fetch GET 200 https://registry.npmjs.org/vuex 220ms (cache revalidated)
+48 silly fetch manifest @vue/cli-plugin-babel@^5.0.8
+49 http fetch GET 200 https://registry.npmjs.org/@vue%2fcli-plugin-babel 234ms (cache revalidated)
+50 silly fetch manifest @vue/cli-service@^5.0.8
+51 http fetch GET 200 https://registry.npmjs.org/@vue%2fcli-service 228ms (cache revalidated)
+52 silly fetch manifest vue-template-compiler@^2.0.0
+53 http fetch GET 200 https://registry.npmjs.org/vue-template-compiler 220ms (cache revalidated)
+54 silly fetch manifest webpack-sources@*
+55 http fetch GET 200 https://registry.npmjs.org/webpack-sources 294ms (cache miss)
+56 silly fetch manifest @vue/cli-plugin-eslint@^5.0.8
+57 http fetch GET 200 https://registry.npmjs.org/@vue%2fcli-plugin-eslint 232ms (cache revalidated)
+58 silly fetch manifest eslint@>=7.5.0
+59 http fetch GET 200 https://registry.npmjs.org/eslint 216ms (cache revalidated)
+60 silly fetch manifest jiti@*
+61 http fetch GET 200 https://registry.npmjs.org/jiti 959ms (cache miss)
+62 silly fetch manifest @vue/compiler-sfc@^3.5.13
+63 http fetch GET 200 https://registry.npmjs.org/@vue%2fcompiler-sfc 232ms (cache revalidated)
+64 silly placeDep ROOT @vue/cli-plugin-babel@5.0.9 REPLACE for: saber-admin@3.0.1 want: ^5.0.8
+65 silly placeDep ROOT @vue/cli-plugin-eslint@5.0.9 REPLACE for: saber-admin@3.0.1 want: ^5.0.8
+66 silly placeDep ROOT eslint@10.6.0 OK for: @vue/cli-plugin-eslint@5.0.9 want: >=7.5.0
+67 silly placeDep ROOT @vue/cli-service@5.0.9 REPLACE for: saber-admin@3.0.1 want: ^5.0.8
+68 silly placeDep ROOT @vue/compiler-sfc@3.5.39 REPLACE for: saber-admin@3.0.1 want: ^3.5.13
+69 timing idealTree Completed in 12539ms
+70 timing command:install Completed in 12542ms
+71 verbose stack Error: could not resolve
+71 verbose stack     at PlaceDep.failPeerConflict (C:\Users\ss102\AppData\Local\nvm\v16.20.2\node_modules\npm\node_modules\@npmcli\arborist\lib\place-dep.js:549:25)
+71 verbose stack     at PlaceDep.place (C:\Users\ss102\AppData\Local\nvm\v16.20.2\node_modules\npm\node_modules\@npmcli\arborist\lib\place-dep.js:199:21)
+71 verbose stack     at new PlaceDep (C:\Users\ss102\AppData\Local\nvm\v16.20.2\node_modules\npm\node_modules\@npmcli\arborist\lib\place-dep.js:73:10)
+71 verbose stack     at C:\Users\ss102\AppData\Local\nvm\v16.20.2\node_modules\npm\node_modules\@npmcli\arborist\lib\arborist\build-ideal-tree.js:944:31
+71 verbose stack     at Array.map (<anonymous>)
+71 verbose stack     at Arborist.[buildDepStep] (C:\Users\ss102\AppData\Local\nvm\v16.20.2\node_modules\npm\node_modules\@npmcli\arborist\lib\arborist\build-ideal-tree.js:944:8)
+71 verbose stack     at async Arborist.buildIdealTree (C:\Users\ss102\AppData\Local\nvm\v16.20.2\node_modules\npm\node_modules\@npmcli\arborist\lib\arborist\build-ideal-tree.js:211:7)
+71 verbose stack     at async Arborist.reify (C:\Users\ss102\AppData\Local\nvm\v16.20.2\node_modules\npm\node_modules\@npmcli\arborist\lib\arborist\reify.js:154:5)
+71 verbose stack     at async Install.exec (C:\Users\ss102\AppData\Local\nvm\v16.20.2\node_modules\npm\lib\commands\install.js:145:5)
+71 verbose stack     at async module.exports (C:\Users\ss102\AppData\Local\nvm\v16.20.2\node_modules\npm\lib\cli.js:78:5)
+72 verbose cwd C:\code\ZD_3\uther
+73 verbose Windows_NT 10.0.26200
+74 verbose node v16.20.2
+75 verbose npm  v8.19.4
+76 error code ERESOLVE
+77 error ERESOLVE could not resolve
+78 error
+79 error While resolving: saber-admin@3.0.1
+79 error Found: vue@2.7.13
+79 error node_modules/vue
+79 error   vue@"^3.5.13" from the root project
+79 error   peer vue@"^2.0.0 || >=3.0.0" from @vue-office/docx@1.6.2
+79 error   node_modules/@vue-office/docx
+79 error     @vue-office/docx@"^1.6.2" from the root project
+79 error   10 more (@vue-office/pdf, @vue/babel-preset-jsx, ...)
+79 error
+79 error Could not resolve dependency:
+79 error element-plus@"^2.8.8" from the root project
+79 error
+79 error Conflicting peer dependency: vue@3.5.39
+79 error node_modules/vue
+79 error   peer vue@"^3.3.7" from element-plus@2.14.2
+79 error   node_modules/element-plus
+79 error     element-plus@"^2.8.8" from the root project
+79 error
+79 error Fix the upstream dependency conflict, or retry
+79 error this command with --force, or --legacy-peer-deps
+79 error to accept an incorrect (and potentially broken) dependency resolution.
+79 error
+79 error See C:\code\ZD_3\.npm-cache\eresolve-report.txt for a full report.
+80 verbose exit 1
+81 timing npm Completed in 12721ms
+82 verbose unfinished npm timer reify 1782897542864
+83 verbose unfinished npm timer reify:loadTrees 1782897542864
+84 verbose unfinished npm timer idealTree:buildDeps 1782897543956
+85 verbose unfinished npm timer idealTree:#root 1782897543956
+86 verbose code 1
+87 error A complete log of this run can be found in:
+87 error     C:\code\ZD_3\.npm-cache\_logs\2026-07-01T09_19_02_689Z-debug-0.log

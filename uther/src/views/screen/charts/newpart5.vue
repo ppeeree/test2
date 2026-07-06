@@ -29,18 +29,17 @@
           ></ring>
         </span>
         <div class="comp_content">
-          <p>
-            <el-col :span="10">部件数：</el-col>
-            <el-col :span="14">
-              <span class="import_num">{{ item.total }}</span></el-col
-            >
-          </p>
-          <div class="content_text">
-            <el-col :span="10">报警占比：</el-col>
-            <el-col :span="14">
-              <span class="import_num">{{ item.faultRate }}</span
-              >&nbsp; %</el-col
-            >
+          <div class="content_line">
+            <span class="content_label">部件数：</span>
+            <span class="content_value">
+              <span class="import_num">{{ item.total }}</span>
+            </span>
+          </div>
+          <div class="content_line">
+            <span class="content_label">报警占比：</span>
+            <span class="content_value">
+              <span class="import_num">{{ item.faultRate }}</span>&nbsp; %
+            </span>
           </div>
         </div>
       </div>
@@ -55,11 +54,12 @@ import { entityPartEnum, eventTypeEnum, levelColorEnum } from '@/util/constant'
 import popup from './popup.vue'
 import PopupWindow from '../mixins/popupWindow'
 import ring from '../base/pie-doughnut.vue'
+import { defineAsyncComponent } from 'vue'
 
 export default {
   components: {
     ring,
-    noData: () => import('@/components/noData/index.vue')
+    noData: defineAsyncComponent(() => import('@/components/noData/index.vue'))
   },
   inject: ['parent'],
   data() {
@@ -295,18 +295,22 @@ export default {
       display: flex;
       flex-direction: column;
       justify-content: center;
-      .el-col {
-        margin-bottom: 0;
-      }
-      .content_text {
-        .el-col {
+      .content_line {
+        display: flex;
+        align-items: baseline;
+        white-space: nowrap;
+        + .content_line {
           margin-top: 8px;
         }
       }
-      .content_num {
-        .el-col {
-          margin-top: 8px;
-        }
+      .content_label {
+        flex: 0 0 72px;
+        text-align: left;
+      }
+      .content_value {
+        flex: 1;
+        min-width: 0;
+        text-align: left;
       }
       .import_num {
         font-size: 18px;

@@ -15,10 +15,9 @@
       @sortChange="sortChange"
     ></windTag>
     <template v-if="startRender">
-      <template v-for="ii in orderDataList">
+      <template v-for="ii in orderDataList" :key="ii.stationID">
         <unit-card
           @clickevent="clickevent"
-          :key="ii.stationID"
           :style="ii.style"
           :windparkInfo="ii"
         />
@@ -88,7 +87,7 @@ export default {
     this.updateContainerSize()
     window.addEventListener('resize', this.updateContainerSize)
   },
-  beforeDestroy() {
+  beforeUnmount() {
     window.removeEventListener('resize', this.updateContainerSize)
   },
   methods: {

@@ -8,13 +8,13 @@
   export default {
     name: "wel",
     data() {
-      return {};
+      return {}
     },
     computed: {},
     created() {
     },
     methods: {}
-  };
+  }
 </script>
 
 <style scoped="scoped" lang="scss">

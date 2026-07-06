@@ -30,12 +30,12 @@
 </template>
 
 <script>
-  import {mapGetters} from "vuex";
-  import {validatenull} from "@/util/validate";
-  import {registerGuest} from "@/api/user";
-  import {getTopUrl} from "@/util/util";
-  import {info} from "@/api/system/tenant";
-  import {resetRouter} from "@/router/router";
+  import {mapGetters} from "vuex"
+  import {validatenull} from "@/util/validate"
+  import {registerGuest} from "@/api/user"
+  import {getTopUrl} from "@/util/util"
+  import {info} from "@/api/system/tenant"
+  import {resetRouter} from "@/router/router"
 
   export default {
     name: "thirdRegister",
@@ -51,72 +51,72 @@
         loading: false,
         tenantMode: true,
         accountBox: false,
-      };
+      }
     },
     computed: {
       ...mapGetters(["userInfo"]),
     },
     created() {
-      this.getTenant();
+      this.getTenant()
     },
     mounted() {
       // 若未登录则弹出框进行绑定
       if (validatenull(this.userInfo.user_id) || this.userInfo.user_id < 0) {
-        this.form.name = this.userInfo.user_name;
-        this.form.account = this.userInfo.user_name;
-        this.accountBox = true;
+        this.form.name = this.userInfo.user_name
+        this.form.account = this.userInfo.user_name
+        this.accountBox = true
       }
     },
     methods: {
       handleRegister() {
         if (this.form.tenantId === '') {
-          this.$message.warning("请先输入租户编号");
-          return;
+          this.$message.warning("请先输入租户编号")
+          return
         }
         if (this.form.account === '') {
-          this.$message.warning("请先输入账号名称");
-          return;
+          this.$message.warning("请先输入账号名称")
+          return
         }
         if (this.form.password === '' || this.form.password2 === '') {
-          this.$message.warning("请先输入密码");
-          return;
+          this.$message.warning("请先输入密码")
+          return
         }
         if (this.form.password !== this.form.password2) {
-          this.$message.warning("两次密码输入不一致");
-          return;
+          this.$message.warning("两次密码输入不一致")
+          return
         }
-        this.loading = true;
+        this.loading = true
         registerGuest(this.form, this.userInfo.oauth_id).then(res => {
-          this.loading = false;
-          const data = res.data;
+          this.loading = false
+          const data = res.data
           if (data.success) {
-            this.accountBox = false;
+            this.accountBox = false
             this.$alert("注册申请已提交,请耐心等待管理员通过!", '注册提示').then(() => {
               this.$store.dispatch("LogOut").then(() => {
-                resetRouter();
-                this.$router.push({path: "/login"});
-              });
+                resetRouter()
+                this.$router.push({path: "/login"})
+              })
             })
           } else {
-            this.$message.error(data.msg || '提交失败');
+            this.$message.error(data.msg || '提交失败')
           }
         }, error => {
-          window.console.log(error);
-          this.loading = false;
-        });
+          window.console.log(error)
+          this.loading = false
+        })
       },
       getTenant() {
-        let domain = getTopUrl();
+        let domain = getTopUrl()
         // 临时指定域名，方便测试
         //domain = "https://bladex.vip";
         info(domain).then(res => {
-          const data = res.data;
+          const data = res.data
           if (data.success && data.data.tenantId) {
-            this.form.tenantId = data.data.tenantId;
-            this.tenantMode = false;
+            this.form.tenantId = data.data.tenantId
+            this.tenantMode = false
           }
         })
       },
     },
-  };
+  }
 </script>

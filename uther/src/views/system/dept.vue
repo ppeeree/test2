@@ -493,7 +493,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-::v-deep .el-form-item__content {
+:deep(.el-form-item__content){
   margin-left: 100px !important;
 }
 

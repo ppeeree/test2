@@ -82,7 +82,8 @@ export default {
         barMaxWidth: 13, //圆环宽度
         radiusAxis: {
           show: false,
-          type: 'category'
+          type: 'category',
+          data: [this.title || 'value']
         },
         //圆环位置和大小
         polar: {
@@ -92,6 +93,7 @@ export default {
         series: [
           {
             type: 'bar',
+            polarIndex: 0,
             data: [
               {
                 //上层圆环，显示数据
@@ -109,6 +111,7 @@ export default {
           {
             //下层圆环，显示最大值
             type: 'bar',
+            polarIndex: 0,
             data: [
               {
                 value: 100,
@@ -229,6 +232,9 @@ export default {
   watch: {
     num: {
       handler: function(val) {
+        if (!this.chart) {
+          return
+        }
         this.init(val)
         this.chart.setOption(this.option)
       }

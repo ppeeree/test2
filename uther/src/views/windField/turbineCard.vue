@@ -79,7 +79,7 @@ export default {
       default: () => {}
     },
     boxWidth: {
-      type: String
+      type: [String, Number]
     },
     turbineNum: {
       type: Number,

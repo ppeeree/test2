@@ -15,8 +15,9 @@
 </template>
 
 <script>
-  import config from "../sidebar/config.js";
-  import {mapGetters} from "vuex";
+  import config from "../sidebar/config.js"
+  import {mapGetters} from "vuex"
+  import { validatenull } from "@/util/validate"
 
   export default {
     data() {
@@ -24,77 +25,80 @@
         config: config,
         value: "",
         menuList: []
-      };
+      }
     },
     created() {
-      this.getMenuList();
+      this.getMenuList()
     },
 
     watch: {
       menu() {
-        this.getMenuList();
+        this.getMenuList()
       }
     },
     computed: {
       labelKey() {
-        return this.website.menu.props.label || this.config.propsDefault.label;
+        return this.website.menu.props.label || this.config.propsDefault.label
       },
       pathKey() {
-        return this.website.menu.props.path || this.config.propsDefault.path;
+        return this.website.menu.props.path || this.config.propsDefault.path
       },
       iconKey() {
-        return this.website.menu.props.icon || this.config.propsDefault.icon;
+        return this.website.menu.props.icon || this.config.propsDefault.icon
       },
       childrenKey() {
         return (
           this.website.menu.props.children || this.config.propsDefault.children
-        );
+        )
       },
       ...mapGetters(["menu", "website"])
     },
     methods: {
+      validatenull(val) {
+        return validatenull(val)
+      },
       getMenuList() {
         const findMenu = list => {
           for (let i = 0; i < list.length; i++) {
-            const ele = Object.assign({}, list[i]);
+            const ele = Object.assign({}, list[i])
             if (this.validatenull(ele[this.childrenKey])) {
-              this.menuList.push(ele);
+              this.menuList.push(ele)
             } else {
-              findMenu(ele[this.childrenKey]);
+              findMenu(ele[this.childrenKey])
             }
           }
-        };
-        this.menuList = [];
-        findMenu(this.menu);
+        }
+        this.menuList = []
+        findMenu(this.menu)
       },
       querySearch(queryString, cb) {
-        var restaurants = this.menuList;
+        var restaurants = this.menuList
         var results = queryString
           ? restaurants.filter(this.createFilter(queryString))
-          : restaurants;
+          : restaurants
         // 调用 callback 返回建议列表的数据
-        cb(results);
+        cb(results)
       },
       createFilter(queryString) {
         return restaurant => {
           return (
             restaurant.name.toLowerCase().indexOf(queryString.toLowerCase()) ===
             0
-          );
-        };
+          )
+        }
       },
       handleSelect(item) {
-        this.value = "";
+        this.value = ""
         this.$router.push({
           path: this.$router.$avueRouter.getPath({
             name: item[this.labelKey],
             src: item[this.pathKey]
           }, item.meta),
           query: item.query
-        });
+        })
       }
     }
-  };
+  }
 </script>
 
 <style lang="scss">

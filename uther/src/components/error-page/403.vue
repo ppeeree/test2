@@ -17,7 +17,7 @@
 <script>
 export default {
   name: "error-403"
-};
+}
 </script>
 <style lang="scss" scoped>
 @import "./style.scss";

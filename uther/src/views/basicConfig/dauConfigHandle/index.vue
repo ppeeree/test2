@@ -29,7 +29,7 @@
       </el-table-column>
       <el-table-column prop="chno" label="通道地址"></el-table-column>
       <el-table-column fixed="right" label="操作" width="240">
-        <template slot-scope="scope">
+        <template #default="scope">
           <el-button class="table_btn" @click="editData(scope.row)" type="text" size="small">
             <i class="el-icon-edit"></i> 修改
           </el-button>
@@ -55,7 +55,7 @@
       title="新增测点映射配置"
       @before-close="beforeClose('ruleForm')"
       append-to-body
-      :visible.sync="settingCard"
+      v-model="settingCard"
       width="1100px"
       destroy-on-close
       v-dialogDrag
@@ -141,15 +141,17 @@
           </div>
         </div>
       </el-form>
-      <span slot="footer" class="dialog-footer">
+      <template #footer>
+        <span class="dialog-footer">
         <el-button @click="settingCard = false">
           <i class="el-icon-circle-close" style="padding-right: 7px"></i>
           取 消
         </el-button>
-        <el-button type="primary" @click.native="addConfig('ruleForm')">
+        <el-button type="primary" @click="addConfig('ruleForm')">
           <i class="el-icon-circle-plus-outline" style="padding-right: 7px"></i>确 定
         </el-button>
-      </span>
+        </span>
+      </template>
     </el-dialog>
 
     <!--修改-->
@@ -157,7 +159,7 @@
       title="修改测点映射配置"
       @before-close="beforeClose('editRuleForm')"
       append-to-body
-      :visible.sync="editCard"
+      v-model="editCard"
       width="500px"
       destroy-on-close
       v-dialogDrag
@@ -188,15 +190,17 @@
           ></el-input-number>
         </el-form-item>
       </el-form>
-      <span slot="footer" class="dialog-footer">
+      <template #footer>
+        <span class="dialog-footer">
         <el-button @click="editCard = false">
           <i class="el-icon-circle-close" style="padding-right: 7px"></i>
           取 消
         </el-button>
-        <el-button type="primary" @click.native="addConfig('editRuleForm')">
+        <el-button type="primary" @click="addConfig('editRuleForm')">
           <i class="el-icon-circle-plus-outline" style="padding-right: 7px"></i>确 定
         </el-button>
-      </span>
+        </span>
+      </template>
     </el-dialog>
   </el-main>
 </template>
@@ -271,7 +275,7 @@ export default {
       }).then(data => {
         this.locationOptions = data.data.data
         data.data.data.forEach((i, index) => {
-          this.$set(this.ruleForm.mapChno, i.key, index + 1)
+          this.ruleForm.mapChno[i.key] = index + 1
         })
       })
     },
@@ -386,9 +390,9 @@ export default {
     windparkSelectChange(val) {
       this.ruleForm.mapStationID = val
       this.turbineList = this.userDeptTree.find(i => i.id == val).childNode
-      this.$set(this.ruleForm, 'deviceID', {})
+      this.ruleForm.deviceID = {}
       this.turbineList.forEach(item => {
-        this.$set(this.ruleForm.deviceID, item.entityId, item.entityId)
+        this.ruleForm.deviceID[item.entityId] = item.entityId
       })
       this.getMealDByStationId()
     },
@@ -418,7 +422,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-::v-deep .el-checkbox__label {
+:deep(.el-checkbox__label){
   color: #909399 !important;
 }
 .el-main {

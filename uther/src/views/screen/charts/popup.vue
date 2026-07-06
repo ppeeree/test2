@@ -18,7 +18,7 @@
     </div>
 
     <div v-if="handleType" class="body_1">
-      <vircualList :items.sync="detailList" :itemHeight="182" :shownumber="1" style="width: 100%">
+      <vircualList :items="detailList" :itemHeight="182" :shownumber="1" style="width: 100%">
         <template v-slot="{ item: outItem }">
           <div class="body_bg">
             <div class="body_title">
@@ -31,7 +31,7 @@
             </div>
             <div class="body_content">
               <vircualList
-                :items.sync="outItem.data"
+                :items="outItem.data"
                 :itemHeight="33"
                 :shownumber="4"
                 style="width: 100%"
@@ -79,7 +79,7 @@
     </div>
 
     <div v-if="eventPartType === 'eventType'" class="body_5">
-      <vircualList :items.sync="handleEventTypeData" :itemHeight="40" :shownumber="5">
+      <vircualList :items="handleEventTypeData" :itemHeight="40" :shownumber="5">
         <template v-slot="{ item }">
           <div
             v-if="item.entityName"
@@ -133,7 +133,7 @@
         </div>
       </div>
       <div v-if="partsFailure && handlePartName.length > 0" class="body_2">
-        <vircualList :items.sync="handlePartName" :itemHeight="36" :shownumber="3">
+        <vircualList :items="handlePartName" :itemHeight="36" :shownumber="3">
           <template v-slot="{ item }">
             <div class="part">
               <div class="row">
@@ -166,7 +166,7 @@
       <div v-if="progressShow" class="body_4">
         <vircualList
           v-if="showProgressEvent"
-          :items.sync="progressEvent"
+          :items="progressEvent"
           :itemHeight="20"
           :shownumber="5"
         >
@@ -234,9 +234,10 @@ import isEqual from 'lodash/isEqual'
 import filter from 'lodash/filter'
 import omit from 'lodash/omit'
 import cloneDeep from 'lodash/cloneDeep'
+import { defineAsyncComponent } from 'vue'
 export default {
   components: {
-    vircualList: () => import('../component/vircualList.vue')
+    vircualList: defineAsyncComponent(() => import('../component/vircualList.vue'))
   },
   props: {
     show: {
@@ -584,7 +585,7 @@ export default {
       width: 100%;
       display: flex;
       justify-content: center;
-      ::v-deep .list-view {
+      :deep(.list-view){
         width: 300px;
         overflow-y: overlay;
         &::-webkit-scrollbar {
@@ -674,7 +675,7 @@ export default {
       line-height: 20px;
       letter-spacing: 0px;
       color: #ffffff;
-      ::v-deep .list-view {
+      :deep(.list-view){
         width: 296px;
         position: relative;
         left: 3px;
@@ -745,7 +746,7 @@ export default {
     align-items: center;
     margin-top: 7px;
 
-    ::v-deep .list-view {
+    :deep(.list-view){
       &::-webkit-scrollbar {
         width: 5px;
       }
@@ -824,7 +825,7 @@ export default {
   }
   .body_5 {
     height: 205px;
-    ::v-deep .list-view {
+    :deep(.list-view){
       &::-webkit-scrollbar {
         width: 4px;
       }
@@ -869,7 +870,7 @@ export default {
       }
     }
   }
-  ::v-deep .el-progress-bar__outer {
+  :deep(.el-progress-bar__outer){
     background-color: rgba(0, 0, 0, 0.3);
   }
 }

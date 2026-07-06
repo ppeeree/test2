@@ -28,7 +28,7 @@
         :filter-method="filterStatus"
         :filters="turbineStatusFilters"
       >
-        <template slot-scope="scope">
+        <template #default="scope">
           <span :style="{ color: scope.row.monitorStatus == '正常' ? '#606266' : '#F56C6C' }">{{
             scope.row.monitorStatus
           }}</span>
@@ -82,7 +82,7 @@ export default {
       this.initTable()
     }, 1000 * 60) */
   },
-  destroyed() {
+  beforeUnmount() {
     /*  if (this.interTimer) {
       clearInterval(this.interTimer)
       this.interTimer = null
@@ -154,7 +154,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-::v-deep .el-table--mini .el-table__cell {
+:deep(.el-table--mini .el-table__cell){
   padding: 3px 0;
 }
 </style>

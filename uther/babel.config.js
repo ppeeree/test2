@@ -9,7 +9,7 @@ module.exports = {
       }
     ]
   ],
-  plugins: ['lodash',
+  plugins: [
     // ② 按需加载 umy-ui（可并存）
     ["component", {
       "libraryName": "umy-ui",

@@ -9,6 +9,38 @@
 <script>
 import * as echarts from 'echarts'
 // import { mapState } from 'vuex'
+
+const hasAxis = axis => {
+  return Array.isArray(axis) ? axis.length > 0 : !!axis
+}
+
+const normalizeEchartsOption = option => {
+  if (!option || !hasAxis(option.xAxis) || !hasAxis(option.yAxis)) {
+    return option
+  }
+  const patchSeries = series => {
+    if (
+      series &&
+      series.type === 'bar' &&
+      !series.coordinateSystem &&
+      series.polarIndex === undefined
+    ) {
+      return {
+        ...series,
+        coordinateSystem: 'cartesian2d'
+      }
+    }
+    return series
+  }
+  const series = Array.isArray(option.series)
+    ? option.series.map(patchSeries)
+    : patchSeries(option.series)
+  return {
+    ...option,
+    series
+  }
+}
+
 export default {
   props: {
     chartData: {
@@ -67,8 +99,11 @@ export default {
     chartData: {
       deep: true,
       handler(val) {
+        if (!this.chart) {
+          return
+        }
         this.chart.clear()
-        val && this.chart.setOption(val, true)
+        val && this.chart.setOption(normalizeEchartsOption(val), true)
       }
     },
     width: {
@@ -97,7 +132,7 @@ export default {
     this.initResizeEvent()
     this.initChart()
   },
-  beforeDestroy() {
+  beforeUnmount() {
     this.destroyResizeEvent()
     if (!this.chart) {
       return
@@ -108,7 +143,7 @@ export default {
   methods: {
     initChart() {
       this.chart = echarts.init(this.$refs.echartId)
-      this.chartData && this.chart.setOption(this.chartData, true)
+      this.chartData && this.chart.setOption(normalizeEchartsOption(this.chartData), true)
       // 点击事件
       if (this.isClick) {
         this.chart.off('click')

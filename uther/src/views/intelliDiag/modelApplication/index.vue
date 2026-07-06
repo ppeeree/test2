@@ -36,12 +36,12 @@
             <el-table-column prop="ndeModel" label="发电机驱动端轴承型号" width="150" />
             <el-table-column prop="deeModel" label="发电机非驱动端轴承型号" width="170" />
             <el-table-column prop="linkModels" label="应用诊断模型">
-              <template slot-scope="scope">
+              <template #default="scope">
                 {{ scope.row.linkModels.join('、') }}
               </template>
             </el-table-column>
             <el-table-column label="操作" width="100" align="center">
-              <template slot-scope="scope">
+              <template #default="scope">
                 <el-button type="text" size="mini" @click="editBinding(scope.row)"
                   >修改绑定</el-button
                 >
@@ -53,7 +53,7 @@
     </div>
     <!-- 模型绑定弹窗 -->
     <model-bind-dialog
-      :visible.sync="dialogVisible"
+      v-model:visible="dialogVisible"
       :row-data="currentRow"
       :model-tree="modelTree"
       @save="handleSaveBinding"
@@ -227,7 +227,7 @@ export default {
       }
     }
   }
-  ::v-deep .avue-crud__menu {
+  :deep(.avue-crud__menu){
     display: none !important;
   }
 }

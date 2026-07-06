@@ -45,7 +45,12 @@
         :dataList="windparkList"
         @clickevent="jumpWindpark"
       ></windparkCard>
-      <windFieldVue v-else style="float: right" :selectWind="WindFarm"></windFieldVue>
+      <windFieldVue
+        v-else-if="selectedWindFarmCode"
+        :key="windFieldKey"
+        style="float: right"
+        :selectWind="WindFarm"
+      ></windFieldVue>
     </template>
 
     <div ref="leftBox" :class="isControl || isMapShow ? 'left_box' : 'insertPage'">
@@ -58,6 +63,7 @@
 import init from './mixins/index'
 import pop from './mixins/cesiumPop'
 import cesiumPng from './mixins/cesiumPng'
+import { defineAsyncComponent } from 'vue'
 import { screenSize } from '@/util/transfrom'
 import { mapGetters } from 'vuex'
 import { getAllWindParkInfo, getEnitiyTree } from '@/api/screen/index'
@@ -84,7 +90,7 @@ export default {
   components: {
     newLeftCard,
     listNavTags,
-    windFieldVue: () => import('../windField/index.vue'),
+    windFieldVue: defineAsyncComponent(() => import('../windField/index.vue')),
     VueCesium,
     windparkCard
   },
@@ -92,6 +98,12 @@ export default {
     // 监听路由变化
     '$route.query'(newQuery) {
       this.syncStateFromRoute(newQuery)
+    },
+    userDeptTree() {
+      this.syncStateFromRoute(this.$route.query)
+    },
+    windparkList() {
+      this.syncStateFromRoute(this.$route.query)
     }
     /* WindFarm: {
         handler(val) {
@@ -116,7 +128,13 @@ export default {
     }*/
   },
   computed: {
-    ...mapGetters(['userInfo', 'userDeptTree'])
+    ...mapGetters(['userInfo', 'userDeptTree']),
+    selectedWindFarmCode() {
+      return this.getWindFarmCode(this.WindFarm)
+    },
+    windFieldKey() {
+      return this.selectedWindFarmCode || this.$route.query.locationcode || 'empty'
+    }
   },
   data() {
     return {
@@ -167,13 +185,35 @@ export default {
     this.$refs.leftBox && screenSize(this.$refs.leftBox)
   },
 
+  beforeUnmount() {
+    this.sessionArr.forEach(item => sessionStorage.removeItem(item))
+    window.removeEventListener('setItem', () => {})
+    let eventBus = [
+      'pieDoughnutRe',
+      'pieDoughnut',
+      'duration',
+      'factory',
+      'stateTypeClick',
+      'leftTalbe',
+      'barStacked',
+      'levelEvent',
+      'progressClick',
+      'clickEventType'
+    ]
+    eventBus.forEach(item => this.$bus.$off(item))
+    this.$cesuimData.handleClearAllData()
+    document.documentElement.style.overflow = ''
+  },
+
   methods: {
     // 更新路由参数（核心）
     updateRoute(isControl, isMapShow, locationcode) {
       let queryParam = {
         isControl: isControl,
         isMapShow: isMapShow,
-        locationcode: isControl ? 'all' : locationcode || this.WindFarm.id
+        locationcode: isControl
+          ? 'all'
+          : locationcode || this.getWindFarmCode(this.WindFarm)
       }
       return this.$router.replace({
         query: {
@@ -193,12 +233,12 @@ export default {
         if (locationcode == 'all') {
           this.WindFarm = {}
         } else {
-          this.WindFarm = this.userDeptTree.find(i => i.id == locationcode)
+          this.WindFarm = this.findWindFarm(locationcode)
         }
       } else {
         this.isControl = this.userInfo.role_name !== 'windpark' ? true : false
         this.isMapShow = false
-        this.WindFarm = this.userInfo.role_name !== 'windpark' ? {} : this.userDeptTree[0]
+        this.WindFarm = this.userInfo.role_name !== 'windpark' ? {} : this.normalizeWindFarm(this.userDeptTree[0])
       }
     },
     // 获取所有风场的地理位置坐标列表
@@ -206,6 +246,7 @@ export default {
       getAllWindParkInfo({ userID: this.userInfo.user_id }).then(res => {
         if (res.data.data) {
           this.windparkList = res.data.data //.slice(0, 11)
+          this.syncStateFromRoute(this.$route.query)
           /* this.windparkList[0] = {
             ...this.windparkList[0],
             attentionDeviceNum: 2,
@@ -235,11 +276,13 @@ export default {
     }, */
     // 风场卡片切换风场
     jumpWindpark(windpark) {
-      this.updateRoute(false, this.isMapShow, windpark.stationID)
+      const selectedWindpark = this.normalizeWindFarm(windpark)
+      this.WindFarm = selectedWindpark
+      this.updateRoute(false, this.isMapShow, this.getWindFarmCode(selectedWindpark))
     },
     // 风场视角切换
     changeFarmVisual(windparkId) {
-      let id = windparkId || this.WindFarm.id
+      let id = windparkId || this.getWindFarmCode(this.WindFarm)
       setTimeout(() => {
         let data = this.windparkList.find(i => i.stationID == id)
         this.$utils.map.flyToAngle(
@@ -257,7 +300,11 @@ export default {
     // 地图上点击风场事件
     handleOneClick(clickedWindparkId) {
       this.$utils.map.hideMapStatus()
-      this.updateRoute(false, this.isMapShow, clickedWindparkId || this.WindFarm.id)
+      this.updateRoute(
+        false,
+        this.isMapShow,
+        clickedWindparkId || this.getWindFarmCode(this.WindFarm)
+      )
     },
     getDblclickEntity(obj) {
       if (obj) {
@@ -283,7 +330,7 @@ export default {
             turbineId: turbineId,
             type: pathType,
             //  windFarmName: this.WindFarm?.name,
-            locationcode: this.WindFarm?.id
+            locationcode: this.getWindFarmCode(this.WindFarm)
           }
         })
       })
@@ -394,24 +441,48 @@ export default {
     changeControl() {
       this.updateRoute(this.isControl, !this.isMapShow, this.$route.query.locationcode)
     },
-    beforeDestroy() {
-      this.sessionArr.forEach(item => sessionStorage.removeItem(item))
-      window.removeEventListener('setItem', () => {})
-      let eventBus = [
-        'pieDoughnutRe',
-        'pieDoughnut',
-        'duration',
-        'factory',
-        'stateTypeClick',
-        'leftTalbe',
-        'barStacked',
-        'levelEvent',
-        'progressClick',
-        'clickEventType'
-      ]
-      eventBus.forEach(item => this.$bus.$off(item))
-      this.$cesuimData.handleClearAllData()
-      document.documentElement.style.overflow = ''
+    normalizeWindFarm(item) {
+      if (!item) return null
+      const windFarmCode =
+        item.code || item.stationID || item.stationId || item.stationCode || item.id
+      return {
+        ...item,
+        id: item.id || item.stationID || windFarmCode,
+        code: item.code || windFarmCode,
+        stationID: item.stationID || windFarmCode,
+        name: item.name || item.stationName
+      }
+    },
+    getWindFarmCode(item) {
+      return item?.code || item?.stationID || item?.stationId || item?.stationCode || item?.id
+    },
+    findWindFarm(locationcode) {
+      const deptMatch = this.userDeptTree.find(
+        item =>
+          item.id == locationcode ||
+          item.code == locationcode ||
+          item.stationID == locationcode ||
+          item.stationId == locationcode ||
+          item.stationCode == locationcode
+      )
+      if (deptMatch) return this.normalizeWindFarm(deptMatch)
+
+      const stationMatch = this.windparkList.find(
+        item =>
+          item.stationID == locationcode ||
+          item.stationId == locationcode ||
+          item.stationCode == locationcode ||
+          item.id == locationcode ||
+          item.code == locationcode
+      )
+      if (stationMatch) return this.normalizeWindFarm(stationMatch)
+
+      return {
+        id: locationcode,
+        code: locationcode,
+        stationID: locationcode,
+        name: ''
+      }
     }
   }
 }
@@ -527,7 +598,7 @@ export default {
   left: 25%;
   z-index: 10;
 }
-::v-deep img {
+:deep(img){
   -webkit-user-drag: none;
 }
 .drone_table {

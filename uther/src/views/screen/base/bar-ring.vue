@@ -63,6 +63,7 @@ export default {
         },
         radiusAxis: {
           type: 'category',
+          data: [this.title || 'value'],
           show: true,
           axisLabel: {
             show: false
@@ -78,6 +79,7 @@ export default {
           {
             name: '',
             type: 'bar',
+            polarIndex: 0,
             roundCap: true,
             barWidth: 40,
             showBackground: true,
@@ -124,6 +126,9 @@ export default {
     numSqrObj: {
       handler:function (val) {
         if (JSON.stringify(val) === '{}') {
+          return
+        }
+        if (!this.chart) {
           return
         }
         this.option.title[0].text = `${this.title}正常运行数：${this.isFly ? this.numSqrObj.droneNormal : this.numSqrObj.nestNormal}\n\n较昨日上升${this.numSqrObj.droneRisep}`

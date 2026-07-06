@@ -18,7 +18,7 @@
             <!-- 预警等级 - 带筛选 -->
             <el-table-column prop="alarmLevel" label="预警等级" width="180" column-key="alarmLevel">
               <!-- 自定义筛选下拉菜单 -->
-              <template slot="header" slot-scope="{ column }">
+              <template #header="{ column }">
                 <div style="padding: 10px">
                   <span>{{ column.label }}</span>
 
@@ -32,12 +32,13 @@
                         </el-checkbox>
                       </el-checkbox-group>
                     </div>
-                    <img slot="reference" src="img/filter.png" alt=""
-                      style="width: 12px; height: 12px; margin-left: 5px" />
+                    <template #reference>
+                      <img src="img/filter.png" alt="" style="width: 12px; height: 12px; margin-left: 5px" />
+                    </template>
                   </el-popover>
                 </div>
               </template>
-              <template slot-scope="{ row }">
+              <template #default="{ row }">
                 <span :style="{ color: levelColor[eventTypeEnum[row.alarmLevel]] }">{{
                   row.alarmLevel
                 }}</span>
@@ -251,7 +252,7 @@ export default {
     }
   }
 
-  ::v-deep .avue-crud__menu {
+  :deep(.avue-crud__menu){
     display: none !important;
   }
 }

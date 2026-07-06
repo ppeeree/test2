@@ -298,7 +298,7 @@ export default {
   height: calc(100% - 14px);
   width: calc(100% - 430px);
   float: right;
-  ::v-deep .el-card.is-always-shadow {
+  :deep(.el-card.is-always-shadow){
     height: 100%;
     .el-card__body {
       height: 100%;
@@ -310,12 +310,12 @@ export default {
     color: white;
   }
 }
-::v-deep .el-table__empty-block {
+:deep(.el-table__empty-block){
   height: auto !important;
 }
 .tree_add_card {
   margin-top: 38vh !important;
-  ::v-deep .el-dialog {
+  :deep(.el-dialog){
     margin-top: 38vh !important;
     .el-dialog__body {
       .dialod_content {
@@ -330,17 +330,17 @@ export default {
     }
   }
 }
-::v-deep .el-form-item__label {
+:deep(.el-form-item__label){
   text-align: right;
 }
-::v-deep .avue-crud__left {
+:deep(.avue-crud__left){
   position: relative;
   right: -82%;
 }
 .el-table::before {
   height: 0;
 }
-::v-deep .el-table__fixed-right-patch,
+:deep(.el-table__fixed-right-patch),
 .el-table .el-table__cell.gutter {
   background-color: #2a65ae;
 }

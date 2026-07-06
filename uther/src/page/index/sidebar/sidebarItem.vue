@@ -39,16 +39,16 @@
   </div>
 </template>
 <script>
-  import {mapGetters} from "vuex";
-  import {isURL, validatenull} from "@/util/validate";
-  import config from "./config.js";
+  import {mapGetters} from "vuex"
+  import {isURL, validatenull} from "@/util/validate"
+  import config from "./config.js"
 
   export default {
     name: "sidebarItem",
     data() {
       return {
         config: config
-      };
+      }
     },
     props: {
       menu: {
@@ -64,7 +64,7 @@
       props: {
         type: Object,
         default: () => {
-          return {};
+          return {}
         }
       },
       collapse: {
@@ -78,22 +78,22 @@
     computed: {
       ...mapGetters(["roles"]),
       labelKey() {
-        return this.props.label || this.config.propsDefault.label;
+        return this.props.label || this.config.propsDefault.label
       },
       pathKey() {
-        return this.props.path || this.config.propsDefault.path;
+        return this.props.path || this.config.propsDefault.path
       },
       iconKey() {
-        return this.props.icon || this.config.propsDefault.icon;
+        return this.props.icon || this.config.propsDefault.icon
       },
       childrenKey() {
-        return this.props.children || this.config.propsDefault.children;
+        return this.props.children || this.config.propsDefault.children
       },
       isOpenKey() {
-        return this.props.isOpen || this.config.propsDefault.isOpen;
+        return this.props.isOpen || this.config.propsDefault.isOpen
       },
       nowTagValue() {
-        return this.$router.$avueRouter.getValue(this.$route);
+        return this.$router.$avueRouter.getValue(this.$route)
       }
     },
     methods: {
@@ -101,56 +101,56 @@
         return this.$router.$avueRouter.generateTitle(
           item[this.labelKey],
           (item.meta || {}).i18n
-        );
+        )
       },
       vaildActive(item) {
         if (this.validIsOpen(item)) {
-          return false;
+          return false
         }
         const groupFlag = (item["group"] || []).some(ele =>
           this.$route.path.includes(ele)
-        );
-        return this.nowTagValue === item[this.pathKey] || groupFlag;
+        )
+        return this.nowTagValue === item[this.pathKey] || groupFlag
       },
       vaildRoles(item) {
-        item.meta = item.meta || {};
-        return item.meta.roles ? item.meta.roles.includes(this.roles) : true;
+        item.meta = item.meta || {}
+        return item.meta.roles ? item.meta.roles.includes(this.roles) : true
       },
       validatenull(val) {
-        return validatenull(val);
+        return validatenull(val)
       },
       validIsOpen(item) {
         if (item[this.isOpenKey] === 2 && isURL(item[this.pathKey])) {
-          return true;
+          return true
         }
       },
       open(item) {
-        if (this.screen <= 1) this.$store.commit("SET_COLLAPSE");
+        if (this.screen <= 1) this.$store.commit("SET_COLLAPSE")
         if (this.validIsOpen(item)) {
-          window.open(item[this.pathKey]);
+          window.open(item[this.pathKey])
         } else {
-          this.$router.$avueRouter.group = item.group;
-          this.$router.$avueRouter.meta = item.meta;
+          this.$router.$avueRouter.group = item.group
+          this.$router.$avueRouter.meta = item.meta
           this.$router.push({
             path: this.$router.$avueRouter.getPath({
               name: item[this.labelKey],
               src: item[this.pathKey]
             }, item.meta),
             query: item.query
-          });
+          })
         }
       }
     }
-  };
+  }
 </script>
 <style lang="less" scoped>
 .menu-wrapper {
-  ::v-deep .el-submenu__title {
+  :deep(.el-submenu__title){
     &:hover {
       background: #11508B;
     }
   }
-  ::v-deep .el-menu--inline {
+  :deep(.el-menu--inline){
     .el-menu-item {
       &:hover {
         background: #11508B;
@@ -161,7 +161,7 @@
 .el-menu--vertical {
   .menu-wrapper {
     background-color: rgba(4, 17, 33, 0.5);
-    ::v-deep .el-submenu__title {
+    :deep(.el-submenu__title){
       color: rgba(255, 255, 255, 0.7);
     }
   }

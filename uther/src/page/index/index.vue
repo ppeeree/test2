@@ -162,7 +162,7 @@ export default {
     // position: absolute;
   }
 }
-::v-deep .header {
+:deep(.header){
   position: relative;
   margin-top: 0px;
   z-index: 2000;
@@ -182,7 +182,7 @@ export default {
   //   }
   // }
 }
-::v-deep .avue-sidebar {
+:deep(.avue-sidebar){
   margin-top: 50px;
   background: linear-gradient(
     180deg,
@@ -201,11 +201,11 @@ export default {
     )
     1 1 1 1;
 }
-::v-deep .avue-sidebar .el-menu-item.is-active,
+:deep(.avue-sidebar .el-menu-item.is-active),
 .avue-sidebar .el-submenu__title.is-active {
   background-color: #11508b;
 }
-::v-deep .avue-sidebar .el-menu-item.is-active:before,
+:deep(.avue-sidebar .el-menu-item.is-active:before),
 .avue-sidebar .el-submenu__title.is-active:before {
   content: '';
   top: 0;

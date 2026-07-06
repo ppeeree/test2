@@ -34,7 +34,7 @@
               :filters="turbineStatusFilters"
               :filter-method="filterStatus"
             >
-              <template slot-scope="scope">
+              <template #default="scope">
                 <span
                   :style="{ color: scope.row.monitorStatus == '正常' ? '#606266' : '#F56C6C' }"
                   >{{ scope.row.monitorStatus }}</span
@@ -84,7 +84,7 @@
             <el-table-column type="selection" width="55" :selectable="checkSelectable">
             </el-table-column>
             <el-table-column prop="channelNum" label="通道号">
-              <template slot-scope="scope">
+              <template #default="scope">
                 <span>{{ scope.row.channelNum === -1 ? '--' : scope.row.channelNum }}</span>
               </template>
             </el-table-column>
@@ -95,7 +95,7 @@
               :filters="dauStatusFilters"
               :filter-method="filterDauStatus"
             >
-              <template slot-scope="scope">
+              <template #default="scope">
                 <span
                   :style="{ color: scope.row.channelStatus == '正常' ? '#606266' : '#F56C6C' }"
                   >{{ scope.row.channelStatus }}</span
@@ -128,7 +128,7 @@
               range-separator="-"
               start-placeholder="开始日期"
               end-placeholder="结束日期"
-              :picker-options="pickerOptions"
+              :shortcuts="pickerShortcuts"
             >
             </el-date-picker>
             <el-button
@@ -265,37 +265,35 @@ export default {
       dauStatus: [],
 
       timeValue: [],
-      pickerOptions: {
-        shortcuts: [
-          {
-            text: '最近一周',
-            onClick(picker) {
-              const end = new Date()
-              const start = new Date()
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 7)
-              picker.$emit('pick', [start, end])
-            }
-          },
-          {
-            text: '最近一个月',
-            onClick(picker) {
-              const end = new Date()
-              const start = new Date()
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 30)
-              picker.$emit('pick', [start, end])
-            }
-          },
-          {
-            text: '最近三个月',
-            onClick(picker) {
-              const end = new Date()
-              const start = new Date()
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 90)
-              picker.$emit('pick', [start, end])
-            }
+      pickerShortcuts: [
+        {
+          text: '最近一周',
+          value() {
+            const end = new Date()
+            const start = new Date()
+            start.setTime(start.getTime() - 3600 * 1000 * 24 * 7)
+            return [start, end]
           }
-        ]
-      },
+        },
+        {
+          text: '最近一个月',
+          value() {
+            const end = new Date()
+            const start = new Date()
+            start.setTime(start.getTime() - 3600 * 1000 * 24 * 30)
+            return [start, end]
+          }
+        },
+        {
+          text: '最近三个月',
+          value() {
+            const end = new Date()
+            const start = new Date()
+            start.setTime(start.getTime() - 3600 * 1000 * 24 * 90)
+            return [start, end]
+          }
+        }
+      ],
       trendDataSource: {
         data: [],
         xType: 'time',
@@ -526,7 +524,7 @@ export default {
       }).then(res => {
         if (res.data.code == 200 && res.data.data) {
           let arr = dealTrendData(res.data.data)
-          this.$set(this.trendDataSource, 'data', arr)
+          this.trendDataSource.data = arr
           if (!this.trendDataSource.data.length) {
             this.$message({
               message: '未查询到数据',
@@ -562,10 +560,10 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-::v-deep .el-checkbox__label {
+:deep(.el-checkbox__label){
   color: #909399 !important;
 }
-::v-deep .el-table--mini .el-table__cell {
+:deep(.el-table--mini .el-table__cell){
   padding: 3px 0;
 }
 .el-main {
@@ -637,7 +635,7 @@ export default {
     background: #0081ff;
     color: #fff;
   }
-  ::v-deep .el-table--mini .el-table__cell {
+  :deep(.el-table--mini .el-table__cell){
     padding: 3px 0;
   }
 }

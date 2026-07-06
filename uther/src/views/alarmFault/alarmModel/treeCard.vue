@@ -10,7 +10,8 @@
         :expand-on-click-node="false"
         v-if="turbineList.length"
       >
-        <span class="custom-tree-node" slot-scope="{ data }">
+        <template #default="{ data }">
+          <span class="custom-tree-node">
           <span
             class="height_light"
             :style="{
@@ -28,7 +29,8 @@
           >
             <i class="el-icon-link"></i>
           </el-tooltip>
-        </span>
+          </span>
+        </template>
       </el-tree>
       <noData v-else />
     </div>
@@ -129,8 +131,7 @@ export default {
         })
       })
 
-      this.$set(val, 'isClick', true)
-      this.$forceUpdate()
+      val.isClick = true
       this.$emit('clickTreeItem', val)
     }
   }

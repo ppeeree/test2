@@ -157,7 +157,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-::v-deep .el-checkbox__label {
+:deep(.el-checkbox__label){
   color: #909399 !important;
 }
 .el-main {
@@ -220,11 +220,11 @@ export default {
     opacity: 1;
     background: linear-gradient(171deg, rgb(0, 129, 255) 0%, #22cce2 101%);
   }
-  ::v-deep .el-tabs__content {
+  :deep(.el-tabs__content){
     width: 100%;
     height: calc(100% - 40px);
   }
-  ::v-deep .el-tabs__header {
+  :deep(.el-tabs__header){
     margin: 0 0 5px 20px;
     margin-left: 350px;
     .el-tabs__item {
@@ -236,7 +236,7 @@ export default {
       //  border-radius: 30px;
     }
   }
-  /*  ::v-deep .el-tabs__nav-wrap::after {
+  /*  :deep(.el-tabs__nav-wrap::after){
     background-color: rgba(160, 161, 163, 0.1);
   } */
   .badge {

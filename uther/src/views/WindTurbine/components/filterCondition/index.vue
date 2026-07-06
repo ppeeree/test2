@@ -80,7 +80,7 @@ export default {
     // this.$emit('changeFunc', this.formData)
     // this.formData = JSON.parse(JSON.stringify(this.filterData))
   },
-  destroyed() {
+  beforeUnmount() {
     if (!isEqual(this.defaultValue, this.formData)) {
       this.formData = JSON.parse(JSON.stringify(this.defaultValue))
       this.$emit('changeFunc', this.formData)
@@ -92,7 +92,7 @@ export default {
       this.apiList.forEach(item => {
         let range = item.value.split('-')
         let code = item.code
-        this.$set(result, code, range)
+        result[code] = range
       })
 
       let endTime
@@ -118,7 +118,7 @@ export default {
     changeWorking(data) {
       const { down, up } = data
       let code = data.code
-      this.$set(this.formData, code, [down, up])
+      this.formData[code] = [down, up]
       this.$emit('changeFunc', this.formData)
     },
     timeChange(time) {
@@ -185,13 +185,13 @@ export default {
     width: 8%;
   }
   .date_pop_model {
-    ::v-deep .el-input__inner {
+    :deep(.el-input__inner){
       color: #999;
       border: 1px solid #dcdfe6;
       background: #fff;
       box-shadow: none;
     }
-    ::v-deep .el-date-range-picker__content.is-left {
+    :deep(.el-date-range-picker__content.is-left){
       border-right: none !important;
     }
   }
@@ -352,13 +352,13 @@ export default {
 //     width: 8%;
 //   }
 //   .date_pop_model {
-//     ::v-deep .el-input__inner {
+//     :deep(.el-input__inner){
 //       color: #999;
 //       border: 1px solid #dcdfe6;
 //       background: #fff;
 //       box-shadow: none;
 //     }
-//     ::v-deep .el-date-range-picker__content.is-left {
+//     :deep(.el-date-range-picker__content.is-left){
 //       border-right: none !important;
 //     }
 //   }

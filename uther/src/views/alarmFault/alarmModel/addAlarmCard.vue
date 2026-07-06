@@ -852,13 +852,13 @@ export default {
     margin-top: 10px;
   }
 }
-::v-deep .el-form {
+:deep(.el-form){
   width: 98% !important;
   .el-form-item {
     margin: 10px 10px 10px 0 !important;
   }
 }
-::v-deep .el-form-item__label {
+:deep(.el-form-item__label){
   text-align: right;
 }
 .value_select {
@@ -869,7 +869,7 @@ export default {
     width: 29%;
     .value_mini {
       width: 70%;
-      ::v-deep .el-input__inner {
+      :deep(.el-input__inner){
         background-color: rgba(71, 86, 128, 0.2) !important;
         color: white;
         height: 38px !important;
@@ -879,7 +879,7 @@ export default {
 }
 
 .waorking_value {
-  ::v-deep .el-checkbox {
+  :deep(.el-checkbox){
     // width: 29%;
     margin: 0px;
     .el-checkbox__label {
@@ -891,7 +891,7 @@ export default {
   .value_mini {
     width: 18%;
     margin-bottom: 10px;
-    ::v-deep .el-input__inner {
+    :deep(.el-input__inner){
       background-color: rgba(71, 86, 128, 0.2) !important;
       color: white;
       height: 38px !important;

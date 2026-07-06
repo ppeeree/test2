@@ -11,13 +11,15 @@
         v-if="determineModelList.length"
         :indent="16"
       >
-        <span class="custom-tree-node" slot-scope="{ data }">
-          <span
-            class="height_light"
-            :style="{ background: data.isClick ? '#3ffff9' : 'transparent' }"
-          ></span>
-          <span>{{ data.modelName }}</span>
-        </span>
+        <template #default="{ data }">
+          <span class="custom-tree-node">
+            <span
+              class="height_light"
+              :style="{ background: data.isClick ? '#3ffff9' : 'transparent' }"
+            ></span>
+            <span>{{ data.modelName }}</span>
+          </span>
+        </template>
       </el-tree>
       <noData v-else />
     </div>
@@ -32,19 +34,21 @@
           :expand-on-click-node="false"
           v-if="customModelList.length"
         >
-          <span class="custom-tree-node" slot-scope="{ data }">
-            <span
-              class="height_light"
-              :style="{
-                background: data.isClick ? '#3ffff9' : 'transparent',
-                left: data.versions !== '' ? '-23px' : '-41px'
-              }"
-            ></span>
-            <span
-              >{{ data.modelName }}<span v-show="data.versions !== ''">_</span
-              >{{ data.versions }}</span
-            >
-          </span>
+          <template #default="{ data }">
+            <span class="custom-tree-node">
+              <span
+                class="height_light"
+                :style="{
+                  background: data.isClick ? '#3ffff9' : 'transparent',
+                  left: data.versions !== '' ? '-23px' : '-41px'
+                }"
+              ></span>
+              <span
+                >{{ data.modelName }}<span v-show="data.versions !== ''">_</span
+                >{{ data.versions }}</span
+              >
+            </span>
+          </template>
         </el-tree>
         <noData v-else />
       </div>
@@ -57,7 +61,7 @@
     <el-dialog
       title="导入报警模型"
       append-to-body
-      :visible.sync="importBox"
+      v-model="importBox"
       width="450px"
       v-dialogDrag
       ref="ruleForm"
@@ -75,23 +79,25 @@
           :on-change="onUploadChange"
           class="upload_file"
         >
-          <el-button
-            slot="trigger"
-            size="small"
-            type="primary"
-            style="position: relative; width: 60px"
-            >导入</el-button
-          >
+          <template #trigger>
+            <el-button
+              size="small"
+              type="primary"
+              style="position: relative; width: 60px"
+            >导入</el-button>
+          </template>
         </el-upload>
       </div>
-      <span slot="footer" class="dialog-footer">
+      <template #footer>
+        <span class="dialog-footer">
         <el-button type="primary" @click="importSubmitRole" :loading="btnLoading"
           ><i class="el-icon-circle-plus-outline"></i>保 存</el-button
         >
         <el-button @click="importBox = false"><i class="el-icon-circle-close"></i>取 消</el-button>
-      </span>
+        </span>
+      </template>
     </el-dialog>
-    <el-dialog title="新建报警模型" append-to-body :visible.sync="addBox" width="450px">
+    <el-dialog title="新建报警模型" append-to-body v-model="addBox" width="450px">
       <div class="dialog_content">
         <el-form :model="addCardForm" :rules="addRules" ref="addForm" class="add_form">
           <el-form-item label="报警模型类型：" prop="alarmType">
@@ -135,12 +141,14 @@
           </el-form-item>
         </el-form>
       </div>
-      <span slot="footer" class="dialog-footer">
+      <template #footer>
+        <span class="dialog-footer">
         <el-button type="primary" @click="addSubmitRole"
           ><i class="el-icon-circle-plus-outline"></i>保 存</el-button
         >
         <el-button @click="addBox = false"><i class="el-icon-circle-close"></i>取 消</el-button>
-      </span>
+        </span>
+      </template>
     </el-dialog>
   </div>
 </template>
@@ -263,8 +271,7 @@ export default {
           ite.isClick = false
         })
       })
-      this.$set(val, 'isClick', true)
-      this.$forceUpdate()
+      val.isClick = true
       this.$bus.$emit('selectModelItem', val)
     },
 
@@ -437,21 +444,21 @@ export default {
   justify-content: space-between;
   margin-bottom: 40px;
   margin-left: 20px;
-  ::v-deep .el-upload {
+  :deep(.el-upload){
     margin-left: 10px;
   }
     }
   }
   .add_form{
-    ::v-deep .el-form-item__content{
+    :deep(.el-form-item__content){
         display: inline-block;
         width: calc(100% - 140px);
     }
-    ::v-deep .el-form-item__label{
+    :deep(.el-form-item__label){
         width: 115px;
         text-align: right;
     }
-    ::v-deep .el-select{
+    :deep(.el-select){
         width: 100%;
     }
   }

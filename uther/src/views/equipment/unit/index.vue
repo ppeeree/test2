@@ -548,20 +548,20 @@ export default {
 
 <style lang="less" scoped>
 @import url('../component/commonStyle.less');
-// ::v-deep .el-form-item__label {
+// :deep(.el-form-item__label){
 //   width: 108px !important;
 // }
 
-// ::v-deep .el-form-item__content {
+// :deep(.el-form-item__content){
 //   margin-left: 100px !important;
 // }
-// ::v-deep .avue-form__group .el-col {
+// :deep(.avue-form__group .el-col){
 //   width: 20%;
 // }
-::v-deep .el-dialog .el-dialog__body .el-form .el-form-item {
+:deep(.el-dialog .el-dialog__body .el-form .el-form-item){
   margin-right: 30px;
 }
-::v-deep .el-dialog__body {
+:deep(.el-dialog__body){
   .el-form-item__label {
     text-align: right;
   }

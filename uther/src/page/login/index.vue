@@ -168,7 +168,7 @@ export default {
         margin-left: 10px;
       }
 
-      ::v-deep .el-image {
+      :deep(.el-image){
         width: 24px;
         height: 27px;
       }

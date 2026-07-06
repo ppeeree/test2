@@ -37,8 +37,8 @@
             ref="time"
             v-model="monthPickerValue"
             type="daterange"
-            value-format="yyyy-MM-dd"
-            :picker-options="pickerOptions"
+            value-format="YYYY-MM-DD"
+            :shortcuts="pickerShortcuts"
             prefix-icon=""
             clear-icon=""
             @change="getWindParkCurrentTree"
@@ -62,7 +62,8 @@
           element-loading-text="正在加载中"
         >
           <!--    getTime(data.createdTime)  -->
-          <div :class="['custom-tree-node']" slot-scope="{ data }">
+          <template #default="{ data }">
+          <div :class="['custom-tree-node']">
             <span>{{ data.name || data.createdTime }}</span>
             <div
               v-if="data.status"
@@ -84,6 +85,7 @@
               ></i>
             </template>
           </div>
+          </template>
         </el-tree>
       </div>
     </div>
@@ -110,9 +112,9 @@
             type="daterange"
             align="right"
             range-separator="~"
-            value-format="yyyy-MM-dd"
+            value-format="YYYY-MM-DD"
             :clearable="false"
-            :picker-options="pickerOptions"
+            :shortcuts="pickerShortcuts"
             unlink-panels
             start-placeholder="开始"
             end-placeholder="结束"
@@ -153,7 +155,8 @@
           element-loading-background="#eee"
           element-loading-text="正在加载中"
         >
-          <div :class="['custom-tree-node']" slot-scope="{ data }">
+          <template #default="{ data }">
+          <div :class="['custom-tree-node']">
             <span
               >{{ data.name
               }}{{ data.type == 'WindTurbineReport' ? '&nbsp;&nbsp;' + data.createTime : '' }}</span
@@ -165,6 +168,7 @@
               :style="{ background: levelColorEnum[data.status] }"
             />
           </div>
+          </template>
         </el-tree>
       </div>
     </div>
@@ -209,37 +213,35 @@ export default {
         dayjs().subtract(1, 'month').format('YYYY-MM-DD'),
         dayjs().format('YYYY-MM-DD')
       ],
-      pickerOptions: {
-        shortcuts: [
-          {
-            text: '最近一周',
-            onClick(picker) {
-              const end = new Date()
-              const start = new Date()
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 7)
-              picker.$emit('pick', [start, end])
-            }
-          },
-          {
-            text: '最近一个月',
-            onClick(picker) {
-              const end = new Date()
-              const start = new Date()
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 30)
-              picker.$emit('pick', [start, end])
-            }
-          },
-          {
-            text: '最近三个月',
-            onClick(picker) {
-              const end = new Date()
-              const start = new Date()
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 90)
-              picker.$emit('pick', [start, end])
-            }
+      pickerShortcuts: [
+        {
+          text: '最近一周',
+          value: () => {
+            const end = new Date()
+            const start = new Date()
+            start.setTime(start.getTime() - 3600 * 1000 * 24 * 7)
+            return [start, end]
           }
-        ]
-      },
+        },
+        {
+          text: '最近一个月',
+          value: () => {
+            const end = new Date()
+            const start = new Date()
+            start.setTime(start.getTime() - 3600 * 1000 * 24 * 30)
+            return [start, end]
+          }
+        },
+        {
+          text: '最近三个月',
+          value: () => {
+            const end = new Date()
+            const start = new Date()
+            start.setTime(start.getTime() - 3600 * 1000 * 24 * 90)
+            return [start, end]
+          }
+        }
+      ],
       analysisRecordsTime: [
         dayjs().subtract(1, 'month').format('YYYY-MM-DD'),
         dayjs().format('YYYY-MM-DD')
@@ -464,11 +466,11 @@ export default {
     //  background: #323232;
     margin-bottom: 5px;
     padding: 8px;
-    ::v-deep .el-input__inner {
+    :deep(.el-input__inner){
       background: #fff;
       height: 28px;
     }
-    ::v-deep .el-input__prefix {
+    :deep(.el-input__prefix){
       top: -6px;
     }
   }
@@ -495,20 +497,20 @@ export default {
         align-items: center;
         justify-content: left; //space-between;
         margin-top: 7px;
-        ::v-deep .el-input__inner {
+        :deep(.el-input__inner){
           width: 260px;
           height: 28px;
           background: #fff;
         }
-        ::v-deep .el-input__prefix {
+        :deep(.el-input__prefix){
           top: -6px;
         }
 
-        ::v-deep .el-month-table td.today .cell {
+        :deep(.el-month-table td.today .cell){
           color: @fontColor;
           font-weight: 700;
         }
-        ::v-deep .el-month-table td.current:not(.disabled) .cell {
+        :deep(.el-month-table td.current:not(.disabled) .cell){
           color: #409eff !important;
         }
       }
@@ -549,11 +551,11 @@ export default {
         align-items: center;
         justify-content: space-between;
         margin-top: 7px;
-        ::v-deep .el-input__inner {
+        :deep(.el-input__inner){
           height: 28px;
           background: #fff;
         }
-        ::v-deep .el-input__prefix {
+        :deep(.el-input__prefix){
           top: -6px;
         }
       }
@@ -573,14 +575,14 @@ export default {
       top: -37px;
     }
 
-    ::v-deep .el-icon-date:before {
+    :deep(.el-icon-date:before){
       position: absolute;
       top: -2px;
     }
   }
 }
 
-::v-deep .el-tree {
+:deep(.el-tree){
   .el-tree-node__expand-icon {
     font-size: 20px;
   }
@@ -628,10 +630,10 @@ export default {
     height: calc(100% - 10px);
   }
 }
-::v-deep .el-tree--highlight-current .el-tree-node.is-current > .el-tree-node__content {
+:deep(.el-tree--highlight-current .el-tree-node.is-current > .el-tree-node__content){
   background: #32a9ff;
 }
-::v-deep .el-date-editor {
+:deep(.el-date-editor){
   .el-range-separator {
     color: #303133;
     padding: 0;

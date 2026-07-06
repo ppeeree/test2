@@ -41,25 +41,25 @@
 </template>
 
 <script>
-import { isvalidatemobile } from "@/util/validate";
-import { mapGetters } from "vuex";
+import { isvalidatemobile } from "@/util/validate"
+import { mapGetters } from "vuex"
 export default {
   name: "codelogin",
   data() {
     const validatePhone = (rule, value, callback) => {
       if (isvalidatemobile(value)[0]) {
-        callback(new Error(isvalidatemobile(value)[1]));
+        callback(new Error(isvalidatemobile(value)[1]))
       } else {
-        callback();
+        callback()
       }
-    };
+    }
     const validateCode = (rule, value, callback) => {
       if (value.length !== 4) {
-        callback(new Error("请输入4位数的验证码"));
+        callback(new Error("请输入4位数的验证码"))
       } else {
-        callback();
+        callback()
       }
-    };
+    }
     return {
       msgText: "",
       msgTime: "",
@@ -72,11 +72,11 @@ export default {
         phone: [{ required: true, trigger: "blur", validator: validatePhone }],
         code: [{ required: true, trigger: "blur", validator: validateCode }]
       }
-    };
+    }
   },
   created() {
-    this.msgText = this.config.MSGINIT;
-    this.msgTime = this.config.MSGTIME;
+    this.msgText = this.config.MSGINIT
+    this.msgTime = this.config.MSGTIME
   },
   mounted() {},
   computed: {
@@ -86,37 +86,37 @@ export default {
         MSGINIT: this.$t("login.msgText"),
         MSGSCUCCESS: this.$t("login.msgSuccess"),
         MSGTIME: 60
-      };
+      }
     }
   },
   props: [],
   methods: {
     handleSend() {
-      if (this.msgKey) return;
-      this.msgText = this.msgTime + this.config.MSGSCUCCESS;
-      this.msgKey = true;
+      if (this.msgKey) return
+      this.msgText = this.msgTime + this.config.MSGSCUCCESS
+      this.msgKey = true
       const time = setInterval(() => {
-        this.msgTime--;
-        this.msgText = this.msgTime + this.config.MSGSCUCCESS;
+        this.msgTime--
+        this.msgText = this.msgTime + this.config.MSGSCUCCESS
         if (this.msgTime === 0) {
-          this.msgTime = this.config.MSGTIME;
-          this.msgText = this.config.MSGINIT;
-          this.msgKey = false;
-          clearInterval(time);
+          this.msgTime = this.config.MSGTIME
+          this.msgText = this.config.MSGINIT
+          this.msgKey = false
+          clearInterval(time)
         }
-      }, 1000);
+      }, 1000)
     },
     handleLogin() {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.$store.dispatch("LoginByPhone", this.loginForm).then(() => {
-            this.$router.push({ path: this.tagWel.value });
-          });
+            this.$router.push({ path: this.tagWel.value })
+          })
         }
-      });
+      })
     }
   }
-};
+}
 </script>
 
 <style>

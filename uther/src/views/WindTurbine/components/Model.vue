@@ -7,7 +7,6 @@
     <div ref="markDom" id="markDom" style="height: 100%; width: 100%">
       <valueComponent
         ref="compDom"
-        v-on="$listeners"
         v-bind="$attrs"
         v-if="currentComp !== 'windturbine' && animate"
         :currentComp="currentComp"
@@ -228,7 +227,7 @@ export default {
     let fdom = document.getElementById('fan_Container')
     fdom.addEventListener('dblclick', this.mouseDBClick.bind(this))
   },
-  beforeDestroy() {
+  beforeUnmount() {
     // console.log('页面销毁')
     scene.children = []
     let self = this.$refs['markDom']
@@ -788,7 +787,7 @@ export default {
         if (JSON.stringify(this.allCompValueList) == JSON.stringify(arr)) {
           return
         }
-        this.$set(this.allCompValueList, name, arr)
+        this.allCompValueList[name] = arr
         this.judgeAddSpotLine(this.currentComp)
       })
     },
@@ -833,8 +832,8 @@ export default {
       let halfWidth = this.dom.offsetWidth / 2
       let halfHeight = this.dom.offsetHeight / 2
 
-      this.$set(val, 'top', Math.round(-vector.y * halfHeight - 28 + halfHeight))
-      this.$set(val, 'left', Math.round(vector.x * halfWidth + halfWidth))
+      val.top = Math.round(-vector.y * halfHeight - 28 + halfHeight)
+      val.left = Math.round(vector.x * halfWidth + halfWidth)
 
       let card = document.getElementById(val.cardId)
       let spot = document.getElementById(val.spotId)

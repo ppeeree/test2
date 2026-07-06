@@ -45,7 +45,8 @@ export const deleteReportApi = (params) => {
     url: 'NetApi/DiagnosticReport/DeleteWindParkDiagnosisReport',
     method: 'post',
     data: {
-      ReportGuid: params.id
+      ReportGuid: params.id,
+      DiagReportGuid: params.id
     }
   })
 }

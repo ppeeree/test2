@@ -1,11 +1,10 @@
 <template>
   <div class="special-analysis" data-key="trend">
     <div :id="type + 'specialAnalysis'" style="position: relative; width: 100%; height: 100%">
-      <template v-for="(item, index) in groupList">
+      <template v-for="(item, index) in groupList" :key="item.key">
         <one-group
           @getWavePointer="getWavePointer"
           :keyid="item.key"
-          :key="item.key"
           :ref="item.key"
           :titleText="item.titleText"
           :chartList="item.chartList"
@@ -15,7 +14,6 @@
         />
         <splitter
           v-if="index < groupList.length - 1"
-          :key="item.key"
           :id="type + item.key"
           splitType="vertical"
           style="width: 4px"

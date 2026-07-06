@@ -1,7 +1,8 @@
 <template>
   <div class="top-class" ref="UI">
-    <el-card class="box-card" @mouseenter.native="handleEnter" @mouseleave.native="handleLeave">
-      <div slot="header" class="clearfix">
+    <el-card class="box-card" @mouseenter="handleEnter" @mouseleave="handleLeave">
+      <template #header>
+        <div class="clearfix">
         <el-image
           :src="requireImgType(row.eventType)"
           fit="scale-down"
@@ -10,7 +11,8 @@
         <span>{{ GeneratorEnum[row.eventType] }}事件</span>
         <span>_{{ row.eventSites }}_</span>
         <span>【{{ '海上风场' }}】</span>
-      </div>
+        </div>
+      </template>
       <el-scrollbar>
         <div class="content-body">
           <span class="title-event">报警事件</span>
@@ -153,7 +155,7 @@ export default {
     width: 316px;
     height: 236px;
     overflow-y: auto;
-    ::v-deep .el-card__header {
+    :deep(.el-card__header){
       background-color: var(--color);
       border-bottom: none;
       .clearfix {
@@ -216,13 +218,13 @@ export default {
   }
 }
 
-::v-deep .el-card__body {
+:deep(.el-card__body){
   padding: 16px;
 }
-::v-deep .el-scrollbar__bar.is-horizontal {
+:deep(.el-scrollbar__bar.is-horizontal){
   display: none;
 }
-::v-deep .el-card {
+:deep(.el-card){
   background-color: rgba(4, 17, 33, 0.5);
   backdrop-filter: blur(15px);
   border: none;

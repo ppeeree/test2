@@ -357,10 +357,10 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-::v-deep .el-checkbox__label {
+:deep(.el-checkbox__label){
   color: #fff !important;
 }
-::v-deep .avue-crud__menu {
+:deep(.avue-crud__menu){
   min-height: 0;
 }
 .el-main {
@@ -439,22 +439,22 @@ export default {
     color: #fff !important;
     margin-bottom: 10px;
   }
-  ::v-deep .el-table__row:hover {
+  :deep(.el-table__row:hover){
     background-color: rgba(30, 56, 140, 0.5) !important;
   }
-  ::v-deep .el-table__body tr.hover-row.current-row > td.el-table__cell,
+  :deep(.el-table__body tr.hover-row.current-row > td.el-table__cell),
   .el-table__body tr.hover-row.el-table__row--striped.current-row > td.el-table__cell,
   .el-table__body tr.hover-row.el-table__row--striped > td.el-table__cell,
   .el-table__body tr.hover-row > td.el-table__cell {
     background-color: rgba(30, 56, 140, 0.5) !important;
   }
-  ::v-deep .el-table__body tr:hover > td {
+  :deep(.el-table__body tr:hover > td){
     background-color: rgba(30, 56, 140, 0.5) !important;
   }
-  ::v-deep .el-table__body tr.current-row > td.el-table__cell {
+  :deep(.el-table__body tr.current-row > td.el-table__cell){
     background-color: rgba(30, 56, 140, 0.5) !important;
   }
-  ::v-deep .el-table::before {
+  :deep(.el-table::before){
     background-color: transparent !important;
   }
 }

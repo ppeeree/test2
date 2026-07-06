@@ -29,7 +29,9 @@
         </div>
       </div>
     </div>
-    <img slot="reference" class="markimg" src="/img/WindTurbine/icon/deviceInfo.png" />
+    <template #reference>
+      <img class="markimg" src="/img/WindTurbine/icon/deviceInfo.png" />
+    </template>
   </el-popover>
 </template>
 <script>

@@ -47,7 +47,7 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-::v-deep .el-input {
+:deep(.el-input){
   width: 35%;
 }
 </style>

@@ -22,9 +22,10 @@
 </template>
 <script>
 import { getEvAnalyzerDataApi } from '@/api/analysis/index.js'
+import { defineAsyncComponent } from 'vue'
 export default {
   components: {
-    trendChart: () => import('@/components/diagnosisChart/trend.vue')
+    trendChart: defineAsyncComponent(() => import('@/components/diagnosisChart/trend.vue'))
   },
   props: {
     trendParams: {

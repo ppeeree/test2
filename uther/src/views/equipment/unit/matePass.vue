@@ -164,10 +164,10 @@ export default {
       display: inline-block;
       text-align: right;
     }
-    // ::v-deep .el-input {
+    // :deep(.el-input){
     //   width: 19%;
     // }
-    ::v-deep .el-input__inner {
+    :deep(.el-input__inner){
       height: 36px;
       width: 140px;
     }
@@ -177,7 +177,7 @@ export default {
   margin-right: 11px;
   margin-bottom: 0px;
 }
-::v-deep .el-form {
+:deep(.el-form){
   width: 100% !important;
   padding: 0px !important;
   .el-form-item {

@@ -7,7 +7,7 @@ export const switchDic = [
     label: "",
     value: 1
   }
-];
+]
 
 export const entityDic = [
   {
@@ -38,7 +38,7 @@ export const entityDic = [
     label: "Date",
     value: "java.util.Date"
   }
-];
+]
 
 export const componentDic = [
   {
@@ -73,7 +73,7 @@ export const componentDic = [
     label: "日期框",
     value: "date"
   }
-];
+]
 
 export const queryDic = [
   {
@@ -116,7 +116,7 @@ export const queryDic = [
     label: "右模糊",
     value: "likeright"
   }
-];
+]
 
 export const templateDic = [
   {
@@ -131,7 +131,7 @@ export const templateDic = [
     label: "树表",
     value: "tree"
   }
-];
+]
 
 export const option = {
   height: 'auto',
@@ -213,7 +213,7 @@ export const option = {
       span: 24,
     },
   ]
-};
+}
 
 export const optionModel = {
   border: true,
@@ -309,4 +309,4 @@ export const optionModel = {
     dicData: queryDic,
     cell: true,
   }]
-};
+}

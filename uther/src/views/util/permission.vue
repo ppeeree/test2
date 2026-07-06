@@ -58,7 +58,7 @@
             sex: 20
           }
         ]
-      };
+      }
     },
     watch: {
       text() {
@@ -66,16 +66,16 @@
           this.permission = {
             delBtn: false,
             addBtn: false
-          };
+          }
         } else {
           this.permission = {
             delBtn: true,
             addBtn: true
-          };
+          }
         }
       }
     }
-  };
+  }
 </script>
 
 <style>

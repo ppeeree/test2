@@ -1138,27 +1138,27 @@ export default {
 </script>
 <style lang="less" scoped>
 // @import url('../component/commonStyle.less');
-::v-deep .avue-form__group .el-col {
+:deep(.avue-form__group .el-col){
   width: 20%;
 }
-::v-deep .el-form-item__content {
+:deep(.el-form-item__content){
   margin-left: 100px !important;
 }
-::v-deep .el-pagination__sizes {
+:deep(.el-pagination__sizes){
   color: white;
 }
 
-::v-deep .el-pagination .el-select .el-input .el-input__inner {
+:deep(.el-pagination .el-select .el-input .el-input__inner){
   border: 1px white solid;
   background: transparent;
 }
 
-::v-deep .el-pagination__editor.el-input .el-input__inner {
+:deep(.el-pagination__editor.el-input .el-input__inner){
   border: 1px white solid;
   background: transparent;
 }
 
-::v-deep .el-table {
+:deep(.el-table){
   height: 555px !important;
   max-height: 555px !important;
 }
@@ -1176,23 +1176,23 @@ export default {
   justify-content: space-between;
   margin-bottom: 40px;
 
-  ::v-deep .el-upload {
+  :deep(.el-upload){
     margin-left: 10px;
   }
 }
 
-::v-deep .el-dialog__body {
+:deep(.el-dialog__body){
   padding: 6px 30px 20px 20px;
 }
 
-::v-deep .el-dialog {
+:deep(.el-dialog){
   position: relative;
   width: 555px;
   top: 34%;
   margin-top: 0 !important;
 }
 
-::v-deep .el-upload-list {
+:deep(.el-upload-list){
   width: 100%;
 
   .el-upload-list__item {
@@ -1216,7 +1216,7 @@ export default {
   }
 }
 
-::v-deep .upload-form {
+:deep(.upload-form){
   .avue-form__group {
     .avue-form__row {
       .el-form-item--small {

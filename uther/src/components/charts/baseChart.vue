@@ -5,6 +5,38 @@
 <script>
 import * as echarts from 'echarts'
 import { mapState } from 'vuex'
+
+const hasAxis = axis => {
+  return Array.isArray(axis) ? axis.length > 0 : !!axis
+}
+
+const normalizeEchartsOption = option => {
+  if (!option || !hasAxis(option.xAxis) || !hasAxis(option.yAxis)) {
+    return option
+  }
+  const patchSeries = series => {
+    if (
+      series &&
+      series.type === 'bar' &&
+      !series.coordinateSystem &&
+      series.polarIndex === undefined
+    ) {
+      return {
+        ...series,
+        coordinateSystem: 'cartesian2d'
+      }
+    }
+    return series
+  }
+  const series = Array.isArray(option.series)
+    ? option.series.map(patchSeries)
+    : patchSeries(option.series)
+  return {
+    ...option,
+    series
+  }
+}
+
 export default {
   props: {
     chartData: {
@@ -46,7 +78,7 @@ export default {
     chartData: {
       deep: true,
       handler(val) {
-        this.chart.setOption(val, true)
+        this.chart && this.chart.setOption(normalizeEchartsOption(val), true)
       }
     }
   },
@@ -61,7 +93,7 @@ export default {
     })
     this.resizeHandler.observe(this.$refs.echartId)
   },
-  beforeDestroy() {
+  beforeUnmount() {
     this.removeResizeOb()
     if (!this.chart) {
       return
@@ -72,12 +104,12 @@ export default {
   methods: {
     initChart() {
       this.chart = echarts.init(this.$refs.echartId)
-      this.chart.setOption(this.chartData, true)
+      this.chart.setOption(normalizeEchartsOption(this.chartData), true)
     },
     removeResizeOb() {
-      if (this.resizeOb) {
-        this.resizeOb.disconnect()
-        this.resizeOb = null
+      if (this.resizeHandler) {
+        this.resizeHandler.disconnect()
+        this.resizeHandler = null
       }
     },
     // 监听浏览器窗口变化 图表自适应

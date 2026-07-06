@@ -228,7 +228,7 @@ export default {
       margin-right: 15px;
     }
   }
-  ::v-deep .el-cascader {
+  :deep(.el-cascader){
     width: 100%;
     // border: 1px solid #546992;
     .el-input {

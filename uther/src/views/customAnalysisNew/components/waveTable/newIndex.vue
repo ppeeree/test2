@@ -343,7 +343,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .block_content {
-  ::v-deep .el-dialog {
+  :deep(.el-dialog){
     height: auto !important;
     padding-bottom: 10px;
     max-height: 80%;

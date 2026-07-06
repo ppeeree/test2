@@ -1,19 +1,21 @@
 <template>
   <div class="content-right">
     <el-card class="box-card" :body-style="{ padding: '10px' }">
-      <div slot="header" class="title">
+      <template #header>
+        <div class="title">
         <div class="top_title">
           <span class="titleChart">综合健康指数及排名</span>
           <span class="title_buttom" style="width: calc(100% - 196px)"></span>
         </div>
         <iconChart
           :style="handleIconBorder('heatMap')"
-          @click.native="handleOpenChart('heatMap')"
+          @click="handleOpenChart('heatMap')"
         ></iconChart>
-      </div>
+        </div>
+      </template>
       <div style="width: 450px">
         <div class="ranking-item">
-          <gauge :gaugeSeretData.sync="gaugeSeretData"></gauge>
+          <gauge :gaugeSeretData="gaugeSeretData"></gauge>
           <div class="title">
             <div>
               {{ '' }}
@@ -21,7 +23,7 @@
             <div @click="handleSort">正序/倒序</div>
           </div>
           <div class="bar-progres" style="height: 835px" v-if="devicesRealTime.length">
-            <vircualList :items.sync="devicesRealTime" :itemHeight="34.5" :shownumber="24">
+            <vircualList :items="devicesRealTime" :itemHeight="34.5" :shownumber="24">
               <template v-slot="{ item }">
                 <div
                   :class="[activeNum === item.windturbineId ? 'active-box' : '']"
@@ -59,10 +61,10 @@
             </div>
             <iconChart
               :style="[{ left: '10px' }, handleIconBorder('area')]"
-              @click.native="handleOpenChart('area')"
+              @click="handleOpenChart('area')"
             ></iconChart>
           </div>
-          <eventTracking :eventNum.sync="eventNum" />
+          <eventTracking :eventNum="eventNum" />
           <div
             class="charts-class"
             :style="{ opacity: peiData1.length && peiData2.length ? '1' : '0.3' }"
@@ -92,7 +94,7 @@
             @clickPartEvent="clickPartEvent"
           ></pie-ring> -->
           </div>
-          <left-table :tableListData="tableListData" v-on="$listeners" />
+          <left-table :tableListData="tableListData" v-on="$attrs" />
         </div>
       </div>
     </el-card>
@@ -101,7 +103,7 @@
       <i @click="handleOpenChart('heatMap')" class="el-icon-close" />
       <vircualList
         v-if="!showHeatMapLegend"
-        :items.sync="heatMapLegend"
+        :items="heatMapLegend"
         :itemHeight="37"
         :shownumber="8"
       >
@@ -158,6 +160,7 @@ import CesuimCanvas from '@/util/cesuimCanvas'
 import { HandleEventTrackingInfoData, FetchData } from '../mixins/handleTableData'
 import dayjs from 'dayjs'
 import { createEnum } from '@/util/exp'
+import { defineAsyncComponent } from 'vue'
 
 const syncEum = {
   eventLevel: {
@@ -194,18 +197,18 @@ const eventTypeNum = {
 
 export default {
   components: {
-    noData: () => import('@/components/noData/index.vue'),
-    GaugeBasic: () => import('../base/gauge-basic.vue'),
-    BarStacked: () => import('../base/bar-stacked.vue'),
-    PieRing: () => import('../base/pie-ring.vue'),
-    leftTable: () => import('../table/leftTable.vue'),
-    heatMapDens: () => import('../base/heatMap-dens.vue'),
-    lineCategory: () => import('../base/line-category.vue'),
-    lineArea: () => import('../base/line-area.vue'),
-    gauge: () => import('../charts/gauge.vue'),
-    iconChart: () => import('../charts/iconChart.vue'),
-    vircualList: () => import('./vircualList.vue'),
-    eventTracking: () => import('./eventTracking.vue')
+    noData: defineAsyncComponent(() => import('@/components/noData/index.vue')),
+    GaugeBasic: defineAsyncComponent(() => import('../base/gauge-basic.vue')),
+    BarStacked: defineAsyncComponent(() => import('../base/bar-stacked.vue')),
+    PieRing: defineAsyncComponent(() => import('../base/pie-ring.vue')),
+    leftTable: defineAsyncComponent(() => import('../table/leftTable.vue')),
+    heatMapDens: defineAsyncComponent(() => import('../base/heatMap-dens.vue')),
+    lineCategory: defineAsyncComponent(() => import('../base/line-category.vue')),
+    lineArea: defineAsyncComponent(() => import('../base/line-area.vue')),
+    gauge: defineAsyncComponent(() => import('../charts/gauge.vue')),
+    iconChart: defineAsyncComponent(() => import('../charts/iconChart.vue')),
+    vircualList: defineAsyncComponent(() => import('./vircualList.vue')),
+    eventTracking: defineAsyncComponent(() => import('./eventTracking.vue'))
   },
 
   data() {
@@ -694,7 +697,7 @@ export default {
   background: #0094c5;
 }
 
-::v-deep .el-card__header {
+:deep(.el-card__header){
   border-bottom: none;
 }
 .content-right {
@@ -760,10 +763,10 @@ export default {
           height: 40px;
           cursor: pointer;
           padding: 4px 16px 4px 4px;
-          ::v-deep .el-progress-bar__outer {
+          :deep(.el-progress-bar__outer){
             background-color: #445461;
           }
-          ::v-deep .el-progress__text {
+          :deep(.el-progress__text){
             color: white;
             font-size: 22px !important;
             font-family: 'DS-DIGIB-2';

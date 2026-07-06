@@ -34,7 +34,8 @@
 
 <script>
   import config from './sidebar/config.js'
-  import {mapGetters} from "vuex";
+  import {mapGetters} from "vuex"
+  import { validatenull } from '@/util/validate'
 
   export default {
     data() {
@@ -46,77 +47,80 @@
       }
     },
     created() {
-      this.getMenuList();
+      this.getMenuList()
     },
     watch: {
       value() {
-        this.querySearch();
+        this.querySearch()
       },
       menu() {
-        this.getMenuList();
+        this.getMenuList()
       }
     },
     computed: {
       labelKey() {
-        return this.website.menu.props.label || this.config.propsDefault.label;
+        return this.website.menu.props.label || this.config.propsDefault.label
       },
       pathKey() {
-        return this.website.menu.props.path || this.config.propsDefault.path;
+        return this.website.menu.props.path || this.config.propsDefault.path
       },
       iconKey() {
-        return this.website.menu.props.icon || this.config.propsDefault.icon;
+        return this.website.menu.props.icon || this.config.propsDefault.icon
       },
       childrenKey() {
         return (
           this.website.menu.props.children || this.config.propsDefault.children
-        );
+        )
       },
       ...mapGetters(["menu", "website"])
     },
     methods: {
+      validatenull(val) {
+        return validatenull(val)
+      },
       handleEsc() {
-        this.$parent.isSearch = false;
+        this.$parent.isSearch = false
       },
       getMenuList() {
         const findMenu = list => {
           for (let i = 0; i < list.length; i++) {
-            const ele = Object.assign({}, list[i]);
+            const ele = Object.assign({}, list[i])
             if (this.validatenull(ele[this.childrenKey])) {
-              this.menuList.push(ele);
+              this.menuList.push(ele)
             } else {
-              findMenu(ele[this.childrenKey]);
+              findMenu(ele[this.childrenKey])
             }
           }
-        };
-        this.menuList = [];
-        findMenu(this.menu);
-        this.menus = this.menuList;
+        }
+        this.menuList = []
+        findMenu(this.menu)
+        this.menus = this.menuList
       },
       querySearch() {
-        var restaurants = this.menuList;
+        var restaurants = this.menuList
         var queryString = this.value
         this.menus = queryString
           ? this.menuList.filter(this.createFilter(queryString))
-          : restaurants;
+          : restaurants
       },
       createFilter(queryString) {
         return restaurant => {
           return (
             restaurant.name.toLowerCase().indexOf(queryString.toLowerCase()) ===
             0
-          );
-        };
+          )
+        }
       },
       handleSelect(item) {
-        this.handleEsc();
-        this.value = "";
+        this.handleEsc()
+        this.value = ""
         this.$router.push({
           path: this.$router.$avueRouter.getPath({
             name: item[this.labelKey],
             src: item[this.pathKey]
           }, item.meta),
           query: item.query
-        });
+        })
       }
     }
   }

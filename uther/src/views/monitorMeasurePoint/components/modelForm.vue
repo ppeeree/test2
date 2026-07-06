@@ -768,7 +768,7 @@ export default {
   }
 }
 
-::v-deep .el-input-number {
+:deep(.el-input-number){
   width: 90px;
   .el-input__inner {
     width: 85px;
@@ -782,7 +782,7 @@ export default {
 .steel_checkbox {
   left: 12px;
   position: relative;
-  ::v-deep .el-checkbox {
+  :deep(.el-checkbox){
     margin: 5px 20px 8px 0;
     .el-checkbox__label {
       width: 54px;
@@ -795,27 +795,27 @@ export default {
 .el-button--primary {
   width: 75px;
 }
-::v-deep .el-input-number {
+:deep(.el-input-number){
   width: 75%;
   .el-input__inner {
     width: 100%;
   }
 }
 
-::v-deep .el-input.is-disabled .el-input__inner {
+:deep(.el-input.is-disabled .el-input__inner){
   background: rgba(71, 86, 128, 0.2);
 }
-::v-deep .el-checkbox__input.is-disabled + span.el-checkbox__label {
+:deep(.el-checkbox__input.is-disabled + span.el-checkbox__label){
   color: #409eff;
 }
-::v-deep .el-checkbox__input.is-disabled.is-checked .el-checkbox__inner {
+:deep(.el-checkbox__input.is-disabled.is-checked .el-checkbox__inner){
   background-color: #409eff;
   border-color: #409eff;
 }
-::v-deep .el-checkbox__input.is-disabled.is-checked .el-checkbox__inner::after {
+:deep(.el-checkbox__input.is-disabled.is-checked .el-checkbox__inner::after){
   border-color: white;
 }
-::v-deep .el-input.is-disabled .el-input__inner {
+:deep(.el-input.is-disabled .el-input__inner){
   border-color: rgba(71, 86, 128, 1);
 }
 </style>

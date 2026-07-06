@@ -140,7 +140,7 @@
     </div>
 
     <!-- 点击删除后的弹框 -->
-    <el-dialog :visible.sync="dialogVisible" width="20%" :modal-append-to-body="false">
+    <el-dialog v-model="dialogVisible" width="20%" :modal-append-to-body="false">
       <span>
         <span style="float: left; margin-right: 7px"
           ><i class="el-icon-question" style="color: #e6a23c"></i
@@ -148,13 +148,15 @@
         <span></span>
         确定将该条事件提醒关闭？
       </span>
-      <span slot="footer" class="dialog-footer">
+        <template #footer>
+          <span class="dialog-footer">
         <el-button @click="dialogVisible = false">取 消</el-button>
         <el-button type="primary" @click="clickbtn()">确 定</el-button>
-      </span>
+          </span>
+        </template>
     </el-dialog>
     <!-- 点击删除后的弹框 -->
-    <el-dialog :visible.sync="closeAllEvent" width="20%" :modal-append-to-body="false">
+    <el-dialog v-model="closeAllEvent" width="20%" :modal-append-to-body="false">
       <span>
         <span style="float: left; margin-right: 7px"
           ><i class="el-icon-question" style="color: #e6a23c"></i
@@ -162,10 +164,12 @@
         <span></span>
         确定将所有事件提醒关闭？
       </span>
-      <span slot="footer" class="dialog-footer">
+        <template #footer>
+          <span class="dialog-footer">
         <el-button @click="closeAllEvent = false">取 消</el-button>
         <el-button type="primary" @click="clickImportEvent()">确 定</el-button>
-      </span>
+          </span>
+        </template>
     </el-dialog>
   </div>
 </template>
@@ -361,7 +365,7 @@ export default {
     }
   }
   //弹框样式修改
-  // ::v-deep .el-dialog {
+  // :deep(.el-dialog){
   //   // margin-top: 3vh;
   //   border-radius: 10px;
   //   .el-dialog__header {

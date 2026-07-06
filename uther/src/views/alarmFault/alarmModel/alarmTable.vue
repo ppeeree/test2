@@ -169,14 +169,14 @@ export default {
     font-weight: bold;
     color: white;
   }
-  ::v-deep .avue-crud {
+  :deep(.avue-crud){
     height: 330px;
   }
-  ::v-deep .avue-crud--card .el-card + .el-card {
+  :deep(.avue-crud--card .el-card + .el-card){
     height: 330px;
   }
 }
-::v-deep .el-table__empty-block {
+:deep(.el-table__empty-block){
   height: 39% !important;
   .el-table__empty-text {
     height: 100%;
@@ -185,35 +185,35 @@ export default {
     }
   }
 }
-::v-deep .avue-crud__left {
+:deep(.avue-crud__left){
   position: relative;
   right: -91%;
 }
-::v-deep .el-loading-mask {
+:deep(.el-loading-mask){
   height: 310px;
 }
-::v-deep .el-table__fixed-body-wrapper,
+:deep(.el-table__fixed-body-wrapper),
 .el-table__body-wrapper {
   height: 265px !important;
 }
-::v-deep .el-table--border {
+:deep(.el-table--border){
   margin-top: 18px;
 }
 
-::v-deep .el-table--enable-row-transition .el-table__body td.el-table__cell {
+:deep(.el-table--enable-row-transition .el-table__body td.el-table__cell){
   padding: 8px 0 !important;
 }
 
-::v-deep .el-table__row:hover {
+:deep(.el-table__row:hover){
   background-color: rgba(30, 56, 140, 0.5) !important;
 }
-::v-deep .el-table__body tr.hover-row.current-row > td.el-table__cell,
+:deep(.el-table__body tr.hover-row.current-row > td.el-table__cell),
 .el-table__body tr.hover-row.el-table__row--striped.current-row > td.el-table__cell,
 .el-table__body tr.hover-row.el-table__row--striped > td.el-table__cell,
 .el-table__body tr.hover-row > td.el-table__cell {
   background-color: rgba(30, 56, 140, 0.5) !important;
 }
-::v-deep .el-table__body tr:hover > td {
+:deep(.el-table__body tr:hover > td){
   background-color: rgba(30, 56, 140, 0.5) !important;
 }
 </style>

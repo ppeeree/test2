@@ -98,7 +98,7 @@ export default {
   padding: 10px;
 }
 
-::v-deep .el-tree--highlight-current .el-tree-node.is-current>.el-tree-node__content {
+:deep(.el-tree--highlight-current .el-tree-node.is-current>.el-tree-node__content){
   background-color: #32a9ff;
   color: #fff;
 }

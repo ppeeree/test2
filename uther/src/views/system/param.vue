@@ -31,7 +31,7 @@ export default window.$crudCommon({
         viewBtn: this.vaildData(this.permission.param_view, false),
         delBtn: this.vaildData(this.permission.param_delete, false),
         editBtn: this.vaildData(this.permission.param_edit, false)
-      };
+      }
     }
   },
   methods: {}

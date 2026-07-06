@@ -1,0 +1,464 @@
+# npm resolution error report
+
+2026-07-01T09:19:15.406Z
+
+While resolving: saber-admin@3.0.1
+Found: vue@2.7.13
+node_modules/vue
+  vue@"^3.5.13" from the root project
+  peer vue@"^2.0.0 || >=3.0.0" from @vue-office/docx@1.6.2
+  node_modules/@vue-office/docx
+    @vue-office/docx@"^1.6.2" from the root project
+  peer vue@"^2.0.0 || >=3.0.0" from @vue-office/pdf@2.0.2
+  node_modules/@vue-office/pdf
+    @vue-office/pdf@"^2.0.2" from the root project
+  peerOptional vue@"*" from @vue/babel-preset-jsx@1.4.0
+  node_modules/@vue/babel-preset-jsx
+    @vue/babel-preset-jsx@"^1.4.0" from the root project
+  vue@"^2.5.17" from avue-plugin-ueditor@0.1.7
+  node_modules/avue-plugin-ueditor
+    avue-plugin-ueditor@"^0.1.4" from the root project
+  peer vue@"^2.5.17" from element-ui@2.15.14
+  node_modules/element-ui
+    element-ui@"^2.13.0" from avue-plugin-ueditor@0.1.7
+    node_modules/avue-plugin-ueditor
+      avue-plugin-ueditor@"^0.1.4" from the root project
+  peer vue@">= 2.6.0 < 3" from umy-table@1.1.8
+  node_modules/umy-table
+    umy-table@"1.1.8" from umy-ui@1.1.6
+    node_modules/umy-ui
+      umy-ui@"^1.1.6" from the root project
+  peer vue@">= 2.6.0 < 3" from umy-ui@1.1.6
+  node_modules/umy-ui
+    umy-ui@"^1.1.6" from the root project
+  peer vue@">= 1.0.0" from vue-axios@2.1.5
+  node_modules/vue-axios
+    vue-axios@"^2.1.2" from the root project
+  peer vue@"^3.0.0-0 || ^2.6.0" from vue-demi@0.14.8
+  node_modules/vue-demi
+    vue-demi@"^0.14.8" from the root project
+    peer vue-demi@"^0.14.6" from @vue-office/docx@1.6.2
+    node_modules/@vue-office/docx
+      @vue-office/docx@"^1.6.2" from the root project
+    peer vue-demi@"^0.14.6" from @vue-office/pdf@2.0.2
+    node_modules/@vue-office/pdf
+      @vue-office/pdf@"^2.0.2" from the root project
+  peer vue@"^2.1.8" from vue-light-timeline@1.0.3
+  node_modules/vue-light-timeline
+    vue-light-timeline@"^1.0.3" from the root project
+  peer vue@"^2.0.0" from vuex@3.6.2
+  node_modules/vuex
+    vuex@"^4.1.0" from the root project
+
+Could not resolve dependency:
+element-plus@"^2.8.8" from the root project
+
+Conflicting peer dependency: vue@3.5.39
+node_modules/vue
+  peer vue@"^3.3.7" from element-plus@2.14.2
+  node_modules/element-plus
+    element-plus@"^2.8.8" from the root project
+
+Fix the upstream dependency conflict, or retry
+this command with --force, or --legacy-peer-deps
+to accept an incorrect (and potentially broken) dependency resolution.
+
+Raw JSON explanation object:
+
+{
+  "code": "ERESOLVE",
+  "edge": {
+    "type": "prod",
+    "name": "element-plus",
+    "spec": "^2.8.8",
+    "error": "MISSING",
+    "from": {
+      "location": "C:\\code\\ZD_3\\uther"
+    }
+  },
+  "dep": {
+    "name": "element-plus",
+    "version": "2.14.2",
+    "whileInstalling": {
+      "name": "saber-admin",
+      "version": "3.0.1",
+      "path": "C:\\code\\ZD_3\\uther"
+    },
+    "location": "node_modules/element-plus",
+    "isWorkspace": false,
+    "dependents": [
+      {
+        "type": "prod",
+        "name": "element-plus",
+        "spec": "^2.8.8",
+        "error": "MISSING",
+        "from": {
+          "location": "C:\\code\\ZD_3\\uther"
+        }
+      }
+    ]
+  },
+  "current": null,
+  "peerConflict": {
+    "current": {
+      "name": "vue",
+      "version": "2.7.13",
+      "location": "node_modules/vue",
+      "isWorkspace": false,
+      "dependents": [
+        {
+          "type": "prod",
+          "name": "vue",
+          "spec": "^3.5.13",
+          "error": "INVALID",
+          "from": {
+            "location": "C:\\code\\ZD_3\\uther"
+          }
+        },
+        {
+          "type": "peer",
+          "name": "vue",
+          "spec": "^2.0.0 || >=3.0.0",
+          "from": {
+            "name": "@vue-office/docx",
+            "version": "1.6.2",
+            "location": "node_modules/@vue-office/docx",
+            "isWorkspace": false,
+            "dependents": [
+              {
+                "type": "prod",
+                "name": "@vue-office/docx",
+                "spec": "^1.6.2",
+                "from": {
+                  "location": "C:\\code\\ZD_3\\uther"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "peer",
+          "name": "vue",
+          "spec": "^2.0.0 || >=3.0.0",
+          "from": {
+            "name": "@vue-office/pdf",
+            "version": "2.0.2",
+            "location": "node_modules/@vue-office/pdf",
+            "isWorkspace": false,
+            "dependents": [
+              {
+                "type": "prod",
+                "name": "@vue-office/pdf",
+                "spec": "^2.0.2",
+                "from": {
+                  "location": "C:\\code\\ZD_3\\uther"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "peerOptional",
+          "name": "vue",
+          "spec": "*",
+          "from": {
+            "name": "@vue/babel-preset-jsx",
+            "version": "1.4.0",
+            "location": "node_modules/@vue/babel-preset-jsx",
+            "isWorkspace": false,
+            "dependents": [
+              {
+                "type": "prod",
+                "name": "@vue/babel-preset-jsx",
+                "spec": "^1.4.0",
+                "from": {
+                  "location": "C:\\code\\ZD_3\\uther"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "prod",
+          "name": "vue",
+          "spec": "^2.5.17",
+          "from": {
+            "name": "avue-plugin-ueditor",
+            "version": "0.1.7",
+            "location": "node_modules/avue-plugin-ueditor",
+            "isWorkspace": false,
+            "dependents": [
+              {
+                "type": "prod",
+                "name": "avue-plugin-ueditor",
+                "spec": "^0.1.4",
+                "from": {
+                  "location": "C:\\code\\ZD_3\\uther"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "peer",
+          "name": "vue",
+          "spec": "^2.5.17",
+          "from": {
+            "name": "element-ui",
+            "version": "2.15.14",
+            "location": "node_modules/element-ui",
+            "isWorkspace": false,
+            "dependents": [
+              {
+                "type": "prod",
+                "name": "element-ui",
+                "spec": "^2.13.0",
+                "from": {
+                  "name": "avue-plugin-ueditor",
+                  "version": "0.1.7",
+                  "location": "node_modules/avue-plugin-ueditor",
+                  "isWorkspace": false,
+                  "dependents": [
+                    {
+                      "type": "prod",
+                      "name": "avue-plugin-ueditor",
+                      "spec": "^0.1.4",
+                      "from": {
+                        "location": "C:\\code\\ZD_3\\uther"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "peer",
+          "name": "vue",
+          "spec": ">= 2.6.0 < 3",
+          "from": {
+            "name": "umy-table",
+            "version": "1.1.8",
+            "location": "node_modules/umy-table",
+            "isWorkspace": false,
+            "dependents": [
+              {
+                "type": "prod",
+                "name": "umy-table",
+                "spec": "1.1.8",
+                "from": {
+                  "name": "umy-ui",
+                  "version": "1.1.6",
+                  "location": "node_modules/umy-ui",
+                  "isWorkspace": false,
+                  "dependents": [
+                    {
+                      "type": "prod",
+                      "name": "umy-ui",
+                      "spec": "^1.1.6",
+                      "from": {
+                        "location": "C:\\code\\ZD_3\\uther"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "peer",
+          "name": "vue",
+          "spec": ">= 2.6.0 < 3",
+          "from": {
+            "name": "umy-ui",
+            "version": "1.1.6",
+            "location": "node_modules/umy-ui",
+            "isWorkspace": false,
+            "dependents": [
+              {
+                "type": "prod",
+                "name": "umy-ui",
+                "spec": "^1.1.6",
+                "from": {
+                  "location": "C:\\code\\ZD_3\\uther"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "peer",
+          "name": "vue",
+          "spec": ">= 1.0.0",
+          "from": {
+            "name": "vue-axios",
+            "version": "2.1.5",
+            "location": "node_modules/vue-axios",
+            "isWorkspace": false,
+            "dependents": [
+              {
+                "type": "prod",
+                "name": "vue-axios",
+                "spec": "^2.1.2",
+                "from": {
+                  "location": "C:\\code\\ZD_3\\uther"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "peer",
+          "name": "vue",
+          "spec": "^3.0.0-0 || ^2.6.0",
+          "from": {
+            "name": "vue-demi",
+            "version": "0.14.8",
+            "location": "node_modules/vue-demi",
+            "isWorkspace": false,
+            "dependents": [
+              {
+                "type": "prod",
+                "name": "vue-demi",
+                "spec": "^0.14.8",
+                "from": {
+                  "location": "C:\\code\\ZD_3\\uther"
+                }
+              },
+              {
+                "type": "peer",
+                "name": "vue-demi",
+                "spec": "^0.14.6",
+                "from": {
+                  "name": "@vue-office/docx",
+                  "version": "1.6.2",
+                  "location": "node_modules/@vue-office/docx",
+                  "isWorkspace": false,
+                  "dependents": [
+                    {
+                      "type": "prod",
+                      "name": "@vue-office/docx",
+                      "spec": "^1.6.2",
+                      "from": {
+                        "location": "C:\\code\\ZD_3\\uther"
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "peer",
+                "name": "vue-demi",
+                "spec": "^0.14.6",
+                "from": {
+                  "name": "@vue-office/pdf",
+                  "version": "2.0.2",
+                  "location": "node_modules/@vue-office/pdf",
+                  "isWorkspace": false,
+                  "dependents": [
+                    {
+                      "type": "prod",
+                      "name": "@vue-office/pdf",
+                      "spec": "^2.0.2",
+                      "from": {
+                        "location": "C:\\code\\ZD_3\\uther"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "peer",
+          "name": "vue",
+          "spec": "^2.1.8",
+          "from": {
+            "name": "vue-light-timeline",
+            "version": "1.0.3",
+            "location": "node_modules/vue-light-timeline",
+            "isWorkspace": false,
+            "dependents": [
+              {
+                "type": "prod",
+                "name": "vue-light-timeline",
+                "spec": "^1.0.3",
+                "from": {
+                  "location": "C:\\code\\ZD_3\\uther"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "peer",
+          "name": "vue",
+          "spec": "^2.0.0",
+          "from": {
+            "name": "vuex",
+            "version": "3.6.2",
+            "location": "node_modules/vuex",
+            "isWorkspace": false,
+            "dependents": [
+              {
+                "type": "prod",
+                "name": "vuex",
+                "spec": "^4.1.0",
+                "error": "INVALID",
+                "from": {
+                  "location": "C:\\code\\ZD_3\\uther"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "peer": {
+      "name": "vue",
+      "version": "3.5.39",
+      "whileInstalling": {
+        "name": "saber-admin",
+        "version": "3.0.1",
+        "path": "C:\\code\\ZD_3\\uther"
+      },
+      "location": "node_modules/vue",
+      "isWorkspace": false,
+      "dependents": [
+        {
+          "type": "peer",
+          "name": "vue",
+          "spec": "^3.3.7",
+          "from": {
+            "name": "element-plus",
+            "version": "2.14.2",
+            "whileInstalling": {
+              "name": "saber-admin",
+              "version": "3.0.1",
+              "path": "C:\\code\\ZD_3\\uther"
+            },
+            "location": "node_modules/element-plus",
+            "isWorkspace": false,
+            "dependents": [
+              {
+                "type": "prod",
+                "name": "element-plus",
+                "spec": "^2.8.8",
+                "error": "MISSING",
+                "from": {
+                  "location": "C:\\code\\ZD_3\\uther"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "strictPeerDeps": false,
+  "force": false,
+  "isMine": true
+}

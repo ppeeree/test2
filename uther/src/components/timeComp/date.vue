@@ -5,7 +5,7 @@
       <div class="data_picker_btn">{{ this.timetext }}</div>
     </div>
     <el-date-picker
-      v-model="time"
+      v-model="localTime"
       type="daterange"
       :picker-options="pickerOptions"
       range-separator="~"
@@ -106,6 +106,17 @@ export default {
       }
     }
   },
+  computed: {
+    localTime: {
+      get() {
+        return this.time
+      },
+      set(value) {
+        this.$emit('update:time', value)
+        this.$emit('timeChange', value)
+      }
+    }
+  },
   watch: {
     time: {
       handler(val) {
@@ -173,10 +184,10 @@ export default {
     }
   }
 }
-::v-deep .el-input__inner {
+:deep(.el-input__inner){
   top: -36px;
 }
-::v-deep .el-icon-date:before {
+:deep(.el-icon-date:before){
   content: '\e790';
   position: absolute;
   right: 11px;

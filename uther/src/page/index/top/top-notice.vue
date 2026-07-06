@@ -16,11 +16,13 @@
                    :option="option"
                    @page-change="pageChange"></avue-notice>
     </el-scrollbar>
-    <div slot="reference">
+    <template #reference>
+    <div>
       <el-badge is-dot>
         <i class="el-icon-bell"></i>
       </el-badge>
     </div>
+    </template>
   </el-popover>
 </template>
 
@@ -49,7 +51,7 @@ let list = [{
   subtitle: '05-08 15:08',
   status: 4,
   tag: '已完成'
-}];
+}]
 export default {
   name: "top-notice",
   data () {
@@ -74,13 +76,13 @@ export default {
     pageChange (page, done) {
       setTimeout(() => {
         this.$message.success('页码' + page)
-        this.data = this.data.concat(list);
-        done();
+        this.data = this.data.concat(list)
+        done()
       }, 1000)
 
     },
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

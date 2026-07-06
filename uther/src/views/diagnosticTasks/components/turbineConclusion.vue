@@ -267,19 +267,19 @@ export default {
       }
     },
     turbineStatusChange(val) {
-      this.$set(this.ruleForm, 'runingAdvice', this.turbinerunDict[eventTypeEnum[val]][0])
+      this.ruleForm.runingAdvice = this.turbinerunDict[eventTypeEnum[val]][0]
     },
     initData(data) {
       this.ruleForm = {}
       const { conclusions, runingAdvice, status } = data
-      this.$set(this.ruleForm, 'runingAdvice', runingAdvice) // 必须使用$set
+      this.ruleForm.runingAdvice = runingAdvice
       this.ruleForm.turbinestate = status
       let turbineCompList = []
       conclusions.forEach(item => {
         let { compStatus, name, children } = item
         turbineCompList.push(name)
         this.ruleForm[name + 'Level'] = compStatus
-        this.$set(this.ruleForm, name, [])
+        this.ruleForm[name] = []
         children.forEach(ii => {
           let { compName, diagnosisConclusion, maintainAdvice, status } = ii
           this.ruleForm[compName].push({
@@ -330,23 +330,15 @@ export default {
       cb(results)
     },
     handleSelect(code, index, value) {
-      this.$set(
-        this.ruleForm[code][index],
-        'status',
+      this.ruleForm[code][index].status =
         eventTypeEnum[
           this.compMaintainList.find(i => i.diagnosisConclusion == value.value).warningLevel
         ]
-      )
-      /*  this.ruleForm[code][index].status =
-        eventTypeEnum[
-          this.compMaintainList.find(i => i.diagnosisConclusion == value.value).warningLevel
-        ] */
       this.faultLevelChange(code)
     },
     handleRunAdviceSelect(val) {
       // console.log(val)
       // console.log(this.ruleForm.runingAdvice)
-      // this.$set(this.ruleForm, 'runingAdvice', val.value)
     },
 
     // 维护建议
@@ -429,20 +421,20 @@ export default {
     width: 100%;
     height: 150px;
     overflow: hidden;
-    ::v-deep .el-form-item {
+    :deep(.el-form-item){
       width: 100%;
       margin-bottom: 6px;
       margin-right: 0px;
     }
-    ::v-deep .el-form-item__content {
+    :deep(.el-form-item__content){
       width: calc(100% - 120px);
     }
-    ::v-deep .el-form-item__label {
+    :deep(.el-form-item__label){
       font-size: 14px;
       font-weight: bolder;
     }
     .fault_level {
-      ::v-deep .el-form-item__content {
+      :deep(.el-form-item__content){
         width: auto;
       }
     }
@@ -466,7 +458,7 @@ export default {
       flex-direction: row;
       align-items: flex-start;
       justify-content: flex-start;
-      ::v-deep .el-form-item {
+      :deep(.el-form-item){
         width: 30%;
         margin-bottom: 6px;
         margin-right: 0px;
@@ -486,25 +478,25 @@ export default {
         color: #409eff;
       }
     }
-    ::v-deep .el-form-item {
+    :deep(.el-form-item){
       width: 100%;
       margin-bottom: 6px;
       margin-right: 0px;
     }
-    ::v-deep .el-form-item__content {
+    :deep(.el-form-item__content){
       width: calc(100% - 80px);
     }
-    ::v-deep .el-form-item__label {
+    :deep(.el-form-item__label){
       font-size: 12px;
     }
     .fault_level_width {
-      ::v-deep .el-form-item__content {
+      :deep(.el-form-item__content){
         width: 100%;
       }
     }
   }
   .fault_level {
-    ::v-deep .el-input__inner {
+    :deep(.el-input__inner){
       color: inherit;
       // color: var(--inputText);
     }

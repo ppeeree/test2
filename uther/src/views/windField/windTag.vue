@@ -184,6 +184,10 @@ export default {
 }
 // 第二个li样式
 .windField_select {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  white-space: nowrap;
   .wind_inform {
     position: relative;
     left: 3px;
@@ -205,6 +209,7 @@ export default {
     }
   }
   .status_list {
+    flex: 0 0 32px;
     color: rgba(255, 255, 255, 0.6);
     border: rgba(30, 98, 205, 0.502) 1px solid;
     border-radius: 4px;
@@ -216,7 +221,7 @@ export default {
     align-items: center;
     justify-content: center;
     line-height: 28px;
-    margin: 0 8px;
+    margin: 0 0 0 8px;
     font-size: 13px;
     font-weight: 350;
     cursor: pointer;
@@ -241,7 +246,9 @@ export default {
       top: 2px; */
     }
   }
-  ::v-deep .el-select {
+  :deep(.el-select){
+    flex: 0 0 210px;
+    width: 210px;
     height: 35px;
     .el-input--suffix .el-input__inner {
       height: 35px;

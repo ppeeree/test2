@@ -355,7 +355,7 @@ export default {
 
 .demo-ruleForm {
   padding: 8px 8px 0px 0px;
-  ::v-deep .el-input__inner {
+  :deep(.el-input__inner){
     // background: rgba(39, 39, 39, 0.5);
   }
 }

@@ -326,18 +326,18 @@ export default {
       margin-right: 10px;
       position: fixed;
       right: 65px;
-      ::v-deep input {
+      :deep(input){
         height: 28px;
         color: #000;
         line-height: 28px;
         border: 1px solid #aaa;
       }
-      ::v-deep .el-input__icon {
+      :deep(.el-input__icon){
         line-height: 28px;
       }
     }
   }
-  ::v-deep .el-dialog {
+  :deep(.el-dialog){
     height: 160px !important;
     .el-row {
       padding: 20px;

@@ -1,4 +1,5 @@
-import {mapGetters} from "vuex";
+import {mapGetters} from "vuex"
+import { validatenull } from "@/util/validate"
 
 export default (app, option = {}) => {
   const mixins = {
@@ -20,11 +21,11 @@ export default (app, option = {}) => {
     computed: {
       ...mapGetters(['userInfo', 'permission', 'roles']),
       ids() {
-        const ids = [];
+        const ids = []
         this.selectionList.forEach(ele => {
-          ids.push(ele[this.rowKey]);
-        });
-        return ids.join(",");
+          ids.push(ele[this.rowKey])
+        })
+        return ids.join(",")
       },
       bindVal() {
         return {
@@ -52,97 +53,100 @@ export default (app, option = {}) => {
       }
     },
     methods: {
+      validatenull(val) {
+        return validatenull(val)
+      },
       getList() {
         const callback = () => {
-          this.loading = true;
+          this.loading = true
           this.api[option.list || 'getList'](this.page.currentPage, this.page.pageSize, this.params).then(res => {
-            let data;
+            let data
             if (option.res) {
-              data = option.res(res.data);
+              data = option.res(res.data)
             } else {
-              data = res.data.data;
+              data = res.data.data
             }
-            this.page.total = data[option.total || 'total'] || 0;
-            this.data = data[option.records || 'records'];
+            this.page.total = data[option.total || 'total'] || 0
+            this.data = data[option.records || 'records']
             if (this.listAfter) {
-              this.listAfter(data);
+              this.listAfter(data)
             }
-            this.loading = false;
+            this.loading = false
           })
         }
         if (this.listBefore) {
-          this.listBefore();
+          this.listBefore()
         }
-        callback();
+        callback()
       },
       rowSave(row, done, loading) {
         const callback = () => {
-          delete this.form.params;
+          delete this.form.params
           this.api[option.add || 'add'](this.form).then((data) => {
-            this.getList();
+            this.getList()
             if (this.addAfter) {
-              this.addAfter(data);
+              this.addAfter(data)
             } else {
-              this.$message.success('新增成功');
+              this.$message.success('新增成功')
             }
-            done();
+            done()
           }).catch(() => {
-            loading();
+            loading()
           })
         }
         if (this.addBefore) {
-          this.addBefore();
+          this.addBefore()
         }
-        callback();
+        callback()
       },
       rowUpdate(row, index, done, loading) {
         const callback = () => {
-          delete this.form.params;
+          delete this.form.params
           this.api[option.update || 'update'](this.form).then((data) => {
-            this.getList();
+            this.getList()
             if (this.updateAfter) {
-              this.updateAfter(data);
+              this.updateAfter(data)
             } else {
-              this.$message.success('更新成功');
+              this.$message.success('更新成功')
             }
-            done();
+            done()
           }).catch(() => {
-            loading();
+            loading()
           })
         }
         if (this.updateBefore) {
-          this.updateBefore();
+          this.updateBefore()
         }
-        callback();
+        callback()
       },
       rowDel(row, index) {
         const callback = () => {
           this.api[option.del || 'remove'](row[this.rowKey], row).then((data) => {
-            this.getList();
+            this.getList()
             if (this.delAfter) {
               this.delAfter(data, row, index)
             } else {
-              this.$message.success('删除成功');
+              this.$message.success('删除成功')
             }
           })
         }
         if (this.delBefore) {
-          this.delBefore();
-          callback();
+          this.delBefore()
+          callback()
         } else {
           this.$confirm('确定将选择数据删除?', '提示', {
             confirmButtonText: '确定',
             cancelButtonText: '取消',
             type: 'warning'
           }).then(() => {
-            callback();
+            callback()
           })
         }
       },
       handleDelete() {
         if (this.selectionList.length === 0) {
-          this.$message.warning("请选择至少一条数据");
-          return;
+          this.$message.warning("请选择至少一条数据")
+          return
         }
         this.$confirm("确定将选择数据删除?", {
           confirmButtonText: "确定",
@@ -151,59 +155,59 @@ export default (app, option = {}) => {
         })
           .then(() => {
             this.api[option.del || 'remove'](this.ids).then((data) => {
-              this.getList();
+              this.getList()
               if (this.delMultiAfter) {
-                this.delMultiAfter(data, this.ids);
+                this.delMultiAfter(data, this.ids)
               } else {
-                this.$message.success('删除成功');
+                this.$message.success('删除成功')
               }
-            });
-          });
+            })
+          })
       },
       searchChange(params, done) {
-        if (done) done();
+        if (done) done()
         if (this.validatenull(params)) {
           Object.keys(this.params).forEach(ele => {
             if (!['createTime_dategt', 'createTime_datelt'].includes(ele)) {
-              delete this.params[ele];
+              delete this.params[ele]
             }
           })
         } else {
           Object.keys(params).forEach(ele => {
             if (this.validatenull(params[ele])) {
-              delete this.params[ele];
-              delete params[ele];
+              delete this.params[ele]
+              delete params[ele]
             }
           })
         }
-        this.params = Object.assign(this.params, params);
-        this.page.currentPage = 1;
-        this.getList();
+        this.params = Object.assign(this.params, params)
+        this.page.currentPage = 1
+        this.getList()
       },
       dateChange(date) {
         if (date) {
-          this.params.createTime_dategt = date[0];
-          this.params.createTime_datelt = date[1];
+          this.params.createTime_dategt = date[0]
+          this.params.createTime_datelt = date[1]
         } else {
-          delete this.params.createTime_dategt;
-          delete this.params.createTime_datelt;
+          delete this.params.createTime_dategt
+          delete this.params.createTime_datelt
         }
-        this.page.currentPage = 1;
-        this.getList();
+        this.page.currentPage = 1
+        this.getList()
       },
       selectionChange(list) {
-        this.selectionList = list;
+        this.selectionList = list
       },
       selectionClear() {
-        this.selectionList = [];
-        this.$refs.crud.toggleSelection();
+        this.selectionList = []
+        this.$refs.crud.toggleSelection()
       },
       refreshChange() {
-        this.getList();
+        this.getList()
       }
     }
   }
-  app.mixins = app.mixins || [];
-  app.mixins.push(mixins);
-  return app;
+  app.mixins = app.mixins || []
+  app.mixins.push(mixins)
+  return app
 }

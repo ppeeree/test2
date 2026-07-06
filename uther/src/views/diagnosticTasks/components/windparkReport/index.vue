@@ -20,7 +20,7 @@
                       :clearable="false"
                       v-model="monitorTime"
                       type="daterange"
-                      value-format="yyyy-MM-dd"
+                      value-format="YYYY-MM-DD"
                       prefix-icon=""
                       :disabled="isShowExitReport"
                       clear-icon=""
@@ -73,7 +73,7 @@
                 v-model="reportTime"
                 type="month"
                 placeholder="选择月份"
-                format="yyyy 年 MM 月"
+                format="YYYY 年 MM 月"
                 :clearable="false"
                 :disabled="isShowExitReport"
               >
@@ -131,7 +131,7 @@
           <el-table-column prop="windturbineName" label="机组" width="120"> </el-table-column>
           <el-table-column prop="diagnosisTime" label="诊断时间" width="180"> </el-table-column>
           <el-table-column prop="status" label="健康状态" width="80">
-            <template slot-scope="scope">
+            <template #default="scope">
               <span
                 :style="{
                   display: 'inline-block',
@@ -143,7 +143,7 @@
           </el-table-column>
           <el-table-column prop="compName" label="部件" width="120"> </el-table-column>
           <el-table-column prop="compStatus" label="部件状态" width="80">
-            <template slot-scope="scope">
+            <template #default="scope">
               <span
                 :style="{
                   display: 'inline-block',
@@ -496,7 +496,7 @@ export default {
         .detail_analysis_header_right {
           float: right;
 
-          ::v-deep .el-date-editor {
+          :deep(.el-date-editor){
             width: 150px;
             height: 28px;
             line-height: 28px;
@@ -561,7 +561,7 @@ export default {
       }
     }
   }
-  ::v-deep .el-date-editor {
+  :deep(.el-date-editor){
     height: 28px;
     line-height: 28px;
     width: 230px;
@@ -580,7 +580,7 @@ export default {
     }
   }
   .report_information {
-    ::v-deep .el-collapse {
+    :deep(.el-collapse){
       .el-collapse-item {
         margin: 0px 20px 0 20px;
         border-bottom: 1px solid rgba(216, 216, 216, 0.2);
@@ -622,7 +622,7 @@ export default {
         font-size: 14px;
         float: left;
       }
-      ::v-deep .el-textarea {
+      :deep(.el-textarea){
         width: calc(100% - 80px) !important;
         float: left;
         .el-textarea__inner {

@@ -158,7 +158,7 @@ export default [{
 },
 
 {
-  path: '*',
+  path: '/:pathMatch(.*)*',
   redirect: '/404'
 },
 /* {

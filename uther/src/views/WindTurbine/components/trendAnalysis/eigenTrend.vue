@@ -30,9 +30,10 @@
 <script>
 import { getEvAnalyzerDataApi } from '@/api/analysis/index.js'
 import { dealTrendData } from '@/util/transfrom.js'
+import { defineAsyncComponent } from 'vue'
 export default {
   components: {
-    trendChart: () => import('@/components/diagnosisChart/trend.vue')
+    trendChart: defineAsyncComponent(() => import('@/components/diagnosisChart/trend.vue'))
   },
   props: {
     trendParams: {
@@ -323,10 +324,10 @@ export default {
       line-height: 30px;
       font-size: 16px;
     }
-    ::v-deep .linePage {
+    :deep(.linePage){
       background: transparent;
     }
-    ::v-deep .chartbox {
+    :deep(.chartbox){
       /*       background: rgba(0, 43, 88, 0.4) !important;
       backdrop-filter: blur(10px); */
     }

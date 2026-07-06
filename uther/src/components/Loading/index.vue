@@ -25,7 +25,7 @@ export default {
   data() {
     return {
       LoadingGif: ''
-    };
+    }
   },
   computed: {
     ...mapGetters(['theme']),
@@ -42,17 +42,17 @@ export default {
     this.LoadingGif = parseInt(this.theme) === 1 ? loadgingGif_light : loadgingGif_dark
     // this.LoadingGif = loadgingGif
     // 设置初始化监听是否错误，错误即提示出来
-    let that = this;
+    let that = this
     window.addEventListener('message', function (messageEvent) {
       if (messageEvent.data == 'loadging') {
         // 取消loading
-        that.isShow = false;
-        return false;
+        that.isShow = false
+        return false
       }
       if (messageEvent.data == 'showLoading') {
         // 添加loading
-        that.isShow = true;
-        return false;
+        that.isShow = true
+        return false
       }
     })
   },
@@ -60,7 +60,7 @@ export default {
   },
   mounted() {
   }
-};
+}
 </script>
 <style lang="scss" scoped>
 .fade-enter-active,

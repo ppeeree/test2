@@ -49,7 +49,7 @@ const translations = {
     save: "Save",
     textPlaceholder: "Enter text..."
   }
-};
+}
 
 export default class ImageAnnotator {
   constructor(imageId, canvasId) {
@@ -89,8 +89,8 @@ export default class ImageAnnotator {
         tool.addEventListener('click', () => {
           this.textInputContainer.style.display = 'none'
           this.currentTool = tool.dataset.tool
-          this.canvas.classList.add('drawing');
-          this.canvas.style.cursor = 'crosshair';
+          this.canvas.classList.add('drawing')
+          this.canvas.style.cursor = 'crosshair'
           /*  if (this.currentTool === 'select') {
              this.canvas.classList.remove('drawing');
              this.canvas.style.cursor = 'pointer';
@@ -255,7 +255,7 @@ export default class ImageAnnotator {
   }
 
   saveAnnotation(annotation) {
-    if (!annotation.text && this.currentTool == 'text') return;
+    if (!annotation.text && this.currentTool == 'text') return
     // 保存当前样式到标注
     annotation.color = this.colorPicker.value
     annotation.lineWidth = parseInt(this.lineWidth.value)
@@ -694,9 +694,9 @@ export default class ImageAnnotator {
 
     // 再绘制标注
     this.redrawAnnotations.call({ ctx: tempCanvas, annotations: this.annotations, drawArrow: this.drawArrow })
-    const xml = new XMLSerializer().serializeToString(tempCanvas.getSvg());
-    const encoded = encodeURIComponent(xml);
-    return `data:image/svg+xml;charset=utf-8,${encoded}`;
+    const xml = new XMLSerializer().serializeToString(tempCanvas.getSvg())
+    const encoded = encodeURIComponent(xml)
+    return `data:image/svg+xml;charset=utf-8,${encoded}`
     // 导出为图片
     /* const link = document.createElement('a')
     link.download = 'defect-annotation-' + new Date().toISOString().slice(0, 10) + '.png'

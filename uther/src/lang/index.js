@@ -1,12 +1,9 @@
-import Vue from 'vue'
-import VueI18n from 'vue-i18n'
-import elementEnLocale from 'element-ui/lib/locale/lang/en' // element-ui lang
-import elementZhLocale from 'element-ui/lib/locale/lang/zh-CN'// element-ui lang
+import { createI18n } from 'vue-i18n'
+import elementEnLocale from 'element-plus/es/locale/lang/en'
+import elementZhLocale from 'element-plus/es/locale/lang/zh-cn'
 import enLocale from './en'
 import zhLocale from './zh'
-import { getStore } from '@/util/store'
-Vue.use(VueI18n)
-const Avue = window.AVUE;
+const Avue = window.AVUE || { locale: { en: {}, zh: {} } }
 const messages = {
   en: {
     ...enLocale,
@@ -20,7 +17,9 @@ const messages = {
   }
 }
 
-const i18n = new VueI18n({
+const i18n = createI18n({
+  legacy: true,
+  globalInjection: true,
   locale: 'zh',// getStore({ name: 'language' }) || 'zh',
   messages
 })

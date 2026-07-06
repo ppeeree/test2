@@ -132,14 +132,14 @@ export default {
   overflow-x: hidden;
   margin-bottom: 10px;
 }
-::v-deep .el-timeline-item {
+:deep(.el-timeline-item){
   margin-left: 30px;
   margin-top: 10px;
 }
-::v-deep .el-timeline-item__content {
+:deep(.el-timeline-item__content){
   color: white;
 }
-::v-deep .el-timeline-item__timestamp.is-top {
+:deep(.el-timeline-item__timestamp.is-top){
   color: white;
   font-size: 14px;
 }

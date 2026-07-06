@@ -138,7 +138,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-::v-deep .el-dialog .el-dialog__header {
+:deep(.el-dialog .el-dialog__header){
   height: 50px !important;
 }
 .bigChartContent {

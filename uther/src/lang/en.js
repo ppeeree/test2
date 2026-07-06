@@ -1,4 +1,4 @@
-let allRightReservedYear = new Date().getFullYear();
+let allRightReservedYear = new Date().getFullYear()
 export default {
   title: 'Saber Admin',
   logoutTip: 'Exit the system, do you want to continue?',
@@ -121,4 +121,4 @@ export default {
     closeOthers: 'Close Others',
     closeAll: 'Close All'
   }
-};
+}

@@ -10,7 +10,6 @@
       :selectedComp="selectedComp"
       @getWave="getWave"
       :positionXY="trendPosition"
-      v-on="$listeners"
       v-bind="$attrs"
       @changeAnalysisMode="changeAnalysisMode"
     />

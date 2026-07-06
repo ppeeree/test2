@@ -1,4 +1,4 @@
-import request from '@/router/axios';
+import request from '@/router/axios'
 
 export const modelList = (current, size, params) => {
   return request({
@@ -64,12 +64,12 @@ export const changeState = (params) => {
 }
 
 export const deployUpload = (category, tenantIds, files) => {
-  const formData = new FormData();
-  formData.append('category', category);
-  formData.append('tenantIds', tenantIds);
+  const formData = new FormData()
+  formData.append('category', category)
+  formData.append('tenantIds', tenantIds)
   files.forEach(file => {
-    formData.append('files', file);
-  });
+    formData.append('files', file)
+  })
   return request({
     headers: {
       "Content-Type": "multipart/form-data"

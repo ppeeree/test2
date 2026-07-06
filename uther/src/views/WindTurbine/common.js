@@ -78,7 +78,7 @@ export function handlerChineseName(name) {
     const value = map[char]
     if (value !== undefined) {
       text += value
-      break; // 遇到数字后直接跳出循环
+      break // 遇到数字后直接跳出循环
     } else {
       text += char
     }

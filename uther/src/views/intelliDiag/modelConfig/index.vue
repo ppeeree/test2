@@ -15,7 +15,7 @@
             <el-table-column prop="name" label="模型名称" />
             <el-table-column prop="modelType" label="专病类型" />
             <el-table-column fixed="right" label="操作">
-              <template slot-scope="scope">
+              <template #default="scope">
                 <el-button type="text" size="small" @click="openEdit(scope.row)">编辑</el-button>
                 <el-button type="text" size="small" @click="deleteModel(scope.row)">删除</el-button>
               </template>
@@ -24,7 +24,7 @@
         </div>
       </div>
     </div>
-    <model-dialog ref="addModel" :show.sync="dialogVisible" @success="handleSuccess"></model-dialog>
+    <model-dialog ref="addModel" v-model:show="dialogVisible" @success="handleSuccess"></model-dialog>
   </div>
 </template>
 <script>
@@ -205,7 +205,7 @@ export default {
     }
   }
 
-  ::v-deep .avue-crud__menu {
+  :deep(.avue-crud__menu){
     display: none !important;
   }
 }

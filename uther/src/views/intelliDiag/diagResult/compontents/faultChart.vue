@@ -70,6 +70,7 @@ export default {
           {
             name: '注意',
             type: 'bar',
+            coordinateSystem: 'cartesian2d',
             barWidth: '10%',
             barGap: '50%',
             itemStyle: {
@@ -99,6 +100,7 @@ export default {
           {
             name: '警告',
             type: 'bar',
+            coordinateSystem: 'cartesian2d',
             barWidth: '10%',
             barGap: '50%',
             itemStyle: {
@@ -124,6 +126,7 @@ export default {
           {
             name: '危险',
             type: 'bar',
+            coordinateSystem: 'cartesian2d',
             barWidth: '10%',
             barGap: '50%',
             itemStyle: {
@@ -171,10 +174,10 @@ export default {
     })
     this.resizeHandler.observe(this.$refs.faultChart)
   },
-  beforeDestroy() {
-    if (this.resizeOb) {
-      this.resizeOb.disconnect()
-      this.resizeOb = null
+  beforeUnmount() {
+    if (this.resizeHandler) {
+      this.resizeHandler.disconnect()
+      this.resizeHandler = null
     }
     if (!this.chart) {
       return

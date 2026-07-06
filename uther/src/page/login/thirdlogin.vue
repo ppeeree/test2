@@ -28,16 +28,16 @@
 </template>
 
 <script>
-  import website from '@/config/website';
+  import website from '@/config/website'
 
   export default {
     name: "thirdLogin",
     methods: {
       handleClick(source) {
-        window.location.href = `${website.authUrl}/${source}`;
+        window.location.href = `${website.authUrl}/${source}`
       }
     }
-  };
+  }
 </script>
 
 <style rel="stylesheet/scss" lang="scss" scoped>

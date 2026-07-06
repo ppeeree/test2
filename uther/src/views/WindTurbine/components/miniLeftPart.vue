@@ -35,7 +35,7 @@
               </el-col>
             </el-row>
           </div>
-          <template slot="reference">
+          <template #reference>
             <ul class="imglist_ul">
               <li
                 :class="{ active_li: selectedComp === item.entityName }"
@@ -151,7 +151,7 @@ export default {
     }, 60 * 1000)
   },
 
-  beforeDestroy() {
+  beforeUnmount() {
     clearInterval(this.timer)
     this.fetchingData1 = false // 停止获取数据
     this.timer = null

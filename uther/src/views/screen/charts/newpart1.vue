@@ -3,9 +3,10 @@
     <div class="windTurbine_state" :style="{ height: parent.isControl ? '80%' : '50%' }">
       <el-col
         class="turbine_item"
+        :span="8"
         v-for="item in turbineList"
         :key="item.value"
-        @click.native="clickWindTurbineMonitor(item.value, item.list)"
+        @click="clickWindTurbineMonitor(item.value, item.list)"
       >
         <span class="num" :style="changeNumStyle(item.value, item.num)" v-if="item.name == '监控率'"
           >{{ item.num }}%</span
@@ -21,7 +22,7 @@
       </el-col>
     </div>
     <div class="windTurbine_informion" v-if="!parent.isControl">
-      <el-col class="pink_item" v-for="item in pinkList" :key="item.value">
+      <el-col class="pink_item" :span="8" v-for="item in pinkList" :key="item.value">
         <span class="num">{{ item.num }}</span>
         <span class="text"> {{ item.name }}</span>
       </el-col>
@@ -35,13 +36,14 @@ import {
   getWindTurbineStatistics,
   getWindTurbineMonitorNum
 } from '@/api/screen/leftCardApi'
+import { defineAsyncComponent } from 'vue'
 
 export default {
   components: {
-    Card: () => import('./card.vue'),
-    GaugeCharts: () => import('../base/gauge-charts.vue'),
-    PieDoughnut: () => import('../base/pie-doughnut.vue'),
-    BarTickAlign: () => import('../base/bar-tickAlign.vue')
+    Card: defineAsyncComponent(() => import('./card.vue')),
+    GaugeCharts: defineAsyncComponent(() => import('../base/gauge-charts.vue')),
+    PieDoughnut: defineAsyncComponent(() => import('../base/pie-doughnut.vue')),
+    BarTickAlign: defineAsyncComponent(() => import('../base/bar-tickAlign.vue'))
   },
   inject: ['parent'],
   watch: {

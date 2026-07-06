@@ -33,7 +33,9 @@
               {{ ele.name }}
             </div>
           </span>
-          <span @mouseenter="openMenu(item)" slot="reference">{{ generateTitle(item) }}</span>
+          <template #reference>
+            <span @mouseenter="openMenu(item)">{{ generateTitle(item) }}</span>
+          </template>
         </el-popover>
       </div>
     </div>
@@ -68,18 +70,19 @@
           <span>{{ $t('navbar.logOut') }}</span>
         </div>
       </div>
-      <el-image
-        slot="reference"
-        src="/img/login/userIcon2.png"
-        fit="cover"
-        class="user"
-        style="width: 24px"
-      />
+      <template #reference>
+        <el-image
+          src="/img/login/userIcon2.png"
+          fit="cover"
+          class="user"
+          style="width: 24px"
+        />
+      </template>
     </el-popover>
     <!-- 确定退出登录框 -->
     <el-dialog
       custom-class="log_out"
-      :visible.sync="showNoChange"
+      v-model="showNoChange"
       width="17%"
       :modal-append-to-body="false"
     >
@@ -104,6 +107,7 @@ import { resetRouter } from '@/router/router'
 import cloneDeep from 'lodash/cloneDeep'
 import { info } from '@/api/system/tenant'
 import { getTopUrl } from '@/util/util'
+import { validatenull } from '@/util/validate'
 
 export default {
   data() {
@@ -142,6 +146,9 @@ export default {
     }, 1000)
   },
   methods: {
+    validatenull(val) {
+      return validatenull(val)
+    },
     /* openPage() {
       window.open('http://192.168.124.11:5150', '_blank')
     }, */
@@ -371,7 +378,7 @@ export default {
       letter-spacing: 3px;
       margin-left: 10px;
     }
-    ::v-deep .el-image {
+    :deep(.el-image){
       width: 24px;
       height: 27px;
     }
@@ -494,7 +501,7 @@ export default {
   }
 }
 //弹框样式修改
-::v-deep .el-dialog__body {
+:deep(.el-dialog__body){
   height: 100px;
   color: white;
 }

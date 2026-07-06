@@ -143,7 +143,7 @@ export default {
     })
     this.observer.observe(dom)
   },
-  destroyed() {
+  beforeUnmount() {
     if (this.chart) {
       this.chart.dispose()
     }

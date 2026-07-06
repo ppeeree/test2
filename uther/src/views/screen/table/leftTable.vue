@@ -15,11 +15,11 @@
         paddingBottom: handleCellStyle
       }"
     >
-      <template slot="empty">
+      <template #empty>
         <noData noteText="" firstText="机组暂无事件" />
       </template>
       <el-table-column prop="eventLevel" label="等级" align="center" width="50">
-        <template slot-scope="scope">
+        <template #default="scope">
           <span :style="{ color: eventLevelArray[scope.row.eventLevel - 1] }">
             {{ eventLevelEnum[scope.row.eventLevel] }}
           </span>
@@ -34,7 +34,7 @@
       >
       </el-table-column>
       <el-table-column prop="eventReason" label="事件详情" align="center">
-        <template slot-scope="scope">
+        <template #default="scope">
           <div class="cell-flex">
             <el-image
               style="width: 20px; height: 20px"
@@ -60,12 +60,12 @@
         align="center"
         :show-overflow-tooltip="true"
       >
-        <!-- <template slot-scope="scope">
+        <!-- <template #default="scope">
           <span>{{ handleTime(scope.row.disNowTime) }}</span>
         </template> -->
       </el-table-column>
       <el-table-column prop="eventStatus" label="处理状态" align="center" width="75">
-        <template slot-scope="scope">
+        <template #default="scope">
           <span>{{ eventStatusEnum[scope.row.eventStatus] }}</span>
         </template>
       </el-table-column>
@@ -81,9 +81,10 @@ import { eventStatusEnum } from '@/util/constant'
 import { eventLevelEnum, eventLevelColorStyleEnum } from '@/util/constant'
 import dayjs from 'dayjs'
 import throttle from 'lodash/throttle'
+import { defineAsyncComponent } from 'vue'
 
 export default {
-  components: { noData: () => import('@/components/noData/index.vue') },
+  components: { noData: defineAsyncComponent(() => import('@/components/noData/index.vue')) },
   props: {
     tableListData: {
       type: Array,
@@ -241,23 +242,23 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-.table-wrapper ::v-deep .el-table--fit {
+.table-wrapper :deep(.el-table--fit){
   padding: 0px;
 }
-.table-wrapper ::v-deep .el-table,
+.table-wrapper :deep(.el-table),
 .el-table__expanded-cell {
   background-color: transparent;
 }
 
-.table-wrapper ::v-deep .el-table tr {
+.table-wrapper :deep(.el-table tr){
   background-color: transparent;
 }
-.table-wrapper ::v-deep .el-table--enable-row-transition .el-table__body td,
+.table-wrapper :deep(.el-table--enable-row-transition .el-table__body td),
 .el-table .cell {
   background-color: transparent;
 }
 //去掉底下边框
-::v-deep .el-table {
+:deep(.el-table){
   // width: 100%;
   box-sizing: border-box;
   &::before {
@@ -270,7 +271,7 @@ export default {
   .el-table {
     color: #fff;
     font-size: 0.7rem;
-    ::v-deep tr {
+    :deep(tr){
       &:hover > td {
         cursor: pointer;
         background-color: transparent;
@@ -284,7 +285,7 @@ export default {
         }
       }
     }
-    ::v-deep .el-table__cell {
+    :deep(.el-table__cell){
       border-bottom-color: transparent;
     }
     .cell-flex {
@@ -309,12 +310,12 @@ export default {
   }
 }
 
-::v-deep .el-table__body {
+:deep(.el-table__body){
   -webkit-border-horizontal-spacing: 0px; // 水平间距
   -webkit-border-vertical-spacing: 0px; // 垂直间距 设置的是行间距
 }
 
-::v-deep .el-table {
+:deep(.el-table){
   .dobule-cell-table {
     background-color: rgba(255, 255, 255, 0.2) !important;
   }
@@ -322,35 +323,35 @@ export default {
     background-color: rgba(255, 255, 255, 0.1) !important;
   }
 }
-::v-deep .el-empty__description {
+:deep(.el-empty__description){
   margin-top: 0px;
 }
-::v-deep .el-table__empty-text {
+:deep(.el-table__empty-text){
   line-height: 29px;
 }
 .event-level-img {
   position: relative;
   top: 6px;
 }
-::v-deep .el-table__body-wrapper {
+:deep(.el-table__body-wrapper){
   overflow-y: auto;
   .el-table__body {
     position: absolute;
   }
 }
-::v-deep .el-table .el-table__cell.is-center,
+:deep(.el-table .el-table__cell.is-center),
 .el-table td.el-table__cell,
 .el-table th.el-table__cell.is-leaf {
   border-color: transparent;
 }
-::v-deep .el-table td.el-table__cell,
+:deep(.el-table td.el-table__cell),
 .el-table th.el-table__cell.is-leaf {
   border-bottom: none;
 }
-::v-deep .el-table__row td {
+:deep(.el-table__row td){
   border-left: none;
 }
-::v-deep .el-table th.gutter {
+:deep(.el-table th.gutter){
   // display: none;
   background: rgb(17, 67, 121);
 }

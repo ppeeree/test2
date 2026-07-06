@@ -1,4 +1,4 @@
-import request from '@/router/axios';
+import request from '@/router/axios'
 
 export const getListDataScope = (current, size, params) => {
   return request({

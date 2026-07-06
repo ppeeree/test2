@@ -21,7 +21,7 @@
               color: "#808695",
               subtext: "购买",
               click: () => {
-                this.box = true;
+                this.box = true
               },
               list: [
                 {
@@ -86,7 +86,7 @@
               tip: "/永久",
               subtext: "购买",
               click: () => {
-                this.box = true;
+                this.box = true
               },
               list: [
                 {
@@ -150,7 +150,7 @@
               tip: "/永久",
               subtext: "购买",
               click: () => {
-                this.box = true;
+                this.box = true
               },
               list: [
                 {
@@ -191,9 +191,9 @@
             }
           ]
         }
-      };
+      }
     }
-  };
+  }
 </script>
 <style>
 </style>

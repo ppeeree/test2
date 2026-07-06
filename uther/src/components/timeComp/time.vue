@@ -6,7 +6,7 @@
       <!-- <br style="clear: both" /> -->
     </div>
     <el-date-picker
-      v-model="time"
+      v-model="localTime"
       type="datetimerange"
       :picker-options="pickerOptions"
       range-separator="~"
@@ -81,6 +81,17 @@ export default {
             }
           }
         ]
+      }
+    }
+  },
+  computed: {
+    localTime: {
+      get() {
+        return this.time
+      },
+      set(value) {
+        this.$emit('update:time', value)
+        this.$emit('timeChange', value)
       }
     }
   },

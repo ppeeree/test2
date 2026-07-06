@@ -62,6 +62,7 @@ export default {
           {
             name: '直接访问',
             type: 'bar',
+            coordinateSystem: 'cartesian2d',
             barWidth: '30%',
             data: [
               {

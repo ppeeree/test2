@@ -3,12 +3,12 @@
     <el-form>
       <el-form-item label="关联事件：">
         <el-tooltip placement="right" effect="light">
-          <div slot="content">
+          <template #content>
             <div style="color: #409eff; margin-bottom: 3px">
               <i class="el-icon-warning"></i> 关联事件处理
             </div>
             对于同一个机组，同一个类型，同一级别事件进行批量统一处理。
-          </div>
+          </template>
           <span
             @mouseenter="mouseShow = true"
             @mouseleave="mouseShow = false"
@@ -87,7 +87,7 @@
     <!-- 缺少必要参数的弹框 -->
     <el-dialog
       style="margin-top: 3vh"
-      :visible.sync="dialogVisible"
+        v-model="dialogVisible"
       :modal-append-to-body="false"
       width="60%"
     >
@@ -97,15 +97,17 @@
         ></span>
         <span>缺少必要参数</span>
       </span>
-      <span slot="footer" class="dialog-footer">
+        <template #footer>
+          <span class="dialog-footer">
         <el-button @click="dialogVisible = false">取 消</el-button>
         <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
-      </span>
+          </span>
+        </template>
     </el-dialog>
     <!-- 没有参数时的弹框 -->
     <el-dialog
       style="margin-top: 3vh"
-      :visible.sync="dialog"
+        v-model="dialog"
       width="60%"
       :modal-append-to-body="false"
     >
@@ -115,15 +117,17 @@
         ></span>
         <span>请输入参数</span>
       </span>
-      <span slot="footer" class="dialog-footer">
+      <template #footer>
+        <span class="dialog-footer">
         <el-button @click="dialog = false">取 消</el-button>
         <el-button type="primary" @click="dialog = false">确 定</el-button>
-      </span>
+        </span>
+      </template>
     </el-dialog>
     <!-- 确认取消修改弹框 -->
     <el-dialog
       style="margin-top: 3vh"
-      :visible.sync="showNoChange"
+        v-model="showNoChange"
       width="60%"
       :modal-append-to-body="false"
     >
@@ -133,10 +137,12 @@
         ></span>
         <span>确认取消修改</span>
       </span>
-      <span slot="footer" class="dialog-footer">
+        <template #footer>
+          <span class="dialog-footer">
         <el-button @click="showNoChange = false">取 消</el-button>
         <el-button type="primary" @click="closeDetailCard">确 定</el-button>
-      </span>
+          </span>
+        </template>
     </el-dialog>
   </div>
 </template>
@@ -255,7 +261,7 @@ export default {
       }
     }
   },
-  destroyed() {},
+  beforeUnmount() {},
   mounted() {
     this.faultLevel = this.changeFaultName[this.clickEventItem.severity]
     this.fauleInput = this.clickEventItem.faultValue
@@ -356,7 +362,7 @@ export default {
   width: 100%;
 }
 .get_event_time {
-  ::v-deep .el-input--small .el-input__inner {
+  :deep(.el-input--small .el-input__inner){
     background: white !important;
     box-shadow: none;
     border-color: transparent;
@@ -367,18 +373,18 @@ export default {
 }
 
 //弹框样式
-::v-deep .el-dialog__body {
+:deep(.el-dialog__body){
   padding-top: 10px;
   padding-left: 35px;
   color: white;
 }
-::v-deep .el-button {
+:deep(.el-button){
   height: 27px;
   padding: 0px 17px;
 }
 
 //时间处理弹框
-::v-deep .el-form {
+:deep(.el-form){
   margin-left: 19px;
   background: rgba(255, 255, 255, 0.1);
   padding-left: 7px;
@@ -407,7 +413,7 @@ export default {
 }
 
 .event_deal_degree {
-  ::v-deep .el-input__inner {
+  :deep(.el-input__inner){
     color: var(--inputText);
   }
 }

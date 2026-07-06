@@ -1,5 +1,5 @@
 <template>
-  <el-dialog :title="dialogTitle" v-drag :modal="false" :visible.sync="visible" width="900px" @close="handleClose"
+  <el-dialog :title="dialogTitle" v-drag :modal="false" v-model="visible" width="900px" @close="handleClose"
     destroy-on-close>
     <div class="dialog-content">
       <el-form :model="formData" :rules="rules" ref="formRef" label-width="120px" size="small">
@@ -43,16 +43,18 @@
         <!-- 3. 数据配置区域 -->
         <el-divider content-position="left"><i class="el-icon-document"></i> 数据配置</el-divider>
         <!-- ================= 3. 底部：动态数据配置 (支持增删) ================= -->
-        <data-config-list ref="configListRef" :list.sync="formData.dataRules" :isMultipleSelection="isMultipleSelection"
+        <data-config-list ref="configListRef" v-model:list="formData.dataRules" :isMultipleSelection="isMultipleSelection"
           :options="measLocationCodes" />
       </el-form>
     </div>
     <!-- 底部按钮区 -->
-    <div slot="footer" class="dialog-footer">
-      <el-button size="small" type="primary" style="margin-right: 10px" @click="submitForm" :loading="loading">保
-        存</el-button>
-      <el-button size="small" @click="handleClose">取 消</el-button>
-    </div>
+    <template #footer>
+      <div class="dialog-footer">
+        <el-button size="small" type="primary" style="margin-right: 10px" @click="submitForm" :loading="loading">保
+          存</el-button>
+        <el-button size="small" @click="handleClose">取 消</el-button>
+      </div>
+    </template>
   </el-dialog>
 </template>
 
@@ -114,8 +116,7 @@ export default {
           const matchedItem = this.measLocationCodes.find(item => item.key === firstCode)
           if (matchedItem) {
             const newName = this.getModelName1(matchedItem.value)
-            // 3. 直接赋值即可，无需 $set（因为 modelName1 在 data 中已预定义）
-            // 如果确实想用 $set，也可以：this.$set(this.formData, 'modelName1', newName);
+            // 3. 直接赋值即可，因为 modelName1 在 data 中已预定义
             this.formData.modelName1 = newName
           }
         }
@@ -248,7 +249,7 @@ export default {
   margin-bottom: 18px;
 }
 
-::v-deep .el-radio__label {
+:deep(.el-radio__label){
   color: #303133;
 }
 

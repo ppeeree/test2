@@ -581,7 +581,7 @@ export default {
     backdrop-filter: blur(4px);
     border-radius: 6px;
     // padding-right: 25px;
-    ::v-deep .el-drawer {
+    :deep(.el-drawer){
       width: 100% !important;
       background: transparent;
       box-shadow: none;

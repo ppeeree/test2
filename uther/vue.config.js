@@ -16,7 +16,7 @@ const proxyAgent = new http.Agent({
 module.exports = {
   //路径前缀
   publicPath: '/',
-  lintOnSave: true,
+  lintOnSave: false,
   outputDir: 'www',
   productionSourceMap: false,
   runtimeCompiler: true,
@@ -39,18 +39,15 @@ module.exports = {
       'lodash'
     )
     config.resolve.alias.set(
+      'vue$',
+      path.resolve(__dirname, 'node_modules/vue/dist/vue.esm-bundler.js')
+    )
+    config.resolve.alias.set(
       'acharts',
       path.resolve(__dirname, '../acharts/index.js')
     )
     //忽略的打包文件,CDN引入
     config.externals({
-      vue: 'Vue',
-      'vue-router': 'VueRouter',
-      vuex: 'Vuex',
-      axios: 'axios',
-      'element-ui': 'ELEMENT',
-      'echarts': 'echarts',
-      'avue': 'Avue',
       xlsx: 'XLSX',
     })
     //==end
@@ -61,7 +58,7 @@ module.exports = {
   },
   configureWebpack: {
     output: {
-      filename: 'js/[name].[hash].js',
+      filename: 'js/[name].[fullhash].js',
       chunkFilename: 'js/[name].[chunkhash].js'
     },
     module: {
@@ -151,14 +148,26 @@ module.exports = {
     // ==end==
   },
   css: {
-    extract: { ignoreOrder: true }
+    extract: { ignoreOrder: true },
+    loaderOptions: {
+      css: {
+        url: {
+          filter: url => {
+            return !/^\/(img|assets|svg|cdn|util)\//.test(url)
+          }
+        }
+      }
+    }
   },
   //开发模式反向代理配置，生产模式请使用Nginx部署并配置反向代理
   devServer: {
     port: 1888,
-    overlay: {
+    client:{
+      overlay: {
       warnings: false,
       errors: false
+    }
+    
     },
     proxy: {
       /* '/api': {

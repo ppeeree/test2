@@ -1,7 +1,7 @@
 import Mock from 'mockjs'
 
 export default ({mock}) => {
-  if (!mock) return;
+  if (!mock) return
   Mock.mock('/api/blade-auth/oauth/token/refresh', 'post', () => {
     return {
       data: {

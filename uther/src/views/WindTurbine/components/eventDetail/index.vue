@@ -41,7 +41,6 @@
       <div class="event_comp_title">事件处理</div>
       <div style="width: 97%">
         <eventDeal
-          v-on="$listeners"
           v-bind="$attrs"
           :clickEventItem="newClickItem"
           :trackdData="eventTrackData"

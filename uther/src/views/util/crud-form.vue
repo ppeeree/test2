@@ -40,7 +40,7 @@ export default {
           name: "small"
         }
       ]
-    };
+    }
   },
   methods: {
     handleForm(id) {
@@ -49,10 +49,10 @@ export default {
         query: {
           id: id
         }
-      });
+      })
     }
   }
-};
+}
 </script>
 
 <style>

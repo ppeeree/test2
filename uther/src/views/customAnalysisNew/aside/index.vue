@@ -602,7 +602,7 @@ export default {
       }
       .inline-input {
         width: calc(50% - 50px);
-        ::v-deep .el-input__inner {
+        :deep(.el-input__inner){
           padding: 0;
           text-align: center;
         }
@@ -611,12 +611,12 @@ export default {
         height: 30px;
         line-height: 30px;
       }
-      ::v-deep .el-range-editor {
+      :deep(.el-range-editor){
         width: calc(100% - 40px);
         height: 30px;
         line-height: 30px;
       }
-      ::v-deep .el-date-editor {
+      :deep(.el-date-editor){
         .el-range-separator {
           color: #303133;
           padding: 0;
@@ -633,7 +633,7 @@ export default {
       }
     }
   }
-  ::v-deep .el-tree {
+  :deep(.el-tree){
     width: 100%;
     color: #606266 !important;
     margin: 10px 0 0 0 !important;

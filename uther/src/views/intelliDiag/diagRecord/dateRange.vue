@@ -8,8 +8,8 @@
     ref="time"
     v-model="timeValue"
     type="daterange"
-    value-format="yyyy-MM-dd"
-    :picker-options="pickerOptions"
+    value-format="YYYY-MM-DD"
+    :shortcuts="pickerShortcuts"
     prefix-icon=""
     clear-icon=""
   >
@@ -29,28 +29,26 @@ export default {
   },
   data() {
     return {
-      pickerOptions: {
-        shortcuts: [
-          {
-            text: '近7天',
-            onClick(picker) {
-              const end = new Date()
-              const start = new Date()
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 7)
-              picker.$emit('pick', [start, end])
-            }
-          },
-          {
-            text: '近30天',
-            onClick(picker) {
-              const end = new Date()
-              const start = new Date()
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 30)
-              picker.$emit('pick', [start, end])
-            }
+      pickerShortcuts: [
+        {
+          text: '近7天',
+          value: () => {
+            const end = new Date()
+            const start = new Date()
+            start.setTime(start.getTime() - 3600 * 1000 * 24 * 7)
+            return [start, end]
           }
-        ]
-      },
+        },
+        {
+          text: '近30天',
+          value: () => {
+            const end = new Date()
+            const start = new Date()
+            start.setTime(start.getTime() - 3600 * 1000 * 24 * 30)
+            return [start, end]
+          }
+        }
+      ],
       timeValue: [dayjs().subtract(30, 'day').format('YYYY-MM-DD'), dayjs().format('YYYY-MM-DD')]
     }
   },
@@ -65,7 +63,7 @@ export default {
 <style lang="scss" scoped>
 .inline-input {
   width: 100px;
-  ::v-deep .el-input__inner {
+  :deep(.el-input__inner){
     padding: 0;
     text-align: center;
   }
@@ -74,12 +72,12 @@ input {
   height: 30px;
   line-height: 30px;
 }
-::v-deep .el-range-editor {
+:deep(.el-range-editor){
   width: 200px;
   height: 30px;
   line-height: 30px;
 }
-::v-deep .el-date-editor {
+:deep(.el-date-editor){
   .el-range-separator {
     color: #303133;
     padding: 0;

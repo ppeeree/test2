@@ -77,19 +77,20 @@
         >
       </div>
     </div>
-    <el-button
-      size="mini"
-      :class="workingList !== '' ? ['func_btn', { func_btn_active: visible }] : ['func_btn_none']"
-      slot="reference"
-      @click="clickWorkingBtn(typeName)"
-      :style="{
-        marginRight: '20px',
-        cursor: workingList !== '' ? 'pointer' : 'not-allowed'
-      }"
-    >
-      <img :src="getCodeImg(workingUnit)" :title="imgTitle" />
-      <!-- <span>{{ typeName }}</span> -->
-    </el-button>
+    <template #reference>
+      <el-button
+        size="mini"
+        :class="workingList !== '' ? ['func_btn', { func_btn_active: visible }] : ['func_btn_none']"
+        @click="clickWorkingBtn(typeName)"
+        :style="{
+          marginRight: '20px',
+          cursor: workingList !== '' ? 'pointer' : 'not-allowed'
+        }"
+      >
+        <img :src="getCodeImg(workingUnit)" :title="imgTitle" />
+        <!-- <span>{{ typeName }}</span> -->
+      </el-button>
+    </template>
   </el-popover>
 </template>
 <script>
@@ -204,7 +205,7 @@ export default {
     }
     this.getdiffWorkingList()
   },
-  destroyed() {
+  beforeUnmount() {
     this.rangeValue = this.workingList.split('-')
   },
   methods: {

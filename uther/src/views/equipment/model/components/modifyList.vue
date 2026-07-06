@@ -378,7 +378,7 @@ export default {
   .el-input {
     width: 55%;
   }
-  ::v-deep .el-form-item__label {
+  :deep(.el-form-item__label){
     width: 189px !important;
   }
 }
@@ -407,10 +407,10 @@ export default {
   }
 }
 
-::v-deep .el-input.is-disabled .el-input__inner {
+:deep(.el-input.is-disabled .el-input__inner){
   border-color: rgba(71, 86, 128, 1);
 }
-::v-deep .el-select .el-input.is-disabled .el-input__inner:hover {
+:deep(.el-select .el-input.is-disabled .el-input__inner:hover){
   border-color: rgba(71, 86, 128, 1);
 }
 </style>

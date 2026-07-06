@@ -26,13 +26,13 @@
             <el-col :span="6" style="border-left: 2px solid #ccc; border-right: 2px solid #ccc">
               <div class="card_title">运维要求</div>
               <div class="card_content">
-                <card-item @click.native="selectedItem('危险')" titleText="48小时内检查" :value="summaryInfo.dangerDeviceCount"
+                <card-item @click="selectedItem('危险')" titleText="48小时内检查" :value="summaryInfo.dangerDeviceCount"
                   icon="local-fix" bgColor="#FF0F0D" fontColor="#FF0F0D" :class="[
                     'active_card_item',
                     { active_card_item_active: selectedlevel === '危险' }
                   ]">
                 </card-item>
-                <card-item @click.native="selectedItem('警告')" titleText="一周内检查" :value="summaryInfo.warningDeviceCount"
+                <card-item @click="selectedItem('警告')" titleText="一周内检查" :value="summaryInfo.warningDeviceCount"
                   icon="local-fix" bgColor="#F37628" fontColor="#F37628" :class="[
                     'active_card_item',
                     { active_card_item_active: selectedlevel === '警告' }
@@ -60,15 +60,15 @@
             class="my-avue-crud" @selection-change="handleSelectionChange" @current-change="currentChange"
             @size-change="sizeChange">
             <!-- 自定义操作列 -->
-            <template slot="menu" slot-scope="scope">
+            <template #menu="scope">
               <el-button @click="goToPath(scope.row)"> 诊断详情 </el-button>
             </template>
-            <template slot="alarmLevel" slot-scope="scope">
+            <template #alarmLevel="scope">
               <span :style="{ color: levelColor[eventTypeEnum[scope.row.alarmLevel]] }">{{
                 scope.row.alarmLevel
               }}</span>
             </template>
-            <template slot="maintenanceRequirement" slot-scope="scope">
+            <template #maintenanceRequirement="scope">
               <span :style="{ color: levelColor[eventTypeEnum[scope.row.alarmLevel]] }">{{
                 scope.row.maintenanceRequirement
               }}</span>
@@ -204,8 +204,8 @@ export default {
   mounted() {
     this.initResizeObserver() // 初始化resizeObserver
   },
-  beforeDestroy() {
-    // Vue 2 组件销毁前的清理工作，防止内存泄漏
+  beforeUnmount() {
+    // 组件销毁前的清理工作，防止内存泄漏
     if (this.resizeObserver) {
       this.resizeObserver.disconnect()
     }
@@ -223,7 +223,7 @@ export default {
         this.resizeTimer = setTimeout(() => {
           // 获取父级容器的最新高度
           const parentHeight = entries[0].contentRect.height
-          this.$set(this.tableOption, 'height', parentHeight - 120 + 'px')
+          this.tableOption.height = parentHeight - 120 + 'px'
           this.$nextTick(() => {
             setTimeout(() => {
               if (this.$refs.crud) {
@@ -586,16 +586,16 @@ export default {
         overflow: hidden;
         min-height: 0;
 
-        ::v-deep .my-avue-crud {
+        :deep(.my-avue-crud){
           flex: 1;
           height: calc(100% - 50px);
         }
 
-        ::v-deep .avue-crud__menu {
+        :deep(.avue-crud__menu){
           display: none !important;
         }
 
-        /*     ::v-deep .my-avue-crud {
+        /*     :deep(.my-avue-crud){
           flex: 1;
           height: calc(100% - 50px);
           display: flex;
@@ -612,10 +612,10 @@ export default {
           }
         }
 
-        ::v-deep .my-avue-crud .el-table__header-wrapper {
+        :deep(.my-avue-crud .el-table__header-wrapper){
           flex: 0 0 auto;
         }
-        ::v-deep .my-avue-crud .el-table {
+        :deep(.my-avue-crud .el-table){
           flex: 1;
           height: 100%;
           min-height: 0;
@@ -624,7 +624,7 @@ export default {
           overflow: hidden;
         }
 
-        ::v-deep .my-avue-crud .el-table__body-wrapper {
+        :deep(.my-avue-crud .el-table__body-wrapper){
           flex: 1;
           height: 100%;
           overflow-y: auto !important;

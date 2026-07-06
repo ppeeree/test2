@@ -145,6 +145,7 @@ export default {
           {
             name: '',
             type: 'bar',
+            coordinateSystem: 'cartesian2d',
             barWidth: '38px',
             data: [0, 0, 0, 0, 0, 0, 0, 0, 0],
             silent: true,
@@ -157,6 +158,7 @@ export default {
           {
             name: '',
             type: 'bar',
+            coordinateSystem: 'cartesian2d',
             zlevel: 2,
             barWidth: '10px',
             animationDuration: 1500,
@@ -175,6 +177,7 @@ export default {
           {
             name: '',
             type: 'bar',
+            coordinateSystem: 'cartesian2d',
             zlevel: 2,
             barWidth: '10px',
             data: [],

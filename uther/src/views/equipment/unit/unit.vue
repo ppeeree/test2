@@ -150,7 +150,7 @@ export default {
         color: white;
       }
     }
-    ::v-deep .el-textarea {
+    :deep(.el-textarea){
       .el-textarea__inner {
         line-height: 38px;
         padding-top: 0px;

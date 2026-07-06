@@ -8,7 +8,7 @@
         :data="data"
         ref="crud"
         v-model="form"
-        :page.sync="page"
+        v-model:page="page"
         :before-open="beforeOpen"
         @search-change="searchChange"
         @search-reset="searchReset"
@@ -30,7 +30,7 @@
             >报告上传</el-button
           >
         </template> -->
-        <template slot="menu" slot-scope="{ row }">
+        <template #menu="{ row }">
           <el-button
             type="text"
             icon="el-icon-download"
@@ -232,7 +232,8 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        deleteReportApi({ id: row.reportGuid }).then(res => {
+        const reportId = row.diagReportGuid || row.DiagReportGuid || row.id || row.reportGuid
+        deleteReportApi({ id: reportId }).then(res => {
           if (res.data.success) {
             this.$message.success(res.data.message)
             this.onLoad(this.page, this.query)
@@ -255,7 +256,7 @@ export default {
   button {
     cursor: pointer;
   }
-  ::v-deep .avue-crud__menu {
+  :deep(.avue-crud__menu){
     min-height: 0 !important;
   }
 }

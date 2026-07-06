@@ -1,7 +1,6 @@
-import Vue from 'vue'
 import { getStore } from '@/util/store'
 import { setTheme } from '@/util/util'
-import { MessageBox } from 'element-ui'
+import { ElMessage, ElMessageBox } from 'element-plus'
 import map from './map'
 // import { getCommonApi, /* getUavBrandApi */ } from '../api/common'
 // 使用方法：this.$utils.方法名
@@ -105,7 +104,7 @@ const UtilData = {
    */
   confirm(options, callback, catchFn) {
     const { msg = '删除后不可恢复，请确认是否删除？', title = '提示', type = 'warning', distinguishCancelAndClose = false } = options
-    MessageBox.confirm(msg, title, {
+    ElMessageBox.confirm(msg, title, {
       type,
       dangerouslyUseHTMLString: true,
       distinguishCancelAndClose
@@ -124,10 +123,9 @@ const UtilData = {
    * @param {*} type 展示类型
    */
   showAlert(content, type = 0) {
-    const self = new Vue()
     const typeList = ['success', 'error', 'warning', 'info']
-    self.$message.closeAll()
-    self.$message[typeList[type]](content)
+    ElMessage.closeAll()
+    ElMessage[typeList[type]](content)
   },
   /**
    * @description: 弹窗拖拽功能
@@ -338,8 +336,8 @@ const UtilData = {
 }
 
 const UTIL = {
-  install: Vue => {
-    Vue.prototype.$utils = UtilData
+  install: app => {
+    app.config.globalProperties.$utils = UtilData
   }
 }
 

@@ -1,6 +1,4 @@
-import Vue from 'vue'
-
-Vue.prototype.setSessionItem = function (key, newVal) {
+export function setSessionItem(key, newVal) {
   let newStorageEvent = document.createEvent('StorageEvent')
   const storage = {
     setItem: function (k, val) {
@@ -22,7 +20,7 @@ Vue.prototype.setSessionItem = function (key, newVal) {
   return storage.setItem(key, newVal)
 }
 
-Vue.prototype.setLocalstorageItem = function (key, newVal) {
+export function setLocalstorageItem(key, newVal) {
   // 创建一个StorageEvent事件
   let newStorageEvent = document.createEvent('StorageEvent')
   const storage = {
@@ -35,4 +33,11 @@ Vue.prototype.setLocalstorageItem = function (key, newVal) {
     }
   }
   return storage.setItem(key, newVal)
+}
+
+export default {
+  install(app) {
+    app.config.globalProperties.setSessionItem = setSessionItem
+    app.config.globalProperties.setLocalstorageItem = setLocalstorageItem
+  }
 }

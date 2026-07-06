@@ -1,5 +1,5 @@
 import { setToken, setRefreshToken, removeToken, removeRefreshToken } from '@/util/auth'
-import { Message } from 'element-ui'
+import { ElMessage } from 'element-plus'
 import { setStore, getStore } from '@/util/store'
 import { isURL, validatenull } from '@/util/validate'
 import { deepClone } from '@/util/util'
@@ -68,7 +68,7 @@ const user = {
           .then((res) => {
             const data = res.data
             if (data.error_description) {
-              Message({
+              ElMessage({
                 message: data.error_description,
                 type: 'error'
               })
@@ -106,7 +106,7 @@ const user = {
           (res) => {
             const data = res.data
             if (data.error_description) {
-              Message({
+              ElMessage({
                 message: data.error_description,
                 type: 'error'
               })

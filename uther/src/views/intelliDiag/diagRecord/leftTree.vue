@@ -174,7 +174,7 @@ export default {
   padding: 10px;
 }
 
-::v-deep .el-tree--highlight-current .el-tree-node.is-current>.el-tree-node__content {
+:deep(.el-tree--highlight-current .el-tree-node.is-current>.el-tree-node__content){
   background-color: #32a9ff;
   color: #fff;
 }
@@ -207,13 +207,13 @@ export default {
       line-height: 30px;
     }
 
-    ::v-deep .el-range-editor {
+    :deep(.el-range-editor){
       width: calc(100% - 40px);
       height: 30px;
       line-height: 30px;
     }
 
-    ::v-deep .el-date-editor {
+    :deep(.el-date-editor){
       .el-range-separator {
         color: #303133;
         padding: 0;

@@ -18,7 +18,13 @@
           >
           </el-option>
         </el-select>
-        <el-date-picker size="small" v-model="dataMonth" type="month" placeholder="选择月">
+        <el-date-picker
+          size="small"
+          v-model="dataMonth"
+          type="month"
+          value-format="YYYY-MM"
+          placeholder="选择月"
+        >
         </el-date-picker>
       </div>
       <el-table
@@ -40,14 +46,14 @@
           show-overflow-tooltip
           width="140"
         >
-          <template slot-scope="scope">
+          <template #default="scope">
             {{ scope.row.deviceName }}-{{ scope.row.compName }}
           </template>
         </el-table-column>
 
         <!-- 右侧动态列：1-30 -->
         <el-table-column v-for="(col, index) in columns" :key="index" :label="col" min-width="40">
-          <template slot-scope="scope">
+          <template #default="scope">
             <!-- 这里的 index 对应 columns 的索引，取出对应的数据 -->
             <span
               :style="{
@@ -156,7 +162,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-::v-deep .el-checkbox__label {
+:deep(.el-checkbox__label){
   color: #909399 !important;
 }
 .el-main {
@@ -220,7 +226,7 @@ export default {
     opacity: 1;
     background: linear-gradient(171deg, rgb(0, 129, 255) 0%, #22cce2 101%);
   } */
-  ::v-deep .el-table tr {
+  :deep(.el-table tr){
     background-color: #fff !important;
   }
 }

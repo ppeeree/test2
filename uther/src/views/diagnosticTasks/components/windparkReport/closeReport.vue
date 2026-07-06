@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-dialog
-      :visible.sync="dialogVisible"
+      v-model="dialogModel"
       :modal-append-to-body="true"
       @close="closeDialog"
       :append-to-body="true"
@@ -20,10 +20,12 @@
         resize="none"
       >
       </el-input>
-      <span slot="footer" class="dialog-footer">
+      <template #footer>
+      <span class="dialog-footer">
         <el-button size="mini" @click="noneStoreReport">取 消</el-button>
         <el-button size="mini" type="primary" @click="storeRepoter">确 定</el-button>
       </span>
+      </template>
     </el-dialog>
   </div>
 </template>
@@ -43,6 +45,16 @@ export default {
       noteInfo: ''
     }
   },
+  computed: {
+    dialogModel: {
+      get() {
+        return this.dialogVisible
+      },
+      set(val) {
+        if (!val) this.closeDialog()
+      }
+    }
+  },
   methods: {
     closeDialog() {
       this.$emit('closeDialog')
@@ -60,7 +72,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-::v-deep .el-dialog {
+:deep(.el-dialog){
   width: 360px;
   height: auto;
   .el-dialog__header {

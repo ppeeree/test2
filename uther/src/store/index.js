@@ -1,5 +1,4 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import { createStore } from 'vuex'
 import user from './modules/user'
 import common from './modules/common'
 import tags from './modules/tags'
@@ -8,8 +7,7 @@ import dict from './modules/dict'
 import business from './modules/business'
 import getters from './getters'
 
-Vue.use(Vuex)
-const store = new Vuex.Store({
+const store = createStore({
   modules: {
     user,
     common,

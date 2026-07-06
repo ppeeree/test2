@@ -1,18 +1,18 @@
 import Mock from 'mockjs'
 export default ({ mock }) => {
-    if (!mock) return;
+    if (!mock) return
     // 用户登录
     Mock.mock('/user/login', 'post', {
         data: new Date().getTime() + ''
-    });
+    })
     //用户退出
     Mock.mock('/user/logout', 'get', {
         data: true,
-    });
+    })
     //刷新token
     Mock.mock('/user/refesh', 'post', {
         data: new Date().getTime() + ''
-    });
+    })
 
     //获取表格数据
     Mock.mock('/user/getTable', 'get', () => {

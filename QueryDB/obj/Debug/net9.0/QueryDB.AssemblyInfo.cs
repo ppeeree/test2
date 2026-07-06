@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("QueryDB")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+81fcecee166f5ade71689317b9626d876c378bdd")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6071209c0ae0676be1d1634dea9c72a2d3d44f08")]
 [assembly: System.Reflection.AssemblyProductAttribute("QueryDB")]
 [assembly: System.Reflection.AssemblyTitleAttribute("QueryDB")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

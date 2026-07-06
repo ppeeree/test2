@@ -26,8 +26,8 @@
 </template>
 
 <script>
-import { validatenull } from "@/util/validate";
-import { mapGetters } from "vuex";
+import { validatenull } from "@/util/validate"
+import { mapGetters } from "vuex"
 export default {
   name: "top-lock",
   data() {
@@ -36,7 +36,7 @@ export default {
       form: {
         passwd: ""
       }
-    };
+    }
   },
   created() {},
   mounted() {},
@@ -48,24 +48,24 @@ export default {
     handleSetLock() {
       this.$refs["form"].validate(valid => {
         if (valid) {
-          this.$store.commit("SET_LOCK_PASSWD", this.form.passwd);
-          this.handleLock();
+          this.$store.commit("SET_LOCK_PASSWD", this.form.passwd)
+          this.handleLock()
         }
-      });
+      })
     },
     handleLock() {
       if (validatenull(this.lockPasswd)) {
-        this.box = true;
-        return;
+        this.box = true
+        return
       }
-      this.$store.commit("SET_LOCK");
+      this.$store.commit("SET_LOCK")
       setTimeout(() => {
-        this.$router.push({ path: "/lock" });
-      }, 100);
+        this.$router.push({ path: "/lock" })
+      }, 100)
     }
   },
   components: {}
-};
+}
 </script>
 
 <style lang="scss" scoped>

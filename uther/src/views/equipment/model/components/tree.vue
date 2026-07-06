@@ -115,7 +115,7 @@ export default {
     margin-left: 5px;
   }
 
-  ::v-deep .el-tree-node__content {
+  :deep(.el-tree-node__content){
     height: 30px !important;
   }
 }

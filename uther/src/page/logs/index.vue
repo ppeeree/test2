@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters } from "vuex"
 export default {
   name: "errLogs",
   data() {
@@ -77,7 +77,7 @@ export default {
           }
         ]
       }
-    };
+    }
   },
   created() {},
   mounted() {},
@@ -94,14 +94,14 @@ export default {
       })
         .then(() => {
           this.$store.dispatch("SendLogs").then(() => {
-            this.$parent.$parent.box = false;
+            this.$parent.$parent.box = false
             this.$message({
               type: "success",
               message: "发送成功!"
-            });
-          });
+            })
+          })
         })
-        .catch(() => {});
+        .catch(() => {})
     },
     clear() {
       this.$confirm("确定清空本地日志记录?", "提示", {
@@ -110,18 +110,18 @@ export default {
         type: "warning"
       })
         .then(() => {
-          this.$store.commit("CLEAR_LOGS");
-          window.console.log(this);
-          this.$parent.$parent.box = false;
+          this.$store.commit("CLEAR_LOGS")
+          window.console.log(this)
+          this.$parent.$parent.box = false
           this.$message({
             type: "success",
             message: "清空成功!"
-          });
+          })
         })
-        .catch(() => {});
+        .catch(() => {})
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

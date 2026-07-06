@@ -90,8 +90,8 @@
     update,
     add,
     getDict,
-  } from "@/api/system/dict";
-  import {mapGetters} from "vuex";
+  } from "@/api/system/dict"
+  import {mapGetters} from "vuex"
 
   export default {
     data() {
@@ -209,7 +209,7 @@
             }
           ]
         }
-      };
+      }
     },
     computed: {
       ...mapGetters(["permission"]),
@@ -219,42 +219,42 @@
           viewBtn: this.vaildData(this.permission.dict_view, false),
           delBtn: this.vaildData(this.permission.dict_delete, false),
           editBtn: this.vaildData(this.permission.dict_edit, false)
-        };
+        }
       },
       ids() {
-        let ids = [];
+        let ids = []
         this.selectionList.forEach(ele => {
-          ids.push(ele.id);
-        });
-        return ids.join(",");
+          ids.push(ele.id)
+        })
+        return ids.join(",")
       }
     },
     methods: {
       rowSave(row, done, loading) {
         add(row).then(() => {
-          this.onLoadParent(this.pageParent);
+          this.onLoadParent(this.pageParent)
           this.$message({
             type: "success",
             message: "操作成功!"
-          });
-          done();
+          })
+          done()
         }, error => {
-          window.console.log(error);
-          loading();
-        });
+          window.console.log(error)
+          loading()
+        })
       },
       rowUpdate(row, index, done, loading) {
         update(row).then(() => {
-          this.onLoadParent(this.pageParent);
+          this.onLoadParent(this.pageParent)
           this.$message({
             type: "success",
             message: "操作成功!"
-          });
-          done();
+          })
+          done()
         }, error => {
-          window.console.log(error);
-          loading();
-        });
+          window.console.log(error)
+          loading()
+        })
       },
       rowDel(row) {
         this.$confirm("确定将选择数据删除?", {
@@ -263,41 +263,41 @@
           type: "warning"
         })
           .then(() => {
-            return remove(row.id);
+            return remove(row.id)
           })
           .then(() => {
-            this.onLoadParent(this.pageParent);
+            this.onLoadParent(this.pageParent)
             this.$message({
               type: "success",
               message: "操作成功!"
-            });
-          });
+            })
+          })
       },
       handleRowClick(row) {
-        this.parentId = row.id;
-        this.onLoadChild(this.pageChild);
+        this.parentId = row.id
+        this.onLoadChild(this.pageChild)
       },
       searchReset() {
-        this.query = {};
-        this.onLoadParent(this.pageParent);
+        this.query = {}
+        this.onLoadParent(this.pageParent)
       },
       searchChange(params, done) {
-        this.query = params;
-        this.pageParent.currentPage = 1;
-        this.onLoadParent(this.pageParent, params);
-        done();
+        this.query = params
+        this.pageParent.currentPage = 1
+        this.onLoadParent(this.pageParent, params)
+        done()
       },
       selectionChange(list) {
-        this.selectionList = list;
+        this.selectionList = list
       },
       selectionClear() {
-        this.selectionList = [];
-        this.$refs.crud.toggleSelection();
+        this.selectionList = []
+        this.$refs.crud.toggleSelection()
       },
       handleDelete() {
         if (this.selectionList.length === 0) {
-          this.$message.warning("请选择至少一条数据");
-          return;
+          this.$message.warning("请选择至少一条数据")
+          return
         }
         this.$confirm("确定将选择数据删除?", {
           confirmButtonText: "确定",
@@ -305,59 +305,59 @@
           type: "warning"
         })
           .then(() => {
-            return remove(this.ids);
+            return remove(this.ids)
           })
           .then(() => {
-            this.onLoadParent(this.pageParent);
+            this.onLoadParent(this.pageParent)
             this.$message({
               type: "success",
               message: "操作成功!"
-            });
-            this.$refs.crud.toggleSelection();
-          });
+            })
+            this.$refs.crud.toggleSelection()
+          })
       },
       beforeOpen(done, type) {
         if (["edit", "view"].includes(type)) {
           getDict(this.formParent.id).then(res => {
-            this.formParent = res.data.data;
-          });
+            this.formParent = res.data.data
+          })
         }
-        done();
+        done()
       },
       currentChange(currentPage) {
-        this.pageParent.currentPage = currentPage;
+        this.pageParent.currentPage = currentPage
       },
       sizeChange(pageSize) {
-        this.pageParent.pageSize = pageSize;
+        this.pageParent.pageSize = pageSize
       },
       refreshChange() {
-        this.onLoadParent(this.page, this.query);
+        this.onLoadParent(this.page, this.query)
       },
       rowSaveChild(row, done, loading) {
         add(row).then(() => {
-          this.onLoadChild(this.pageChild);
+          this.onLoadChild(this.pageChild)
           this.$message({
             type: "success",
             message: "操作成功!"
-          });
-          done();
+          })
+          done()
         }, error => {
-          window.console.log(error);
-          loading();
-        });
+          window.console.log(error)
+          loading()
+        })
       },
       rowUpdateChild(row, index, done, loading) {
         update(row).then(() => {
-          this.onLoadChild(this.pageChild);
+          this.onLoadChild(this.pageChild)
           this.$message({
             type: "success",
             message: "操作成功!"
-          });
-          done();
+          })
+          done()
         }, error => {
-          window.console.log(error);
-          loading();
-        });
+          window.console.log(error)
+          loading()
+        })
       },
       rowDelChild(row) {
         this.$confirm("确定将选择数据删除?", {
@@ -366,37 +366,37 @@
           type: "warning"
         })
           .then(() => {
-            return remove(row.id);
+            return remove(row.id)
           })
           .then(() => {
-            this.onLoadChild(this.pageChild);
+            this.onLoadChild(this.pageChild)
             this.$message({
               type: "success",
               message: "操作成功!"
-            });
-          });
+            })
+          })
       },
       searchResetChild() {
-        this.query = {};
-        this.onLoadChild(this.pageChild);
+        this.query = {}
+        this.onLoadChild(this.pageChild)
       },
       searchChangeChild(params, done) {
-        this.query = params;
-        this.pageChild.currentPage = 1;
-        this.onLoadChild(this.pageChild, params);
-        done();
+        this.query = params
+        this.pageChild.currentPage = 1
+        this.onLoadChild(this.pageChild, params)
+        done()
       },
       selectionChangeChild(list) {
-        this.selectionList = list;
+        this.selectionList = list
       },
       selectionClearChild() {
-        this.selectionList = [];
-        this.$refs.crudChild.toggleSelection();
+        this.selectionList = []
+        this.$refs.crudChild.toggleSelection()
       },
       handleDeleteChild() {
         if (this.selectionList.length === 0) {
-          this.$message.warning("请选择至少一条数据");
-          return;
+          this.$message.warning("请选择至少一条数据")
+          return
         }
         this.$confirm("确定将选择数据删除?", {
           confirmButtonText: "确定",
@@ -404,65 +404,65 @@
           type: "warning"
         })
           .then(() => {
-            return remove(this.ids);
+            return remove(this.ids)
           })
           .then(() => {
-            this.onLoadChild(this.pageChild);
+            this.onLoadChild(this.pageChild)
             this.$message({
               type: "success",
               message: "操作成功!"
-            });
-            this.$refs.crudChild.toggleSelection();
-          });
+            })
+            this.$refs.crudChild.toggleSelection()
+          })
       },
       beforeOpenChild(done, type) {
         if (["edit", "view"].includes(type)) {
           getDict(this.formChild.id).then(res => {
-            this.formChild = res.data.data;
-          });
+            this.formChild = res.data.data
+          })
         }
-        done();
+        done()
       },
       currentChangeChild(currentPage) {
-        this.pageChild.currentPage = currentPage;
+        this.pageChild.currentPage = currentPage
       },
       sizeChangeChild(pageSize) {
-        this.pageChild.pageSize = pageSize;
+        this.pageChild.pageSize = pageSize
       },
       refreshChangeChild() {
-        this.onLoadChild(this.pageChild, this.query);
+        this.onLoadChild(this.pageChild, this.query)
       },
       onLoadParent(page, params = {}) {
-        this.loading = true;
+        this.loading = true
         getParentList(
           page.currentPage,
           page.pageSize,
           Object.assign(params, this.query)
         ).then(res => {
-          const data = res.data.data;
-          this.pageParent.total = data.total;
-          this.dataParent = data.records;
-          this.loading = false;
-          this.selectionClear();
-        });
+          const data = res.data.data
+          this.pageParent.total = data.total
+          this.dataParent = data.records
+          this.loading = false
+          this.selectionClear()
+        })
       },
       onLoadChild(page, params = {}) {
-        this.loading = true;
+        this.loading = true
         getChildList(
           page.currentPage,
           page.pageSize,
           this.parentId,
           Object.assign(params, this.query)
         ).then(res => {
-          const data = res.data.data;
-          this.pageChild.total = data.total;
-          this.dataChild = data.records;
-          this.loading = false;
-          this.selectionClear();
-        });
+          const data = res.data.data
+          this.pageChild.total = data.total
+          this.dataChild = data.records
+          this.loading = false
+          this.selectionClear()
+        })
       }
     }
-  };
+  }
 </script>
 
 <style>

@@ -96,11 +96,11 @@
 </template>
 
 <script>
-import {getList, getDetail, remove, update, add, setting, datasource, packageInfo, packageSetting} from "@/api/system/tenant";
-import {getDetail as packageDetail} from "@/api/system/tenantpackage";
-import {mapGetters} from "vuex";
-import {getMenuTree} from "@/api/system/menu";
-import {validatenull} from "@/util/validate";
+import {getList, getDetail, remove, update, add, setting, datasource, packageInfo, packageSetting} from "@/api/system/tenant"
+import {getDetail as packageDetail} from "@/api/system/tenantpackage"
+import {mapGetters} from "vuex"
+import {getMenuTree} from "@/api/system/menu"
+import {validatenull} from "@/util/validate"
 
 export default {
   data() {
@@ -289,15 +289,15 @@ export default {
           },
         ]
       },
-    };
+    }
   },
   watch: {
     'packageForm.packageId'() {
       if (!validatenull(this.packageForm.packageId)) {
         packageDetail(this.packageForm.packageId).then(res => {
-          this.packageForm.menuId = res.data.data.menuId;
-          this.initData();
-        });
+          this.packageForm.menuId = res.data.data.menuId
+          this.initData()
+        })
       }
     }
   },
@@ -309,51 +309,51 @@ export default {
         viewBtn: this.vaildData(this.permission.tenant_view, false),
         delBtn: this.vaildData(this.permission.tenant_delete, false),
         editBtn: this.vaildData(this.permission.tenant_edit, false)
-      };
+      }
     },
     ids() {
-      let ids = [];
+      let ids = []
       this.selectionList.forEach(ele => {
-        ids.push(ele.id);
-      });
-      return ids.join(",");
+        ids.push(ele.id)
+      })
+      return ids.join(",")
     },
     tenantId() {
-      return this.selectionList[0].tenantId;
+      return this.selectionList[0].tenantId
     }
   },
   methods: {
     initData() {
       getMenuTree().then(res => {
-        const column = this.findObject(this.packageOption.column, "menuId");
-        column.dicData = res.data.data;
-      });
+        const column = this.findObject(this.packageOption.column, "menuId")
+        column.dicData = res.data.data
+      })
     },
     rowSave(row, done, loading) {
       add(row).then(() => {
-        this.onLoad(this.page);
+        this.onLoad(this.page)
         this.$message({
           type: "success",
           message: "操作成功!"
-        });
-        done();
+        })
+        done()
       }, error => {
-        window.console.log(error);
-        loading();
-      });
+        window.console.log(error)
+        loading()
+      })
     },
     rowUpdate(row, index, done, loading) {
       update(row).then(() => {
-        this.onLoad(this.page);
+        this.onLoad(this.page)
         this.$message({
           type: "success",
           message: "操作成功!"
-        });
-        done();
+        })
+        done()
       }, error => {
-        window.console.log(error);
-        loading();
-      });
+        window.console.log(error)
+        loading()
+      })
     },
     rowDel(row) {
       this.$confirm("确定将选择数据删除?", {
@@ -362,52 +362,52 @@ export default {
         type: "warning"
       })
         .then(() => {
-          return remove(row.id);
+          return remove(row.id)
         })
         .then(() => {
-          this.onLoad(this.page);
+          this.onLoad(this.page)
           this.$message({
             type: "success",
             message: "操作成功!"
-          });
-        });
+          })
+        })
     },
     beforeOpen(done, type) {
       if (["view"].includes(type)) {
         getDetail(this.form.id).then(res => {
-          const data = res.data.data;
+          const data = res.data.data
           if (!(data.accountNumber > 0)) {
-            data.accountNumber = "不限制";
+            data.accountNumber = "不限制"
           }
           if (!data.expireTime) {
-            data.expireTime = "不限制";
+            data.expireTime = "不限制"
           }
-          this.form = data;
-        });
+          this.form = data
+        })
       }
-      done();
+      done()
     },
     searchReset() {
-      this.query = {};
-      this.onLoad(this.page);
+      this.query = {}
+      this.onLoad(this.page)
     },
     searchChange(params, done) {
-      this.query = params;
-      this.page.currentPage = 1;
-      this.onLoad(this.page, params);
-      done();
+      this.query = params
+      this.page.currentPage = 1
+      this.onLoad(this.page, params)
+      done()
     },
     selectionChange(list) {
-      this.selectionList = list;
+      this.selectionList = list
     },
     selectionClear() {
-      this.selectionList = [];
-      this.$refs.crud.toggleSelection();
+      this.selectionList = []
+      this.$refs.crud.toggleSelection()
     },
     handleDelete() {
       if (this.selectionList.length === 0) {
-        this.$message.warning("请选择至少一条数据");
-        return;
+        this.$message.warning("请选择至少一条数据")
+        return
       }
       this.$confirm("确定将选择数据删除?", {
         confirmButtonText: "确定",
@@ -415,139 +415,139 @@ export default {
         type: "warning"
       })
         .then(() => {
-          return remove(this.ids);
+          return remove(this.ids)
         })
         .then(() => {
-          this.onLoad(this.page);
+          this.onLoad(this.page)
           this.$message({
             type: "success",
             message: "操作成功!"
-          });
-          this.$refs.crud.toggleSelection();
-        });
+          })
+          this.$refs.crud.toggleSelection()
+        })
     },
     handleSetting() {
       if (this.selectionList.length === 0) {
-        this.$message.warning("请选择至少一条数据");
-        return;
+        this.$message.warning("请选择至少一条数据")
+        return
       }
       if (this.selectionList.length === 1) {
         getDetail(this.selectionList[0].id).then(res => {
-          const data = res.data.data;
-          this.settingForm.accountNumber = data.accountNumber;
-          this.settingForm.expireTime = data.expireTime;
-        });
+          const data = res.data.data
+          this.settingForm.accountNumber = data.accountNumber
+          this.settingForm.expireTime = data.expireTime
+        })
       } else {
-        this.settingForm.accountNumber = -1;
-        this.settingForm.expireTime = '';
+        this.settingForm.accountNumber = -1
+        this.settingForm.expireTime = ''
       }
-      this.box = true;
+      this.box = true
     },
     handleDatasource() {
       if (this.selectionList.length === 0) {
-        this.$message.warning("请选择至少一条数据");
-        return;
+        this.$message.warning("请选择至少一条数据")
+        return
       }
       if (this.selectionList.length !== 1) {
-        this.$message.warning("只能选择一条数据");
-        return;
+        this.$message.warning("只能选择一条数据")
+        return
       }
       getDetail(this.selectionList[0].id).then(res => {
-        const data = res.data.data;
-        this.datasourceForm.datasourceId = data.datasourceId;
-      });
-      this.datasourceBox = true;
+        const data = res.data.data
+        this.datasourceForm.datasourceId = data.datasourceId
+      })
+      this.datasourceBox = true
     },
     handlePackage() {
       if (this.selectionList.length === 0) {
-        this.$message.warning("请选择至少一条数据");
-        return;
+        this.$message.warning("请选择至少一条数据")
+        return
       }
       if (this.selectionList.length !== 1) {
-        this.$message.warning("只能选择一条数据");
-        return;
+        this.$message.warning("只能选择一条数据")
+        return
       }
       if (this.selectionList.length === 1) {
         packageInfo(this.selectionList[0].id).then(res => {
-          const data = res.data.data;
-          this.packageForm.packageId = data.id;
-          this.packageForm.menuId = data.menuId;
-        });
+          const data = res.data.data
+          this.packageForm.packageId = data.id
+          this.packageForm.menuId = data.menuId
+        })
       } else {
-        this.packageForm.menuId = '';
+        this.packageForm.menuId = ''
       }
-      this.packageBox = true;
+      this.packageBox = true
       //更新字典远程数据
       setTimeout(() => {
-        const form = this.$refs.formPackage;
-        form.updateDic('packageId');
-      }, 10);
+        const form = this.$refs.formPackage
+        form.updateDic('packageId')
+      }, 10)
     },
     handlePackageSetting() {
-      this.packageSettingBox = true;
+      this.packageSettingBox = true
     },
     handleSubmit(form, done, loading) {
       setting(this.ids, form).then(() => {
-        this.onLoad(this.page);
+        this.onLoad(this.page)
         this.$message({
           type: "success",
           message: "配置成功!"
-        });
-        done();
-        this.box = false;
+        })
+        done()
+        this.box = false
       }, error => {
-        window.console.log(error);
-        loading();
-      });
+        window.console.log(error)
+        loading()
+      })
     },
     handleDatasourceSubmit(form, done, loading) {
       datasource(this.tenantId, form.datasourceId).then(() => {
         this.$message({
           type: "success",
           message: "配置成功!"
-        });
-        done();
-        this.datasourceBox = false;
+        })
+        done()
+        this.datasourceBox = false
       }, error => {
-        window.console.log(error);
-        loading();
-      });
+        window.console.log(error)
+        loading()
+      })
     },
     handlePackageSubmit(form, done, loading) {
       packageSetting(this.tenantId, form.packageId).then(() => {
-        this.onLoad(this.page);
+        this.onLoad(this.page)
         this.$message({
           type: "success",
           message: "配置成功!"
-        });
-        done();
-        this.packageBox = false;
+        })
+        done()
+        this.packageBox = false
       }, error => {
-        window.console.log(error);
-        loading();
-      });
+        window.console.log(error)
+        loading()
+      })
     },
     currentChange(currentPage) {
-      this.page.currentPage = currentPage;
+      this.page.currentPage = currentPage
     },
     sizeChange(pageSize) {
-      this.page.pageSize = pageSize;
+      this.page.pageSize = pageSize
     },
     refreshChange() {
-      this.onLoad(this.page, this.query);
+      this.onLoad(this.page, this.query)
     },
     onLoad(page, params = {}) {
-      this.loading = true;
+      this.loading = true
       getList(page.currentPage, page.pageSize, Object.assign(params, this.query)).then(res => {
-        const data = res.data.data;
-        this.page.total = data.total;
-        this.data = data.records;
-        this.loading = false;
-        this.selectionClear();
-      });
+        const data = res.data.data
+        this.page.total = data.total
+        this.data = data.records
+        this.loading = false
+        this.selectionClear()
+      })
     }
   }
-};
+}
 </script>
 
 <style>

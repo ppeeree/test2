@@ -15,15 +15,15 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import logs from "@/page/logs/index";
+import { mapGetters } from "vuex"
+import logs from "@/page/logs/index"
 export default {
   name: "top-logs",
   components: { logs },
   data() {
     return {
       box: false
-    };
+    }
   },
   created() {},
   mounted() {},
@@ -33,10 +33,10 @@ export default {
   props: [],
   methods: {
     handleOpen() {
-      this.box = true;
+      this.box = true
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

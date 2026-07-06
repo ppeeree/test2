@@ -141,14 +141,14 @@ h4 {
   text-align: center;
 }
 
-::v-deep .el-tree-node {
+:deep(.el-tree-node){
   line-height: 30px;
 }
-::v-deepel-tree-node__content {
+:deep(.el-tree-node__content) {
   line-height: 30px;
   height: 30px;
 }
-::v-deep .custom-tree-node {
+:deep(.custom-tree-node){
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

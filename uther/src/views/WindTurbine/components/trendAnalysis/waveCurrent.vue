@@ -45,9 +45,11 @@
   </div>
 </template>
 <script>
+import { defineAsyncComponent } from 'vue'
+
 export default {
   components: {
-    chartDom: () => import('@/components/diagnosisChart/wave.vue')
+    chartDom: defineAsyncComponent(() => import('@/components/diagnosisChart/wave.vue'))
     // chartDom: () => import('./wave/index.vue')
   },
   props: {
@@ -115,8 +117,7 @@ export default {
     }
   },
   mounted() {},
-  beforeDestroy() {},
-  destroyed() {},
+  beforeUnmount() {},
   methods: {
     changeWave(param) {
       if (!param.length) {
@@ -275,15 +276,15 @@ export default {
       line-height: 30px;
       font-size: 16px;
     }
-    ::v-deep .linePage {
+    :deep(.linePage){
       background: transparent;
     }
-    ::v-deep .chartbox {
+    :deep(.chartbox){
       background: #252526;
       /*  background: rgba(0, 43, 88, 0.4) !important;
       backdrop-filter: blur(10px); */
     }
-    ::v-deep .table_info {
+    :deep(.table_info){
       background: #252526;
       /*  background: rgba(0, 43, 88, 0.4) !important;
       backdrop-filter: blur(10px); */

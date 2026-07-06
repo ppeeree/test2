@@ -433,7 +433,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-::v-deep .el-input-number {
+:deep(.el-input-number){
   width: 90px;
   .el-input__inner {
     width: 85px;

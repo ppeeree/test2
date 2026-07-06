@@ -2,7 +2,7 @@
   <div class="tabsNav_content">
     <div class="merge_header">报告工作台</div>
     <div class="tabsNav_content_body">
-      <IESummaryConclusion :IESummaryconclusionData.sync="IESummaryconclusionData" />
+      <IESummaryConclusion v-model:IESummaryconclusionData="IESummaryconclusionData" />
     </div>
   </div>
 </template>
@@ -128,7 +128,7 @@ export default {
       this.activeChart = 'IESummaryConclusion'
     }
   },
-  beforeDestroy() {
+  beforeUnmount() {
     sessionStorage.removeItem('IESummaryconclusionData')
   }
 }
